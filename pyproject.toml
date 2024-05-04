@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -26,6 +26,12 @@ filterwarnings = [
     'ignore::pytest.PytestDeprecationWarning:pytest_cov',
 ]
 
+[tool.poetry]
+name = "BM"
+version = "0.1.0"
+description = "Burning Man Stuff"
+authors = ["peter <pelbaor@gmail.com>"]
+
 [project]
 name = "BM"
 description = "Burning Man Stuff"
@@ -39,12 +45,12 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-dependencies = [
-    "pandas",
-    "ipython",
-    "streamlit",
-    "openpyxl",
-]
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "*"
+ipython = "*"
+streamlit = "*"
+openpyxl = "*"
 
 [project.optional-dependencies]
 dev = [
