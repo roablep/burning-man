@@ -53,6 +53,9 @@ streamlit = "*"
 openpyxl = "*"
 altair = "*"
 watchdog = "*"
+matplotlib = "*"
+statsmodels = "*"
+scikit-learn = "*"
 
 [project.optional-dependencies]
 dev = [
