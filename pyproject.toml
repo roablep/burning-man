@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yml", "*.csv", "*.txt", "*.html", "*.gz", "*.joblib", "**/*.sql"]
+
+[tool.coverage.run]
+parallel = true
+source = [
+]
+context = '${CONTEXT}'
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+]
+xfail_strict = true
+junit_family = "xunit2"
+filterwarnings = [
+    "error",
+    'ignore::pytest.PytestDeprecationWarning:pytest_cov',
+]
+
+[project]
+name = "BM"
+description = "Burning Man Stuff"
+readme = "README.md"
+requires-python = ">=3.11.6"
+dynamic = ["version"]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "pandas",
+    "ipython",
+    "streamlit",
+    "openpyxl",
+]
+
+[project.optional-dependencies]
+dev = [
+]
+
+test = []
+
+[tool.setuptools.dynamic]
+version = {attr = "bm.__version__"}
