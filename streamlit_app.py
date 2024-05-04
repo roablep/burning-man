@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import altair as alt
 
 print("hello world 1")
 
@@ -38,7 +39,7 @@ try:
             )
         )
         st.altair_chart(chart, use_container_width=True)
-except URLError as e:
+except Exception as e:
     st.error(
         """
         **This demo requires internet access.**

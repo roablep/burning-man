@@ -51,6 +51,8 @@ pandas = "*"
 ipython = "*"
 streamlit = "*"
 openpyxl = "*"
+altair = "*"
+watchdog = "*"
 
 [project.optional-dependencies]
 dev = [
