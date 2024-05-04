@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
 
-matplotlib.use('TkAgg')
+# matplotlib.use('TkAgg')  # this will crash streamlit
 # matplotlib.use('nbAgg')
 
 alt.renderers.enable('browser')
@@ -63,16 +63,18 @@ st.sidebar.header("Filter Options")
 
 # Camp Size Filter
 min_size, max_size = int(df['Camp Size'].min()), int(df['Camp Size'].max())
-camp_size = st.sidebar.slider("Select Camp Size", min_size, max_size, (min_size, max_size))
-filtered_df = df[(df['Camp Size'] >= camp_size[0]) & (df['Camp Size'] <= camp_size[1])]
+camp_size = st.sidebar.slider("Camp Size", min_size, max_size, (min_size, max_size))
+
+min_dues, max_dues = int(df['Average Per Person Camp Contribution'].min()), int(df['Average Per Person Camp Contribution'].max())
+camp_dues = st.sidebar.slider("Avg $/per person Dues", min_dues, max_dues, (min_dues, max_dues))
+
+filtered_df = df[(df['Camp Size'] >= camp_size[0]) & (df['Camp Size'] <= camp_size[1]) & (df['Average Per Person Camp Contribution'] >= camp_dues[0]) & (df['Average Per Person Camp Contribution'] <= camp_dues[1])]
 
 # Amenities Filter
 selected_amenities = st.sidebar.multiselect("Select Amenities", amenity_columns)
 if selected_amenities:
     for amenity in selected_amenities:
         filtered_df = filtered_df[filtered_df[amenity] == 1]
-
-
 
 # QUESTION: How many camps are in the survey? 
 total_camps = len(df)
@@ -85,13 +87,12 @@ total_budget = df['Camp Total Annual Budget'].mean()
 
 st.write(f"**Total Number of Camps in the Survey:** {total_camps}")
 st.write(f"**Camps with Complete Data:** {camps_with_data}")
-st.write(f'**Average Per Person Contribution:** {avg_contrib:.2f}')
-st.write(f'**Average Annual Budget Across Camps:** {total_budget:.2f}')
+st.write(f'**Average Per Person Contribution:** ${avg_contrib:,.0f}')
+st.write(f'**Average Annual Budget Across Camps:** ${total_budget:,.0f}')
 
-# QUESTION: Distribution of Camp Sizes
 st.subheader("Distribution of Camp Sizes")
 camp_size_hist = alt.Chart(filtered_df).mark_bar().encode(
-    x=alt.X('Camp Size', bin=alt.Bin(maxbins=10), title="Camp Size"),
+    x=alt.X('Camp Size', bin=alt.Bin(maxbins=50), title="Camp Size"),
     y=alt.Y('count()', title='Number of Camps')
 )
 st.altair_chart(camp_size_hist, use_container_width=True)
@@ -99,7 +100,7 @@ st.altair_chart(camp_size_hist, use_container_width=True)
 # QUESTION: Distribution of Average Camp Dues
 st.subheader("Distribution of Average Per Person Camp Contribution")
 average_dues_hist = alt.Chart(filtered_df[filtered_df['Average Per Person Camp Contribution'].notna()]).mark_bar().encode(
-    x=alt.X('Average Per Person Camp Contribution', bin=alt.Bin(maxbins=10), title="Average Contribution Per Person"),
+    x=alt.X('Average Per Person Camp Contribution', bin=alt.Bin(maxbins=50), title="$ per person"),
     y=alt.Y('count()', title='Number of Camps')
 )
 st.altair_chart(average_dues_hist, use_container_width=True)
@@ -122,43 +123,40 @@ st.altair_chart(chart1, use_container_width=True)
 # Error bars of high/mid/low by camp size. 
 df2 = filtered_df[filtered_df['Error Lower'].notnull() & filtered_df['Error Upper'].notnull()]
 st.title("Contribution Ranges and Average Contribution vs. Camp Size")
-# fig, ax = plt.subplots(figsize=(12, 8))
-
-plt.figure(figsize=(12, 8))
-plt.errorbar(df2['Camp Size'], df2['Average Per Person Camp Contribution'],
-             yerr=[df2['Error Lower'], df2['Error Upper']],
-             # fmt='o', 
-             ecolor='red', capsize=5, elinewidth=2, marker='s', markersize=7)
+fig, ax = plt.subplots(figsize=(12, 8))
+ax.errorbar(df2['Camp Size'], df2['Average Per Person Camp Contribution'],
+            yerr=[df2['Error Lower'], df2['Error Upper']],
+            fmt='o', ecolor='red', capsize=5, elinewidth=2, marker='s', markersize=7)
 
 # Customize the plot
-plt.title('Contribution Ranges and Average Contribution vs. Camp Size')
-plt.xlabel('Camp Size')
-plt.ylabel('Average Contribution Per Person')
-plt.grid(visible=True, which='both', linestyle='--', linewidth=0.5)
-plt.savefig('/Users/peter/Downloads/contribution_errorbars_vs_camp_size.png')
-st.pyplot(plt)
+ax.set_title('Contribution Ranges and Average Contribution vs. Camp Size')
+ax.set_xlabel('Camp Size')
+ax.set_ylabel('Average Contribution Per Person')
+ax.grid(visible=True, which='both', linestyle='--', linewidth=0.5)
 
-error_bars = alt.Chart(df2).mark_errorbar(extent='ci').encode(
-    x=alt.X('Camp Size:Q', title='Camp Size'),
-    y=alt.Y('Average Per Person Camp Contribution:Q', title='Average Contribution Per Person'),
-    yError='Error Upper:Q',
-    yError2='Error Lower:Q',
-    tooltip=['Camp Size', 'Average Per Person Camp Contribution']
-)
+# Display in Streamlit
+st.pyplot(fig)
+# error_bars = alt.Chart(df2).mark_errorbar(extent='ci').encode(
+#     x=alt.X('Camp Size:Q', title='Camp Size'),
+#     y=alt.Y('Average Per Person Camp Contribution:Q', title='Average Contribution Per Person'),
+#     yError='Error Upper:Q',
+#     yError2='Error Lower:Q',
+#     tooltip=['Camp Size', 'Average Per Person Camp Contribution']
+# )
 
-# Base scatter plot to add markers on the error bars
-base = alt.Chart(df2).mark_point().encode(
-    x='Camp Size:Q',
-    y='Average Per Person Camp Contribution:Q',
-    tooltip=['Camp Size', 'Average Per Person Camp Contribution']
-)
+# # Base scatter plot to add markers on the error bars
+# base = alt.Chart(df2).mark_point().encode(
+#     x='Camp Size:Q',
+#     y='Average Per Person Camp Contribution:Q',
+#     tooltip=['Camp Size', 'Average Per Person Camp Contribution']
+# )
 
-# Combine the error bars and base markers
-chart = (error_bars + base).interactive()
-st.altair_chart(chart, use_container_width=True)
+# # Combine the error bars and base markers
+# chart = (error_bars + base).interactive()
+# st.altair_chart(chart, use_container_width=True)
 
 # QUESTION: How do camp fees vary based on amenities offered?
-st.write("Filtering will not work for anything below here.")
+st.write("# Filtering will not work for anything below here")
 df_melted = df[df['Average Per Person Camp Contribution'].notnull()].melt(id_vars=['ndx', 'Average Per Person Camp Contribution'], value_vars=amenity_columns, var_name='Amenity', value_name='Presence')
 # grouped_data = df_melted.groupby(['Amenity','Presence'])['Average Per Person Camp Contribution'].describe(percentiles=[.25, .5, .75])
 df_melted2 = df_melted[df_melted['Presence'] == 1]
@@ -190,24 +188,22 @@ boxplot_subplot = alt.Chart(df_melted).mark_boxplot().encode(
 st.altair_chart(boxplot_subplot, use_container_width=True)
 
 # Let's run a regression. 
-features = amenity_columns
-
-model_source_df = df[features+['Average Per Person Camp Contribution']].dropna()
-X = model_source_df[features + ['benefactor']].astype(int)
+model_source_df = df[amenity_columns+['Average Per Person Camp Contribution']].dropna()
+X = model_source_df[amenity_columns].astype(int)
 y = model_source_df['Average Per Person Camp Contribution']
 
-assert X.dtypes.all() in ['int64', 'float64'], "Check X for non-numeric values."
-assert y.dtype in ['int64', 'float64'], "Check y for non-numeric values."
+#assert X.dtypes.all() in ['int64', 'float64'], "Check X for non-numeric values."
+#assert y.dtype in ['int64', 'float64'], "Check y for non-numeric values."
 
 X = sm.add_constant(X)
 model = sm.OLS(y, X).fit()
 print(model.summary())
 
-st.title("Regression Analysis: Average Per Person Camp Contribution")
+st.write("## Regression Analysis: Average Per Person Camp Contribution")
 
 
 # Display regression summary
-st.subheader("Regression Model Summary")
+st.write("#### Regression Model Summary")
 st.text(model.summary())
 
 #from sklearn.model_selection import train_test_split
@@ -252,7 +248,7 @@ coef_chart = alt.Chart(coef_data).mark_bar().encode(
 ).configure_axis(grid=True)
 
 # Streamlit layout
-st.title("Regression Analysis: Feature Importance")
+st.write("### Feature Importance, Visualized")
 st.write("This visualization shows the coefficient values for each feature used in the regression analysis.")
 
 st.altair_chart(coef_chart, use_container_width=True)
@@ -260,21 +256,21 @@ st.altair_chart(coef_chart, use_container_width=True)
 
 st.write("What did we learn? I guess we learned not to do it again. This model doesn't seem to have much explanatory power. No way in hell does including booze, greywater, and water as camp amenities make dues CHEAPER.\nThere may be a relationship we're not directly seeing because it's not in the survey, like a correlation between these amenetities and a benevolent benefactor/sugar mommy/daddy.\n")
 
-st.write("So let's do another model *with* an indicator of if the camp has that sugar mommy/daddy\nI implied the presence of a benefactor by looking at the difference between the average dues and upper end of dues for camps that operated on a sliding scale rather than flat fee. Camps which had upper dues greater than 1x the average dues There were only 31 camps (35%) so take this with a grain of salt since not much data to work with.")
+st.write("So let's do another model *with an indicator if the camp has that sugar mommy/daddy*.\nI implied the presence of a benefactor by looking at the difference between the average dues and upper end of dues for camps that operated on a sliding scale rather than flat fee. Camps which had upper dues greater than 1x the average dues There were only 31 camps (35%) so take this with a grain of salt since not much data to work with.")
 
 # Add some rough indicators if there is an especially rich member
-sugar_df = df[df['rng_to_avg'].notnull()]
+sugar_df = df[df['rng_to_avg'].notnull()].copy()
 sugar_df['benefactor'] = 0
 sugar_df.loc[(sugar_df['Tidbits'].notnull() & sugar_df['Tidbits'].str.contains('benefactor')), 'benefactor'] = 1
 sugar_df.loc[sugar_df['rng_to_avg'] > 1, 'benefactor'] = 1
 
 
-model_source_df = sugar_df[features+['Average Per Person Camp Contribution', 'benefactor']].dropna()
-X = model_source_df[features + ['benefactor']].astype(int)
-y = model_source_df['Average Per Person Camp Contribution']
+model_source_df2 = sugar_df[amenity_columns+['Average Per Person Camp Contribution', 'benefactor']].dropna()
+X = model_source_df2[amenity_columns + ['benefactor']].astype(int)
+y = model_source_df2['Average Per Person Camp Contribution']
 
-assert X.dtypes.all() in ['int64', 'float64'], "Check X for non-numeric values."
-assert y.dtype in ['int64', 'float64'], "Check y for non-numeric values."
+#assert X.dtypes.all() in ['int64', 'float64'], "Check X for non-numeric values."
+#assert y.dtype in ['int64', 'float64'], "Check y for non-numeric values."
 
 X = sm.add_constant(X)
 model2 = sm.OLS(y, X).fit()
@@ -282,9 +278,10 @@ print(model2.summary())
 
 # Display regression summary
 st.subheader("Regression Model Summary: Average Per Person Camp Contribution among camps with that special Sugar Daddy/Mommy")
-st.text(model.summary())
+st.text(model2.summary())
 
-st.write("What did we learn? Camps with a sugar mommy/daddy pay more! But again, small sample so let's shrug and say YOLO.")
+st.write("What did we learn? Apparently, campers who camp with a sugar mommy/daddy pay more! But again, small sample so let's shrug and say YOLO.")
+st.write("Disclaimer: I haven't done honest-to-god data analysis in years. I've got no pride of authorship, only shame, so If you're that special someone data scientist who wants do a more robust analysis, HMU. pelbaor@gmail.com")
 
 # import seaborn as sns
 # plt.figure(figsize=(14, 8))
