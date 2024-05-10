@@ -25,6 +25,9 @@ df['Camp Total Annual Budget'] = pd.to_numeric(df['Camp Total Annual Budget'].re
 df['budget_pp'] = df['Camp Total Annual Budget']/df['Camp Size']*1.0
 df['budget_variance'] = df['Average Per Person Camp Contribution']/df['budget_pp']-1
 
+df['implied_budget']=df['Camp Size']*df['Average Per Person Camp Contribution']
+df['validation_difference'] = (df['implied_budget']/df['Camp Total Annual Budget']*1.0 - 1)*100
+
 def calculate_avg_position(df):
     df['ContributionRangeLow'] = pd.to_numeric(df['ContributionRangeLow'])
     df['ContributionRangeHigh'] = pd.to_numeric(df['ContributionRangeHigh'])
@@ -197,7 +200,6 @@ y = model_source_df['Average Per Person Camp Contribution']
 
 X = sm.add_constant(X)
 model = sm.OLS(y, X).fit()
-print(model.summary())
 
 st.write("## Regression Analysis: Average Per Person Camp Contribution")
 
@@ -274,7 +276,6 @@ y = model_source_df2['Average Per Person Camp Contribution']
 
 X = sm.add_constant(X)
 model2 = sm.OLS(y, X).fit()
-print(model2.summary())
 
 # Display regression summary
 st.subheader("Regression Model Summary: Average Per Person Camp Contribution among camps with that special Sugar Daddy/Mommy")
@@ -300,4 +301,32 @@ st.write(contribution_structure)
 
 
 # RSR mentions basd on size , budget
+
+st.write("### Budget Validation - Stated vs. Implied")
+st.write("Let's do a quick check to see how explicitly reported total reported budget matches against a bottoms up estimate that we calculate by multiplying Camp Size and Average per Person Contribution.")
+
+validation_scatterplot = alt.Chart(filtered_df.loc[filtered_df['validation_difference'].notnull(), ['implied_budget', 'Camp Total Annual Budget']]).mark_circle(size=60).encode(
+    x=alt.X('implied_budget', title='Implied Total Budget'),
+    y=alt.Y('Camp Total Annual Budget', title='Stated Total Budget'),
+    tooltip=['implied_budget', 'Camp Total Annual Budget']
+).interactive().properties(
+    title='Stated Budget vs. Implied Budget',
+    width=600,
+    height=400
+)
+validation_trendline = validation_scatterplot.transform_regression(
+    'implied_budget', 'Camp Total Annual Budget', method="linear"
+).mark_line(color='red')
+final_validation_scatter = validation_scatterplot + validation_trendline
+st.altair_chart(final_validation_scatter, use_container_width=True)
+
+validation_bar = alt.Chart(filtered_df.loc[filtered_df['validation_difference'].notnull(), ['validation_difference']]).mark_bar().encode(
+    x=alt.X('validation_difference', bin=alt.Bin(maxbins=50), title="% Difference between Implied and Stated Budget"),
+    y=alt.Y('count()', title='Number of Camps')
+)
+st.altair_chart(validation_bar, use_container_width=True)
+
+st.write("Good news. Ya'll answers are mostly consistent!")
+
+st.markdown("[![Click me](//static-file-serving.streamlit.app/~/+/app/static/dog.jpg)](https://streamlit.io)")
 

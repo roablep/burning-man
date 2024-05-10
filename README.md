@@ -24,3 +24,6 @@ source activate.sh
 ```
 source build-dev.sh
 ```
+
+## Running the Streamlit server
+`streamlit run src/bm/bm_streamlit_app.py`
