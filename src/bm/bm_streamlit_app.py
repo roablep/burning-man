@@ -79,7 +79,7 @@ df['Do supplemental contributions support other camp amenities (in addition to c
 df['has_extra_paid_in_amenities'] = df['Do supplemental contributions support other camp amenities (in addition to core contribution)'].notna()
 
 
-st.title("Theme Camp Dues Analysis Dashboard")
+st.title("Theme Camp Dues Survey Results")
 st.sidebar.header("Filter Options")
 
 # Camp Size Filter
@@ -90,6 +90,7 @@ min_dues, max_dues = int(df['Average Per Person Camp Contribution'].min()), int(
 camp_dues = st.sidebar.slider("Avg $/per person Dues", min_dues, max_dues, (min_dues, max_dues))
 
 filtered_df = df[(df['Camp Size'] >= camp_size[0]) & (df['Camp Size'] <= camp_size[1]) & (df['Average Per Person Camp Contribution'] >= camp_dues[0]) & (df['Average Per Person Camp Contribution'] <= camp_dues[1])]
+filtered_df.drop(axis=1, columns=['Tidbits', 'Commentary'], inplace=True)
 
 # Amenities Filter
 selected_amenities = st.sidebar.multiselect("Select Amenities", amenity_columns)
@@ -103,15 +104,21 @@ total_camps = len(df)
 # QUESTION: How many camps are in the survey where we have decent data?
 camps_with_data = len(df[df['Average Per Person Camp Contribution'].notna() & df['Camp Size'].notna()])
 
-avg_contrib = df['Average Per Person Camp Contribution'].mean()
-total_budget = df['Camp Total Annual Budget'].mean()
+# Calculate mean and median
+mean_dues = df['Average Per Person Camp Contribution'].mean()
+median_dues = df['Average Per Person Camp Contribution'].median()
+mean_size = df['Camp Size'].mean()
+median_size = df['Camp Size'].median()
+mean_budget = filtered_df['Camp Total Annual Budget'].mean()
+median_budget = filtered_df['Camp Total Annual Budget'].median()
 
 st.write(f"## Summary Stats ##")
 
 st.write(f"**Total Number of Camps in the Survey:** {total_camps}")
 st.write(f"**Camps with Complete Data:** {camps_with_data}")
-st.write(f'**Average Per Person Contribution:** ${avg_contrib:,.0f}')
-st.write(f'**Average Annual Budget Across Camps:** ${total_budget:,.0f}')
+st.write(f'**Average Camp Size:** {mean_size:,.0f}')
+st.write(f'**Average Dues:** ${mean_dues:,.0f}')
+st.write(f'**Average Annual Budget:** ${mean_budget:,.0f}')
 
 camp_size_hist = alt.Chart(filtered_df).mark_bar().encode(
     x=alt.X('Camp Size', bin=alt.Bin(maxbins=50), title="Camp Size"),
@@ -121,7 +128,16 @@ camp_size_hist = alt.Chart(filtered_df).mark_bar().encode(
     width=600,
     height=400
 )
-st.altair_chart(camp_size_hist, use_container_width=True)
+mean_line_size = alt.Chart(pd.DataFrame({'x': [mean_size]})).mark_rule(color='red').encode(
+    x=alt.X('x', title='Mean'),
+    tooltip=[alt.Tooltip('x', title='Mean Size')]
+)
+
+median_line_size = alt.Chart(pd.DataFrame({'x': [median_size]})).mark_rule(color='blue').encode(
+    x=alt.X('x', title='Median'),
+    tooltip=[alt.Tooltip('x', title='Median Size')]
+)
+st.altair_chart(camp_size_hist + mean_line_size + median_line_size, use_container_width=True)
 
 # QUESTION: Distribution of Average Camp Dues
 average_dues_hist = alt.Chart(filtered_df[filtered_df['Average Per Person Camp Contribution'].notna()]).mark_bar().encode(
@@ -132,7 +148,34 @@ average_dues_hist = alt.Chart(filtered_df[filtered_df['Average Per Person Camp C
     width=600,
     height=400
 )
-st.altair_chart(average_dues_hist, use_container_width=True)
+dues_mean_line_dues = alt.Chart(pd.DataFrame({'x': [mean_dues]})).mark_rule(color='red').encode(
+    x=alt.X('x', title='Mean'),
+    tooltip=[alt.Tooltip('x', title='Mean Dues')]
+)
+
+dues_median_line_dues = alt.Chart(pd.DataFrame({'x': [median_dues]})).mark_rule(color='blue').encode(
+    x=alt.X('x', title='Median'),
+    tooltip=[alt.Tooltip('x', title='Median Dues')]
+)
+st.altair_chart(average_dues_hist + dues_mean_line_dues + dues_median_line_dues, use_container_width=True)
+
+total_budget_hist = alt.Chart(filtered_df[filtered_df['Camp Total Annual Budget'].notna()]).mark_bar().encode(
+    x=alt.X('Camp Total Annual Budget', bin=alt.Bin(maxbins=50), title="Total Annual Budget ($)"),
+    y=alt.Y('count()', title='Number of Camps')
+).properties(
+    title='Total Annual Budget Distribution',
+    width=600,
+    height=400
+).interactive()
+mean_line_budget = alt.Chart(pd.DataFrame({'x': [mean_budget]})).mark_rule(color='red').encode(
+    x=alt.X('x', title='Mean'),
+    tooltip=[alt.Tooltip('x', title='Mean Budget')]
+)
+median_line_budget = alt.Chart(pd.DataFrame({'x': [median_budget]})).mark_rule(color='blue').encode(
+    x=alt.X('x', title='Median'),
+    tooltip=[alt.Tooltip('x', title='Median Budget')]
+)
+st.altair_chart(total_budget_hist + mean_line_budget + median_line_budget, use_container_width=True)
 
 # QUESTION: Average Contribution vs. Camp Size
 data1 = filtered_df[['Camp Size', 'Average Per Person Camp Contribution']]
@@ -147,7 +190,7 @@ chart1 = alt.Chart(data1).mark_circle(size=60).encode(
 )
 st.altair_chart(chart1, use_container_width=True)
 
-st.write("## Drilling into Contribution Structures")
+st.write("## Drilling into Financial Structures")
 
 st.write("First, let's look camp contribution models.")
 exploded_fee = filtered_df['How are camp contributions structured?'].dropna().explode('How are camp contributions structured?').reset_index(drop=True)
@@ -166,7 +209,7 @@ fee_counts_chart = alt.Chart(fee_counts).mark_arc().encode(
         alt.Tooltip('Percentage', title='Percentage', format='.0%')
         ]
 ).properties(
-    title='Camp Contributions Structure'
+    title='Camp Financial Structure'
 ).interactive()
 st.altair_chart(fee_counts_chart, use_container_width=True)
 
@@ -322,6 +365,9 @@ paidin_amenity_hist = alt.Chart(paidin_amenity_hist_df).mark_bar().encode(
     height=400
 )
 st.altair_chart(paidin_amenity_hist, use_container_width=True)
+amenity_counts = paidin_amenity_hist_df['Extra Amenities'].value_counts().reset_index()
+amenity_counts.columns = ['Extra Amenities', 'Number of Camps']
+st.table(amenity_counts)
 
 st.write("## Drilling into Amenities")
 st.write("How do camp fees vary based on amenities offered?")
