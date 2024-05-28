@@ -16,7 +16,7 @@ import statsmodels.api as sm
 
 alt.renderers.enable('browser')
 
-df = pd.read_csv("./static/Theme Camp Dues!.csv")
+df = pd.read_csv("/Users/peter/Downloads/Theme Camp Dues!.csv")
 df.drop('Camp Name', axis=1, inplace=True)
 
 df['ndx'] = df.index
@@ -191,6 +191,8 @@ chart1 = alt.Chart(data1).mark_circle(size=60).encode(
 st.altair_chart(chart1, use_container_width=True)
 
 st.write("## Drilling into Financial Structures")
+
+st.write("First, let's look camp contribution models.")
 exploded_fee = filtered_df['How are camp contributions structured?'].dropna().explode('How are camp contributions structured?').reset_index(drop=True)
 # Count the occurrences of each contribution type
 fee_counts = exploded_fee.value_counts().reset_index()
@@ -231,6 +233,7 @@ notaflof_chart = alt.Chart(notaflof).mark_arc().encode(
 ).interactive()
 st.altair_chart(notaflof_chart, use_container_width=True)
 
+st.write("Most camps use flat fees, and most offer an informal mechanism to accomodate lower-income campers. Notably, a third of camps don't have a way to support lower-income campers.")
 
 entity = filtered_df['Do you collect contributions through an entity?'].value_counts().reset_index()
 entity.columns = ['Entity', 'Count']
@@ -250,6 +253,10 @@ entity_chart = alt.Chart(entity).mark_arc().encode(
 ).interactive()
 st.altair_chart(entity_chart, use_container_width=True)
 
+st.write("Surprisingly, most camps don't bother with a formal entity!")
+
+st.write("## Drilling into Contributions")
+st.write("Next, let's look at the range of contributions for camps that use a tiered contribution system. The blue mark is the average per camper contribution; the red error bars are the upper and lower tiers.")
 # QUESTION: How close is the average camper contribution relative to the max/min?
 # Error bars of high/mid/low by camp size. 
 df2 = filtered_df[filtered_df['Error Lower'].notnull() & filtered_df['Error Upper'].notnull()]
@@ -324,7 +331,7 @@ st.plotly_chart(fig, use_container_width=True)
 # st.altair_chart(chart, use_container_width=True)
 # QUESTION: How do camp fees vary based on amenities offered?
 
-
+st.write("Do you provide additional amenities for an additional fee?")
 exploded_other_fees = filtered_df['has_extra_paid_in_amenities'].reset_index(drop=True)
 # Count the occurrences of each contribution type
 exploded_other_fees = exploded_other_fees.value_counts().reset_index()
@@ -344,6 +351,9 @@ exploded_other_fees_chart = alt.Chart(exploded_other_fees).mark_arc().encode(
     title='Additional Paid-In Amenities'
 ).interactive()
 st.altair_chart(exploded_other_fees_chart, use_container_width=True)
+st.write("Some camps structure their fee structure in a way that lets some campers have additional creature comforts, e.g. RV hookup power, without budening other campers. It's incredibly common, apparently!")
+
+st.write("What additional paid-in amenities tend to be offered?")
 
 paidin_amenity_hist_df = filtered_df['Do supplemental contributions support other camp amenities (in addition to core contribution)'].dropna().explode('Do supplemental contributions support other camp amenities (in addition to core contribution)').reset_index(drop=True).rename('Extra Amenities').reset_index()
 paidin_amenity_hist = alt.Chart(paidin_amenity_hist_df).mark_bar().encode(
@@ -360,7 +370,7 @@ amenity_counts.columns = ['Extra Amenities', 'Number of Camps']
 st.table(amenity_counts)
 
 st.write("## Drilling into Amenities")
-
+st.write("How do camp fees vary based on amenities offered?")
 
 df_melted = df[df['Average Per Person Camp Contribution'].notnull()].melt(id_vars=['ndx', 'Average Per Person Camp Contribution'], value_vars=amenity_columns, var_name='Amenity', value_name='Presence')
 # grouped_data = df_melted.groupby(['Amenity','Presence'])['Average Per Person Camp Contribution'].describe(percentiles=[.25, .5, .75])
@@ -394,6 +404,8 @@ st.dataframe(styled_table)
 # st.altair_chart(boxplot, use_container_width=True)
 # st.write("This boxplot doesn't tell us much overall. So let's do the same avg camper dues boxplot but split it according to if an amenity is offered or not.")
 
+st.write("If you're more of a visual learner, these boxplots show the avg camper dues split it according to if an amenity is offered or not.")
+
 
 #g = sns.FacetGrid(df_melted, col='Amenity', col_wrap=3, height=4)  # Adjust col_wrap for the number of amenities 
 #g.map(sns.boxplot, 'Presence', 'Average Per Person Camp Contribution', showmeans=True)
@@ -419,7 +431,11 @@ y = model_source_df['Average Per Person Camp Contribution']
 X = sm.add_constant(X)
 model = sm.OLS(y, X).fit()
 
+st.write("#### Regression Analysis: Average Per Person Camp Contribution")
+st.write("Can we use a simple regression to understand which amenities drive camp costs?")
+
 # Display regression summary
+st.write("##### Model Summary")
 st.text(model.summary())
 
 #from sklearn.model_selection import train_test_split
@@ -464,9 +480,16 @@ coef_chart = alt.Chart(coef_data).mark_bar().encode(
 ).configure_axis(grid=True)
 
 # Streamlit layout
+st.write("##### Feature Importance, Visualized")
+st.write("This visualization shows the coefficient values (Dollar impact to camp dues) for each feature (amenity) used in the regression analysis. Read this as 'x' amenity drives 'coefficient' in $ costs above the baseline.")
 
 st.altair_chart(coef_chart, use_container_width=True)
 
+
+st.write("What did we learn? I guess not to do this again. This model doesn't seem to have much explanatory power. No way in hell does including things like booze, greywater, and shade structure as camp amenities make dues CHEAPER.\nThere may be a relationship we're not directly seeing because it's not in the survey, like a correlation between these amenetities and a benevolent benefactor/sugar mommy/daddy.\n")
+
+st.write("So let's do another model *adding an indicator that the camp may have a substantial benefactor/sugar mommy/sugar daddy*.")
+st.write("I implied the presence of a benefactor by looking at the range of upper-end dues for camps that operated on a sliding scale. Camps which had upper dues greater than 1x the average dues There were only 31 camps (35%) so take this with a grain of salt since not much data to work with.")
 
 # Add some rough indicators if there is an especially rich member
 sugar_df = df[df['rng_to_avg'].notnull()].copy()
@@ -489,6 +512,7 @@ model2 = sm.OLS(y, X).fit()
 st.write("##### Sugar Daddy Model Summary")
 st.text(model2.summary())
 
+st.write("Well fuck me. That's counterintuitive. What did we learn? Apparently, campers who camp with a sugar mommy/daddy pay more! But again, small sample so let's shrug and say YOLO.")
 st.write("***Disclaimer***: I haven't done honest-to-god data analysis in years. I've got no pride of authorship, only shame, so If you're that special someone data scientist who wants do a more robust analysis, HMU. pelbaor@gmail.com")
 
 # import seaborn as sns
