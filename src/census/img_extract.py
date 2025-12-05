@@ -26,7 +26,7 @@ pillow_heif.register_heif_opener()
 
 genai.configure(api_key=API_KEY)
 # model = genai.GenerativeModel("gemini-2.5-flash")
-model = genai.GenerativeModel("gemini-2.5-flash-lite") 
+model = genai.GenerativeModel("gemini-2.5-flash-lite")
 
 print("Available Models:")
 for m in genai.list_models():
@@ -118,7 +118,7 @@ if os.path.exists(OUTPUT_CSV):
             for row in reader:
                 if len(row) > 1:
                     # Store "Subfolder/Filename" unique ID
-                    processed_files.add(f"{row[0]}/{row[1]}")
+                    processed_files.add(f"{row[0]}/{row[1]}/{row[2]}")
         except StopIteration:
             pass
 
@@ -129,7 +129,7 @@ write_header = not os.path.exists(OUTPUT_CSV)
 with open(OUTPUT_CSV, "a", newline="", encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
     if write_header:
-        writer.writerow(["Subfolder", "Filename", "Raw Transcription"])
+        writer.writerow(["Folder", "Subfolder", "Filename", "Raw Transcription"])
 
     # Recursive file search
     files = [
@@ -144,9 +144,11 @@ with open(OUTPUT_CSV, "a", newline="", encoding="utf-8") as csvfile:
     print(f"Using {len(process_files)} total images.")
 
     for i, full_path in enumerate(process_files):
+        p = Path(full_path)
+        folder = Path(IMAGE_FOLDER).name # p.parent.parent.name
         filename = os.path.basename(full_path)
         subfolder = os.path.basename(os.path.dirname(full_path))
-        unique_id = f"{subfolder}/{filename}"
+        unique_id = f"{folder}/{subfolder}/{filename}"
 
         if unique_id in processed_files:
             continue
@@ -156,7 +158,7 @@ with open(OUTPUT_CSV, "a", newline="", encoding="utf-8") as csvfile:
         clean_image = load_and_prep_image(full_path)
         transcription = transcribe_image(clean_image)
 
-        writer.writerow([subfolder, filename, transcription])
+        writer.writerow([folder, subfolder, filename, transcription])
 
         # Simple rate limiting
         if "Quota" in transcription:
