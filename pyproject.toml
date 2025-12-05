@@ -58,6 +58,7 @@ scikit-learn = "*"
 plotly = "*"
 pillow-heif = "*"
 python-dotenv = "*"
+google-generativeai = "*"
 
 [project.optional-dependencies]
 dev = [

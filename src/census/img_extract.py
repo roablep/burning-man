@@ -3,11 +3,17 @@ import csv
 import time
 from pathlib import Path
 
+# --- LIBRARY IMPORTS ---
 import google.generativeai as genai
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 from dotenv import load_dotenv
+
+# --- IMAGE HANDLING IMPORTS ---
+# We explicitly import these plugins to prevent "module has no attribute" errors
+import PIL.PngImagePlugin
+import PIL.JpegImagePlugin
+import pillow_heif
 from PIL import Image, ImageOps
-from pillow_heif import register_heif_opener
-from google.api_core import exceptions
 
 # --- 1. SETUP ---
 load_dotenv()
@@ -15,49 +21,70 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 IMAGE_FOLDER = "/Users/peter/Downloads/2025 Notes"
 OUTPUT_CSV = "transcriptions.csv"
 
-register_heif_opener()
+# Configure the HEIC opener
+pillow_heif.register_heif_opener()
+
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+# model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash-lite") 
 
-safety_settings = [
-    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
-]
+print("Available Models:")
+for m in genai.list_models():
+    if "generateContent" in m.supported_generation_methods:
+        print(f"- {m.name}")
+
+# --- SAFETY SETTINGS (FIXED) ---
+# We use a Dictionary format here. This prevents the "list object cannot be interpreted" error.
+safety_settings = {
+    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+}
 
 
-# --- 2. HELPER FUNCTION ---
+# --- 2. ROBUST IMAGE LOADER ---
 def load_and_prep_image(image_path):
     """
-    Handles opening, converting HEIC->RGB, fixing rotation,
-    and resizing. Returns a clean PIL Image object.
+    Robust loader that handles HEIC/PNG/JPG and fixes orientation/mode.
     """
     try:
-        # Open the file (Pillow handles HEIC due to register_heif_opener)
-        img = Image.open(image_path)
+        img = None
 
-        # 1. Force Convert to RGB. This fixes the 'no attribute _im' error
-        #    and ensures compatibility for HEIC, PNG, and RGBA files.
-        img = img.convert("RGB")
+        # MANUAL HEIC DECODE (Bypasses lazy-loading bugs)
+        if image_path.lower().endswith((".heic", ".heif")):
+            heif_file = pillow_heif.read_heif(image_path)
+            img = Image.frombytes(
+                heif_file.mode,
+                heif_file.size,
+                heif_file.data,
+                "raw",
+            )
+        else:
+            # Standard Open
+            img = Image.open(image_path)
 
-        # 2. Fix Orientation (Phone photos are often rotated in metadata)
+        # Force Loading: Copies image to memory and closes file pointer
+        img.load()
+
+        # 1. Convert to RGB (Fixes 'no attribute _im' and Alpha channel issues)
+        if img.mode != "RGB":
+            img = img.convert("RGB")
+
+        # 2. Fix Orientation (EXIF rotation)
         img = ImageOps.exif_transpose(img)
 
-        # 3. Resize (Optimize for API speed/cost)
-        #    Max 1024px on the longest side is plenty for handwriting OCR
+        # 3. Resize (Max 1024px)
         img.thumbnail((1024, 1024))
 
         return img
+
     except Exception as e:
-        print(f"Failed to prep image {image_path}: {e}")
+        print(f"FAILED to load {image_path}: {e}")
         return None
 
 
 def transcribe_image(img_object):
-    """
-    Takes a prepped PIL Image object and sends it to Gemini.
-    """
     try:
         if img_object is None:
             return "Error: Image load failure"
@@ -75,45 +102,67 @@ def transcribe_image(img_object):
         )
         return response.text.strip()
 
-    except exceptions.ResourceExhausted:
-        return "Error: 429 Quota Exceeded"
-    except ValueError:
-        return "Error: Blocked by Safety Filters"
     except Exception as e:
+        # Catch-all for API errors
         return f"Error: {e}"
 
 
 # --- 3. MAIN EXECUTION ---
-with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["Subfolder", "Filename", "Raw Transcription"])
+# Check existing progress to allow resuming
+processed_files = set()
+if os.path.exists(OUTPUT_CSV):
+    with open(OUTPUT_CSV, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        try:
+            next(reader)  # Skip header
+            for row in reader:
+                if len(row) > 1:
+                    # Store "Subfolder/Filename" unique ID
+                    processed_files.add(f"{row[0]}/{row[1]}")
+        except StopIteration:
+            pass
 
-    # Gather files
+print(f"Resuming... {len(processed_files)} images already processed.")
+
+# Append mode 'a'
+write_header = not os.path.exists(OUTPUT_CSV)
+with open(OUTPUT_CSV, "a", newline="", encoding="utf-8") as csvfile:
+    writer = csv.writer(csvfile)
+    if write_header:
+        writer.writerow(["Subfolder", "Filename", "Raw Transcription"])
+
+    # Recursive file search
     files = [
         os.path.join(root, f)
         for root, dirs, filenames in os.walk(IMAGE_FOLDER)
         for f in filenames
         if f.lower().endswith((".heic", ".jpg", ".png"))
     ]
-    print(f"Found {len(files)} images. Starting...")
+    print(f"Found {len(files)} total images.")
 
-    for i, full_path in enumerate(files):
+    process_files = files[:1]
+    print(f"Using {len(process_files)} total images.")
+
+    for i, full_path in enumerate(process_files):
         filename = os.path.basename(full_path)
         subfolder = os.path.basename(os.path.dirname(full_path))
+        unique_id = f"{subfolder}/{filename}"
 
-        print(f"Processing {i+1}/{len(files)}: {subfolder}/{filename}")
+        if unique_id in processed_files:
+            continue
 
-        # STEP 1: Load & Prep (The new helper function)
+        print(f"Processing {i+1}/{len(files)}: {unique_id}")
+
         clean_image = load_and_prep_image(full_path)
-
-        # STEP 2: Transcribe
         transcription = transcribe_image(clean_image)
 
         writer.writerow([subfolder, filename, transcription])
 
-        if "Quota Exceeded" in transcription:
+        # Simple rate limiting
+        if "Quota" in transcription:
+            print("Quota hit. Sleeping 30s...")
             time.sleep(30)
         else:
-            time.sleep(2)
+            time.sleep(2)  # 2 seconds between calls is safe for Flash
 
 print("Done.")
