@@ -101,7 +101,7 @@ async def process_single_image(sem, full_path, writer_queue, processed_set):
             Analyze this image. It is a survey response. 
             Extract the handwritten answers corresponding to the typed questions.
             Return ONLY a raw string in this format:
-            Q1: [Answer] | Q2: [Answer] | Q3: [Answer]
+            Q1: [Answer] | Q2: [Answer] | Q3: [Answer] | ...
             If handwriting is illegible, write [Illegible].
             """
 
