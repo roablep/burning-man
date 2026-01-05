@@ -5,8 +5,8 @@ import time
 from pathlib import Path
 
 # --- LIBRARY IMPORTS ---
-import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 # --- IMAGE HANDLING IMPORTS ---
@@ -23,18 +23,20 @@ OUTPUT_CSV = "transcriptions.csv"
 
 # Configure settings
 pillow_heif.register_heif_opener()
-genai.configure(api_key=API_KEY)
+client = genai.Client(api_key=API_KEY)
 
 # Use the lighter model for speed, but fallback aliases are safer
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
+model_id = "gemini-2.0-flash-lite"
 
 # Safety Settings
-safety_settings = {
-    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-}
+config = types.GenerateContentConfig(
+    safety_settings=[
+        types.SafetySetting(category='HARM_CATEGORY_HARASSMENT', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_HATE_SPEECH', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_DANGEROUS_CONTENT', threshold='BLOCK_NONE'),
+    ]
+)
 
 
 # --- 2. BLOCKING HELPER FUNCTIONS (Run in ThreadPool) ---
@@ -106,8 +108,10 @@ async def process_single_image(sem, full_path, writer_queue, processed_set):
             """
 
             # Use the NATIVE Async method
-            response = await model.generate_content_async(
-                [prompt, img_object], safety_settings=safety_settings
+            response = await client.aio.models.generate_content(
+                model=model_id,
+                contents=[prompt, img_object],
+                config=config
             )
             transcription = response.text.strip()
 
@@ -178,7 +182,7 @@ async def main():
         for f in all_files
         if f"{os.path.basename(os.path.dirname(f))}/{os.path.basename(f)}"
         not in processed_files
-    ][:50]
+    ][:]
     print(f"Processing {len(files_to_do)} new images...")
 
     # CONFIGURATION

@@ -4,8 +4,8 @@ import time
 from pathlib import Path
 
 # --- LIBRARY IMPORTS ---
-import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 # --- IMAGE HANDLING IMPORTS ---
@@ -24,23 +24,22 @@ OUTPUT_CSV = "transcriptions.csv"
 # Configure the HEIC opener
 pillow_heif.register_heif_opener()
 
-genai.configure(api_key=API_KEY)
-# model = genai.GenerativeModel("gemini-2.5-flash")
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
+client = genai.Client(api_key=API_KEY)
+model_id = "gemini-2.0-flash-lite" # Updated to a valid model name for the new SDK
 
 print("Available Models:")
-for m in genai.list_models():
-    if "generateContent" in m.supported_generation_methods:
-        print(f"- {m.name}")
+for m in client.models.list():
+    print(f"- {m.name}")
 
-# --- SAFETY SETTINGS (FIXED) ---
-# We use a Dictionary format here. This prevents the "list object cannot be interpreted" error.
-safety_settings = {
-    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-}
+# --- SAFETY SETTINGS (NEW SDK FORMAT) ---
+config = types.GenerateContentConfig(
+    safety_settings=[
+        types.SafetySetting(category='HARM_CATEGORY_HARASSMENT', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_HATE_SPEECH', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold='BLOCK_NONE'),
+        types.SafetySetting(category='HARM_CATEGORY_DANGEROUS_CONTENT', threshold='BLOCK_NONE'),
+    ]
+)
 
 
 # --- 2. ROBUST IMAGE LOADER ---
@@ -97,8 +96,10 @@ def transcribe_image(img_object):
         If handwriting is illegible, write [Illegible].
         """
 
-        response = model.generate_content(
-            [prompt, img_object], safety_settings=safety_settings
+        response = client.models.generate_content(
+            model=model_id,
+            contents=[prompt, img_object],
+            config=config
         )
         return response.text.strip()
 
