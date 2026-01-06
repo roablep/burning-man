@@ -22,7 +22,7 @@ from PIL import Image, ImageOps
 load_dotenv()
 ALLOWED_EXTS = (".heic", ".heif", ".jpg", ".jpeg", ".png")
 API_KEY = os.getenv("GEMINI_API_KEY")
-IMAGE_FOLDER = "/Users/peter/Downloads/2025 Notes"
+IMAGE_FOLDER = "/Users/peter/Downloads/2025 Field Notes Images"
 OUTPUT_CSV = "transcriptions.csv"
 LIMIT_FILES = 10  # Set to an integer for testing
 
