@@ -23,15 +23,15 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
     -   Function to call Gemini API for batch processing (Sentiment/Tagging) with rate limit handling.
     -   Function to cache LLM results (to avoid re-running costs).
 
-## 2. Module 1: The "Pilgrim's Progress" (Transformation)
+- [x] **Module 1: The "Pilgrim's Progress" (Transformation)**
 *Research Question:* How does the narrative of transformation evolve from Virgin to Veteran?
 
-- [ ] **Data Prep:** Filter "Transformation" (Set A) responses by Cohort (Virgin, Sophomore, Veteran, Elder).
-- [ ] **Analysis Script (`analyze_transformation.py`):**
-    -   **Keyword Extraction:** Identify top unique words for Virgins vs. Veterans.
-    -   **LLM Analysis:** Ask Gemini to summarize the "Core Driver of Change" for a sample of each cohort.
-- [ ] **Hypothesis Test:** Verify if "Ego Death" is a Virgin trait and "Service" is a Veteran trait.
-- [ ] **Output:** `reports/module_1_transformation.md`
+- [x] **Data Prep:** Filter "Transformation" (Set A) responses by Cohort (Virgin, Sophomore, Veteran, Elder).
+- [x] **Analysis Script (`analyze_transformation.py`):**
+    -   [x] **Keyword Extraction:** Identify top unique words for Virgins vs. Veterans.
+    -   [x] **LLM Analysis:** Ask Gemini to summarize the "Core Driver of Change" for a sample of each cohort.
+- [x] **Hypothesis Test:** Verify if "Ego Death" is a Virgin trait and "Service" is a Veteran trait.
+- [x] **Output:** `reports/module_1_transformation.md`
 
 ## 3. Module 2: Maslow’s Inverted Pyramid (Survival vs. Epiphany)
 *Research Question:* Does physical hardship correlate with emotional breakthrough?

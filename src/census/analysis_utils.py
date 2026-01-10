@@ -26,7 +26,9 @@ def load_data(year=2024, survey_type=None) -> List[Dict[str, Any]]:
     Loads normalized data for a specific year.
     If survey_type (e.g., 'Transformation', 'A') is provided, filters by Subfolder.
     """
-    filename = f"{year}-field-note-transcriptions-normalized.csv"
+    # Look in the 'data' subdirectory relative to the script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    filename = os.path.join(base_dir, "data", f"{year}-field-note-transcriptions-normalized.csv")
     if not os.path.exists(filename):
         print(f"File not found: {filename}")
         return []
