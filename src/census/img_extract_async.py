@@ -23,7 +23,7 @@ load_dotenv()
 ALLOWED_EXTS = (".heic", ".heif", ".jpg", ".jpeg", ".png")
 API_KEY = os.getenv("GEMINI_API_KEY")
 IMAGE_FOLDER = "/Users/peter/Downloads/2025 Field Notes Images"
-OUTPUT_CSV = "transcriptions.csv"
+OUTPUT_CSV = "2024-field-note-transcriptions-pt1.csv"
 LIMIT_FILES = None  # Set to an integer for testing
 
 # Configure settings
