@@ -1,0 +1,12 @@
+[
+  {"pattern": "\\bdefaut\\b", "replacement": "default"},
+  {"pattern": "\\bberner\\b", "replacement": "burner"},
+  {"pattern": "\\btne\\b", "replacement": "the"},
+  {"pattern": "\\bteh\\b", "replacement": "the"},
+  {"pattern": "\\bthier\\b", "replacement": "their"},
+  {"pattern": "\\brecieve\\b", "replacement": "receive"},
+  {"pattern": "\\boccured\\b", "replacement": "occurred"},
+  {"pattern": "\\bseperate\\b", "replacement": "separate"},
+  {"pattern": "\\bwich\\b", "replacement": "which"},
+  {"pattern": "\\bwierd\\b", "replacement": "weird"}
+]
