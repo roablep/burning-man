@@ -71,8 +71,8 @@ async def run_analysis():
         # Add a "Voice" section - pick a representative quote (longest usually good proxy for depth)
         if cohorts[cohort]:
             longest_response = max(cohorts[cohort][:SAMPLE_SIZE], key=len)
-            report.append(f"**Representative Voice:**\n> *\"{longest_response}\"*
-")
+            voice_block = f"**Representative Voice:**\n> *\"{longest_response}\"*\n"
+            report.append(voice_block)
 
     utils.save_report("module_1_transformation.md", "\n".join(report))
 
