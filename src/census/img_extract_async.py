@@ -24,7 +24,7 @@ ALLOWED_EXTS = (".heic", ".heif", ".jpg", ".jpeg", ".png")
 API_KEY = os.getenv("GEMINI_API_KEY")
 IMAGE_FOLDER = "/Users/peter/Downloads/2025 Field Notes Images"
 OUTPUT_CSV = "transcriptions.csv"
-LIMIT_FILES = 10  # Set to an integer for testing
+LIMIT_FILES = None  # Set to an integer for testing
 
 # Configure settings
 pillow_heif.register_heif_opener()
