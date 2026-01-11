@@ -1,7 +1,7 @@
 import sys
 import os
 import asyncio
-import importlib
+import argparse
 
 # Ensure src/census is in path to allow "import analysis_utils"
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -18,8 +18,20 @@ from modules import (
     analyze_relationships,
     synthesize_report
 )
+import analyze_cross_theme
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run the Burning Man analysis pipeline.")
+    parser.add_argument(
+        "--include-cross-theme",
+        action="store_true",
+        help="Include cross-theme cohort analysis (TF-IDF clustering + correlations).",
+    )
+    return parser.parse_args()
+
 
 async def main():
+    args = parse_args()
     print("=== Starting Analysis Pipeline ===")
     
     steps = [
@@ -33,6 +45,9 @@ async def main():
         ("Module 6: Relationships", analyze_relationships.run_analysis),
         ("Synthesis: Final Report", synthesize_report.run_synthesis)
     ]
+
+    if args.include_cross_theme:
+        steps.append(("Cross-Theme Cohort Analysis", analyze_cross_theme.main))
     
     for name, func in steps:
         print(f"\n--- Running {name} ---")
