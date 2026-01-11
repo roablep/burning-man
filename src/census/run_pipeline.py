@@ -9,6 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # Import modules dynamically to avoid top-level import errors if paths aren't set yet
 from modules import (
     generate_basic_stats,
+    analyze_descriptive_stats,
     analyze_transformation,
     analyze_survival,
     analyze_identity,
@@ -23,6 +24,7 @@ async def main():
     
     steps = [
         ("Module 0: Basic Stats", generate_basic_stats.run_analysis),
+        ("Module 0b: Descriptive Stats by Theme", analyze_descriptive_stats.run_analysis),
         ("Module 1: Transformation", analyze_transformation.run_analysis),
         ("Module 2: Survival", analyze_survival.run_analysis),
         ("Module 3: Identity", analyze_identity.run_analysis),
