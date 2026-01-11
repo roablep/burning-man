@@ -23,6 +23,25 @@ model_id = "gemini-2.0-flash-lite"
 if not os.path.exists(CACHE_DIR):
     os.makedirs(CACHE_DIR)
 
+def get_age_bucket(age_val):
+    """
+    Returns a standardized age bucket string.
+    Expects an integer or a string that can be cast to int.
+    """
+    try:
+        age = int(age_val)
+    except (ValueError, TypeError):
+        return "Unknown"
+
+    if age < 30:
+        return "Under 30"
+    elif age < 40:
+        return "30-39"
+    elif age < 50:
+        return "40-49"
+    else:
+        return "50+"
+
 def load_data(year=2024, survey_type=None) -> List[Dict[str, Any]]:
     """
     Loads normalized data for a specific year.

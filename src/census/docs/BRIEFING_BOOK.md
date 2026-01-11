@@ -356,7 +356,7 @@ The `analysis_plan.md` proposes five major theoretical lenses:
    - Theme evolution over time
    - Pandemic recovery (if pre-2024 data exists)
 
-5. **N-gram & TF-IDF Analysis**
+5. **Semantic Theme & Linguistic Analysis**
    - Unique vocabulary by cohort (Virgin "I/me" vs. Elder "we/us")
    - Keyword frequency shifts
    - Linguistic markers of transformation
@@ -400,7 +400,7 @@ Beyond the standard analyses, here are five high-impact research directions that
 **Research Question**: *"Do Burners linguistically shift from individual to collective identity as tenure increases?"*
 
 **Methodology**:
-- TF-IDF analysis by cohort on Transformation responses
+- **Linguistic Pronoun Analysis** (LLM-based) by cohort on Transformation responses
 - Count pronoun usage: "I/me/my/mine" vs. "we/us/our/ours"
 - Track keywords:
   - **Virgin-specific**: "myself", "first time", "overwhelmed", "discovering"

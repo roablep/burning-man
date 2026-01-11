@@ -19,12 +19,22 @@ async def run_analysis():
     
     # Segment by Gender
     cohorts = {"M": [], "F": []}
+    
+    # Segment by Age
+    age_cohorts = {"Under 30": [], "30-39": [], "40-49": [], "50+": []}
+    
     for r in data:
+        # Gender
         gender = r.get("Norm_Gender", "U")
         if gender in ["M", "F"]:
             cohorts[gender].append(r)
             
-    # Prepare lists for batch processing
+        # Age
+        age = utils.get_age_bucket(r.get("Norm_Age"))
+        if age in age_cohorts:
+            age_cohorts[age].append(r)
+            
+    # Prepare lists for batch processing (Gender)
     man_resp_m = [r.get("Q6", "") for r in cohorts["M"] if len(r.get("Q6", "")) > 5]
     man_resp_f = [r.get("Q6", "") for r in cohorts["F"] if len(r.get("Q6", "")) > 5]
     temple_resp_m = [r.get("Q7", "") for r in cohorts["M"] if len(r.get("Q7", "")) > 5]
@@ -32,7 +42,7 @@ async def run_analysis():
 
     prompt = "Analyze this symbol description. Determine sentiment and emotion.\nDescription: \"{{TEXT}}\""
     
-    # Run 4 separate batches
+    # Run Gender batches
     print("Analyzing Men on The Man...")
     man_res_m = await utils.batch_process_with_llm(man_resp_m, prompt, response_schema=SymbolAnalysis)
     print("Analyzing Women on The Man...")
@@ -41,6 +51,24 @@ async def run_analysis():
     temple_res_m = await utils.batch_process_with_llm(temple_resp_m, prompt, response_schema=SymbolAnalysis)
     print("Analyzing Women on The Temple...")
     temple_res_f = await utils.batch_process_with_llm(temple_resp_f, prompt, response_schema=SymbolAnalysis)
+    
+    # Run Age batches
+    age_stats = {}
+    print("Analyzing Age Cohorts...")
+    for age, rows in age_cohorts.items():
+        # The Man
+        man_texts = [r.get("Q6", "") for r in rows if len(r.get("Q6", "")) > 5]
+        # The Temple
+        temple_texts = [r.get("Q7", "") for r in rows if len(r.get("Q7", "")) > 5]
+        
+        # Reuse cache
+        man_res = await utils.batch_process_with_llm(man_texts, prompt, response_schema=SymbolAnalysis)
+        temple_res = await utils.batch_process_with_llm(temple_texts, prompt, response_schema=SymbolAnalysis)
+        
+        man_counts = Counter([r.get("primary_emotion") for r in man_res if "error" not in r])
+        temple_counts = Counter([r.get("primary_emotion") for r in temple_res if "error" not in r])
+        
+        age_stats[age] = {"Man": man_counts, "Temple": temple_counts}
     
     def get_stats(results):
         valid = [r for r in results if "error" not in r]
@@ -103,7 +131,7 @@ async def run_analysis():
     # Report
     report = ["# Module 4: Sacred vs. Profane (Symbolism & Gender)\n"]
     report.append("**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ, and is there a gender divide?\n")
-    report.append(f"**Methodology:** Comparative sentiment and emotion analysis of {man_total} Man responses vs {temple_total} Temple responses, segmented by Gender.\n")
+    report.append(f"**Methodology:** Comparative sentiment and emotion analysis of {man_total} Man responses vs {temple_total} Temple responses, segmented by Gender and **Age**.\n")
     
     report.append("## Results & Analysis")
     report.append(f"- **The Man Sentiment (M/F):** {man_score_m:.2f} / {man_score_f:.2f}")
@@ -116,6 +144,18 @@ async def run_analysis():
     report.append("\n### Gender Breakdown (Temple Grief)")
     report.append(f"- **Men:** {m_temple_grief:.1%}")
     report.append(f"- **Women:** {f_temple_grief:.1%}")
+    
+    report.append("\n### Age Analysis: Evolution of Meaning")
+    report.append("| Age Group | Man: Celebration % | Temple: Grief % |")
+    report.append("| :--- | :--- | :--- |")
+    for age in ["Under 30", "30-39", "40-49", "50+"]:
+        stats = age_stats.get(age, {"Man": Counter(), "Temple": Counter()})
+        man_tot = sum(stats["Man"].values())
+        temple_tot = sum(stats["Temple"].values())
+        
+        man_cel = stats["Man"]['Celebration'] / man_tot if man_tot > 0 else 0
+        temple_grf = stats["Temple"]['Grief'] / temple_tot if temple_tot > 0 else 0
+        report.append(f"| {age} | {man_cel:.1%} | {temple_grf:.1%} |")
 
     report.append("\n## Voices")
     report.append("- **The Man:** *\"The Man keeps my Sadness\"*") 

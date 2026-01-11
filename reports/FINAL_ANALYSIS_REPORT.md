@@ -33,7 +33,7 @@ This report synthesizes findings from a mixed-method analysis of 2024-2025 field
 
 **Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?
 
-**Methodology:** Analyzed 154 transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: 200 per cohort.
+**Methodology:** Analyzed 154 transformation narratives using LLM-based Semantic Theme Extraction, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: 200 per cohort.
 
 ## Results & Analysis
 ### Linguistic Analysis (The 'Ego Death' Test)

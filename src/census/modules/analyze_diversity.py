@@ -36,11 +36,19 @@ async def run_analysis():
     marginalized = [r for r in general_data if r.get("Norm_Gender") in ["NB", "O"]]
     majority = [r for r in general_data if r.get("Norm_Gender") == "M"] # Using Men as baseline
     
+    # Segment by Age
+    age_groups = {"Under 30": [], "30-39": [], "40-49": [], "50+": []}
+    for r in general_data:
+        age = utils.get_age_bucket(r.get("Norm_Age"))
+        if age in age_groups:
+            age_groups[age].append(r)
+    
     async def get_group_sentiment(group_data, label):
         texts = [r.get("Q5", "") for r in group_data if len(r.get("Q5", "")) > 15]
         if not texts: return 0, 0
         prompt = "Score the sentiment and detect social friction in this Burning Man experience.\nResponse: \"{{TEXT}}\""
-        results = await utils.batch_process_with_llm(texts[:200], prompt, response_schema=SentimentAnalysis)
+        # Limit sample size for efficiency
+        results = await utils.batch_process_with_llm(texts[:150], prompt, response_schema=SentimentAnalysis)
         
         valid = [r for r in results if "error" not in r]
         if not valid: return 0, 0
@@ -52,6 +60,13 @@ async def run_analysis():
     maj_sent, maj_friction = await get_group_sentiment(majority, "Majority")
     print("Analyzing sentiment for Marginalized (NB/Other) group...")
     marg_sent, marg_friction = await get_group_sentiment(marginalized, "Marginalized")
+    
+    # Age Analysis
+    age_friction_stats = {}
+    print("Analyzing sentiment by Age Group...")
+    for age, group in age_groups.items():
+        _, fric = await get_group_sentiment(group, f"Age: {age}")
+        age_friction_stats[age] = fric
 
     # --- PROCESS DIVERSITY RESULTS ---
     stats = Counter([r.get("identity_impact") for r in div_results if "error" not in r])
@@ -70,13 +85,18 @@ async def run_analysis():
             conclusion.append(f"**Cross-Set Validation:** Marginalized respondents reported **significantly higher friction** in general experience surveys ({marg_friction:.1%} vs {maj_friction:.1%} for the majority baseline).")
         else:
             conclusion.append(f"**Baseline Consistency:** General experience sentiment was relatively consistent between groups (Friction: {marg_friction:.1%} marginalized vs {maj_friction:.1%} majority).")
+            
+        # Age Conclusion
+        max_fric_age = max(age_friction_stats, key=age_friction_stats.get) if age_friction_stats else "None"
+        conclusion.append(f"**Generational Friction:** The highest rate of reported social friction was found in the **{max_fric_age}** cohort ({age_friction_stats.get(max_fric_age, 0):.1%}).")
+        
     else:
         conclusion.append("Insufficient data to draw conclusions.")
 
     # Report
     report = ["# Module 5: The 'Other' in Utopia (Diversity & Inclusion)\n"]
     report.append("**Research Question:** How does the marginalized experience differ from the 'Radical Inclusion' ideal?\n")
-    report.append(f"**Methodology:** Comparative analysis of {total_valid} diversity narratives and cross-set sentiment analysis of {len(marginalized) + len(majority)} general responses.\n")
+    report.append(f"**Methodology:** Comparative analysis of {total_valid} diversity narratives and cross-set sentiment analysis of {len(marginalized) + len(majority)} general responses, segmented by Identity and **Age**.\n")
     
     report.append("## 1. Diversity Survey Results")
     if total_valid > 0:
@@ -92,6 +112,12 @@ async def run_analysis():
     report.append("| :--- | :--- | :--- |")
     report.append(f"| Majority (Men) | {maj_sent:.2f} | {maj_friction:.1%} |")
     report.append(f"| Marginalized (NB/O) | {marg_sent:.2f} | {marg_friction:.1%} |")
+    
+    report.append("\n### Age Analysis: Friction by Generation")
+    report.append("| Age Group | Friction Rate |")
+    report.append("| :--- | :--- |")
+    for age in ["Under 30", "30-39", "40-49", "50+"]:
+        report.append(f"| {age} | {age_friction_stats.get(age, 0):.1%} |")
     
     report.append("\n## Conclusion")
     report.append(f"> {' '.join(conclusion)}")

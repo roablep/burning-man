@@ -20,23 +20,32 @@ async def run_analysis():
     all_data = data_2024 + data_2025
     
     cohorts = {"Virgin": [], "Sophomore": [], "Veteran": [], "Elder": []}
+    age_cohorts = {"Under 30": [], "30-39": [], "40-49": [], "50+": []}
     
     for row in all_data:
-        status = row.get("Burn_Status", "Unknown")
         q5_text = row.get("Q5", "").strip()
-        if status in cohorts and len(q5_text) > 10:
-            cohorts[status].append(q5_text)
+        if len(q5_text) > 10:
+            # Tenure Cohorts
+            status = row.get("Burn_Status", "Unknown")
+            if status in cohorts:
+                cohorts[status].append(q5_text)
+            
+            # Age Cohorts
+            age_bucket = utils.get_age_bucket(row.get("Norm_Age"))
+            if age_bucket in age_cohorts:
+                age_cohorts[age_bucket].append(q5_text)
             
     # LLM Analysis
     SAMPLE_SIZE = 200
+    
+    # --- Tenure Analysis ---
     cohort_themes = {}
     cohort_pronouns = {}
     
     for cohort, responses in cohorts.items():
         sample = responses[:SAMPLE_SIZE]
-        if not sample:
-            continue
-            
+        if not sample: continue
+        
         # Theme Extraction
         theme_prompt = """
         Analyze the following response to the question "Did Burning Man change you?".
@@ -64,6 +73,29 @@ async def run_analysis():
         total_self = sum([r.get('self_refs', 0) for r in pronoun_results if "error" not in r])
         total_collective = sum([r.get('collective_refs', 0) for r in pronoun_results if "error" not in r])
         cohort_pronouns[cohort] = {"I": total_self, "We": total_collective}
+
+    # --- Age Analysis ---
+    age_themes = {}
+    age_pronouns = {}
+    
+    for age_group, responses in age_cohorts.items():
+        sample = responses[:SAMPLE_SIZE]
+        if not sample: continue
+        
+        # Reuse prompts (themes)
+        themes_raw = await utils.batch_process_with_llm(sample, theme_prompt)
+        theme_counter = Counter()
+        for t_str in themes_raw:
+            if not t_str or "ERROR" in t_str: continue
+            themes = [t.strip().title() for t in t_str.split(",")]
+            theme_counter.update(themes)
+        age_themes[age_group] = theme_counter
+        
+        # Reuse prompts (pronouns)
+        pronoun_results = await utils.batch_process_with_llm(sample, pronoun_prompt, response_schema=PronounAnalysis)
+        total_self = sum([r.get('self_refs', 0) for r in pronoun_results if "error" not in r])
+        total_collective = sum([r.get('collective_refs', 0) for r in pronoun_results if "error" not in r])
+        age_pronouns[age_group] = {"I": total_self, "We": total_collective}
 
     # Dynamic Conclusion Logic
     if "Virgin" not in cohort_themes or "Elder" not in cohort_themes:
@@ -106,9 +138,9 @@ async def run_analysis():
     # Generate Report
     report = ["# Module 1: The Pilgrim's Progress (Transformation)\n"]
     report.append("**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?\n")
-    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using **LLM-based Semantic Theme Extraction** and **Linguistic Pronoun Analysis**, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: {SAMPLE_SIZE} per cohort.\n")
+    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using **LLM-based Semantic Theme Extraction** and **Linguistic Pronoun Analysis**, segmented by **Burn Tenure** and **Age**.\n")
     
-    report.append("## Results & Analysis")
+    report.append("## Results & Analysis (By Tenure)")
     
     report.append("### Linguistic Analysis (The 'Ego Death' Test)")
     report.append("| Cohort | Self Refs (I/Me) | Collective Refs (We/Us) | Ratio (I:We) |")
@@ -122,6 +154,20 @@ async def run_analysis():
     for cohort, counter in cohort_themes.items():
         top_3 = ", ".join([t[0] for t in counter.most_common(3)])
         report.append(f"- **{cohort}:** Top themes are *{top_3}*.")
+        
+    report.append("\n## Results & Analysis (By Age)")
+    report.append("### Linguistic Analysis")
+    report.append("| Age Group | Self Refs | Collective Refs | Ratio (I:We) |")
+    report.append("| :--- | :--- | :--- | :--- |")
+    for age in ["Under 30", "30-39", "40-49", "50+"]:
+        stats = age_pronouns.get(age, {"I": 0, "We": 0})
+        ratio = stats["I"] / stats["We"] if stats["We"] > 0 else 0
+        report.append(f"| {age} | {stats['I']} | {stats['We']} | {ratio:.2f} |")
+        
+    report.append("\n### Thematic Analysis")
+    for age, counter in age_themes.items():
+        top_3 = ", ".join([t[0] for t in counter.most_common(3)])
+        report.append(f"- **{age}:** *{top_3}*")
     
     report.append("\n## Voices")
     for cohort in ["Virgin", "Sophomore", "Elder"]:
