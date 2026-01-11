@@ -19,13 +19,16 @@ async def run_analysis():
     
     prompt = """
     Analyze the following Burning Man field notes.
-    1. Does the person mention physical hardship (Mud, Rain, Heat, Dust, Hunger, Exhaustion, Logistics)?
-    2. Does the person describe a breakthrough or shift?
-    3. Is the hardship explicitly linked to the breakthrough? (Yes/No).
-    
-    Format: Hardship: [Yes/No], Breakthrough: [Yes/No], Linked: [Yes/No]
-    
-    Notes: "{TEXT}"""
+    Output ONLY the following format:
+    Hardship: [Yes/No], Breakthrough: [Yes/No], Linked: [Yes/No]
+
+    Definition of terms:
+    - Hardship: Mentions of Mud, Rain, Heat, Dust, Hunger, Exhaustion, or Logistics.
+    - Breakthrough: Describes a significant personal epiphany, realization, or shift in perspective.
+    - Linked: The participant explicitly states the hardship caused or contributed to the breakthrough.
+
+    Notes: "{{TEXT}}"
+    """
     
     results = await utils.batch_process_with_llm(test_subjects[:150], prompt)
     

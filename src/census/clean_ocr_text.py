@@ -136,7 +136,7 @@ async def llm_clean_texts(texts: List[str]) -> List[str]:
     return await batch_process_with_llm(texts, prompt_template=prompt_template)
 
 
-def process_file(
+async def process_file(
     input_path: str,
     output_path: str,
     mapping_path: str,
@@ -182,7 +182,7 @@ def process_file(
                 row[f"Cleaning_Confidence_{field}"] = f"{score:.3f}"
 
     if use_llm and llm_inputs:
-        llm_outputs = asyncio.run(llm_clean_texts(llm_inputs))
+        llm_outputs = await llm_clean_texts(llm_inputs)
         for (row, field), llm_text in zip(llm_targets, llm_outputs):
             cleaned = normalize_whitespace(llm_text)
             row[f"Cleaned_{field}"] = cleaned
@@ -225,18 +225,21 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    for input_path, output_path in iter_input_output_pairs(args):
-        if not os.path.exists(input_path):
-            print(f"Skipping missing file: {input_path}")
-            continue
-        process_file(
-            input_path=input_path,
-            output_path=output_path,
-            mapping_path=args.mapping,
-            min_question=args.min_question,
-            use_llm=args.use_llm,
-            llm_threshold=args.llm_threshold,
-        )
+    async def run_all():
+        for input_path, output_path in iter_input_output_pairs(args):
+            if not os.path.exists(input_path):
+                print(f"Skipping missing file: {input_path}")
+                continue
+            await process_file(
+                input_path=input_path,
+                output_path=output_path,
+                mapping_path=args.mapping,
+                min_question=args.min_question,
+                use_llm=args.use_llm,
+                llm_threshold=args.llm_threshold,
+            )
+
+    asyncio.run(run_all())
 
 
 if __name__ == "__main__":
