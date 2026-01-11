@@ -40,17 +40,20 @@ async def run_analysis():
     temple_resp_m = [r.get("Q7", "") for r in cohorts["M"] if len(r.get("Q7", "")) > 5]
     temple_resp_f = [r.get("Q7", "") for r in cohorts["F"] if len(r.get("Q7", "")) > 5]
 
+    # LLM Analysis
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
+
     prompt = "Analyze this symbol description. Determine sentiment and emotion.\nDescription: \"{{TEXT}}\""
     
     # Run Gender batches
     print("Analyzing Men on The Man...")
-    man_res_m = await utils.batch_process_with_llm(man_resp_m, prompt, response_schema=SymbolAnalysis)
+    man_res_m = await utils.batch_process_with_llm(man_resp_m[:SAMPLE_SIZE] if SAMPLE_SIZE else man_resp_m, prompt, response_schema=SymbolAnalysis)
     print("Analyzing Women on The Man...")
-    man_res_f = await utils.batch_process_with_llm(man_resp_f, prompt, response_schema=SymbolAnalysis)
+    man_res_f = await utils.batch_process_with_llm(man_resp_f[:SAMPLE_SIZE] if SAMPLE_SIZE else man_resp_f, prompt, response_schema=SymbolAnalysis)
     print("Analyzing Men on The Temple...")
-    temple_res_m = await utils.batch_process_with_llm(temple_resp_m, prompt, response_schema=SymbolAnalysis)
+    temple_res_m = await utils.batch_process_with_llm(temple_resp_m[:SAMPLE_SIZE] if SAMPLE_SIZE else temple_resp_m, prompt, response_schema=SymbolAnalysis)
     print("Analyzing Women on The Temple...")
-    temple_res_f = await utils.batch_process_with_llm(temple_resp_f, prompt, response_schema=SymbolAnalysis)
+    temple_res_f = await utils.batch_process_with_llm(temple_resp_f[:SAMPLE_SIZE] if SAMPLE_SIZE else temple_resp_f, prompt, response_schema=SymbolAnalysis)
     
     # Run Age batches
     age_stats = {}
@@ -62,8 +65,11 @@ async def run_analysis():
         temple_texts = [r.get("Q7", "") for r in rows if len(r.get("Q7", "")) > 5]
         
         # Reuse cache
-        man_res = await utils.batch_process_with_llm(man_texts, prompt, response_schema=SymbolAnalysis)
-        temple_res = await utils.batch_process_with_llm(temple_texts, prompt, response_schema=SymbolAnalysis)
+        sample_man = man_texts[:SAMPLE_SIZE] if SAMPLE_SIZE else man_texts
+        sample_temple = temple_texts[:SAMPLE_SIZE] if SAMPLE_SIZE else temple_texts
+        
+        man_res = await utils.batch_process_with_llm(sample_man, prompt, response_schema=SymbolAnalysis)
+        temple_res = await utils.batch_process_with_llm(sample_temple, prompt, response_schema=SymbolAnalysis)
         
         man_counts = Counter([r.get("primary_emotion") for r in man_res if "error" not in r])
         temple_counts = Counter([r.get("primary_emotion") for r in temple_res if "error" not in r])
@@ -129,9 +135,10 @@ async def run_analysis():
         conclusion.append(f"**Male Resonance with Grief:** Men are more likely ({m_temple_grief:.1%} vs {f_temple_grief:.1%}) to explicitly describe the Temple as a place of grief.")
 
     # Report
+    sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 4: Sacred vs. Profane (Symbolism & Gender)\n"]
     report.append("**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ, and is there a gender divide?\n")
-    report.append(f"**Methodology:** Comparative sentiment and emotion analysis of {man_total} Man responses vs {temple_total} Temple responses, segmented by Gender and **Age**.\n")
+    report.append(f"**Methodology:** Comparative sentiment and emotion analysis of {man_total} Man responses vs {temple_total} Temple responses, segmented by Gender and **Age**. Sample size: {sample_desc}.\n")
     
     report.append("## Results & Analysis")
     report.append(f"- **The Man Sentiment (M/F):** {man_score_m:.2f} / {man_score_f:.2f}")

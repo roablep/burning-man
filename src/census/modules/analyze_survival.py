@@ -1,9 +1,10 @@
 import sys
 import os
 import asyncio
+import re
 from collections import Counter
 from pydantic import BaseModel, Field
-from typing import Literal
+from typing import Literal, Iterable, Dict, List, Tuple
 
 # Add parent directory to path to find analysis_utils
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -15,12 +16,84 @@ class SurvivalAnalysis(BaseModel):
     describes_breakthrough: bool = Field(..., description="Does the participant describe a significant emotional or spiritual breakthrough?")
     hardship_was_catalyst: bool = Field(..., description="Is the physical hardship explicitly described as the cause or catalyst for the breakthrough?")
 
+INVALID_EQUIPMENT = {"", "[blank]", "blank", "n/a", "na", "none", "null", "idk", "?"}
+
+EQUIPMENT_CATEGORY_RULES: List[Tuple[str, List[str]]] = [
+    ("bathroom/hygiene hacks", [r"\bpee\b", r"urinal", r"bidet", r"toilet paper", r"\btp\b", r"wash basin", r"sponge bath", r"rosewater"]),
+    ("food/cooking", [r"watermelon", r"\bcooker\b", r"\bcook\b", r"deep fryer", r"fryer"]),
+    ("tools/repair", [r"rebar", r"stake", r"impact driver", r"\bdriver\b", r"\bsaw\b", r"chain lube", r"nail clippers", r"goggles"]),
+    ("power/tech", [r"solar", r"generator", r"starlink", r"battery"]),
+    ("art/play/music", [r"accordion", r"flow", r"lamp", r"dance", r"watercolou?r", r"paint", r"wizard", r"crystal", r"orb"]),
+    ("comfort/warmth", [r"onesie", r"blanket", r"hoodie", r"chair", r"shoes", r"cot"]),
+    ("substances/medicine", [r"mushroom", r"psychedelic", r"tequila", r"pepto", r"insulin", r"\bmed\b"]),
+]
+
+def normalize_equipment(text: str) -> str:
+    lowered = text.lower().strip()
+    lowered = re.sub(r"[\"'`]+", "", lowered)
+    lowered = re.sub(r"\s+", " ", lowered)
+    lowered = re.sub(r"[^a-z0-9\s/&+-]", "", lowered)
+    return lowered.strip()
+
+def is_invalid_equipment(text: str) -> bool:
+    normalized = normalize_equipment(text)
+    if normalized in INVALID_EQUIPMENT:
+        return True
+    if not normalized or normalized.isdigit():
+        return True
+    if len(normalized) <= 2:
+        return True
+    return normalized in {"yes", "id"}
+
+def categorize_equipment(text: str) -> str:
+    normalized = normalize_equipment(text)
+    for label, patterns in EQUIPMENT_CATEGORY_RULES:
+        for pattern in patterns:
+            if re.search(pattern, normalized):
+                return label
+    return "other"
+
+def get_surprising_equipment(rows: Iterable[Dict[str, str]]) -> List[str]:
+    items = []
+    for row in rows:
+        text = (row.get("Q6") or "").strip()
+        if not text or is_invalid_equipment(text):
+            continue
+        items.append(text)
+    return items
+
+def equipment_stats(items: Iterable[str]) -> Dict[str, object]:
+    normalized = [normalize_equipment(item) for item in items]
+    counts = Counter(normalized)
+    total = len(normalized)
+    unique_once = sum(1 for count in counts.values() if count == 1)
+    top_share = (counts.most_common(1)[0][1] / total) if total else 0
+    categories = Counter()
+    examples = {}
+    for item in items:
+        category = categorize_equipment(item)
+        categories[category] += 1
+        if category not in examples:
+            examples[category] = item
+    return {
+        "total": total,
+        "unique_rate": (unique_once / total) if total else 0,
+        "top_share": top_share,
+        "top_exact": counts.most_common(8),
+        "categories": categories,
+        "examples": examples,
+    }
+
+def md_escape(text: str) -> str:
+    return text.replace("|", "/")
+
 async def run_analysis():
     print("Loading Survival and Transformation Data...")
     
     # 1. Establish Hardship Baseline (from Survival question sets)
     # Question set J (2024) is Survival
     survival_data = utils.load_data(2024, "Survival")
+    survival_data_2025 = utils.load_data(2025, "Survival")
     
     # Analyze general hardship prevalence by Age
     age_baselines = {"Under 30": [], "30-39": [], "40-49": [], "50+": []}
@@ -31,6 +104,9 @@ async def run_analysis():
             if age in age_baselines:
                 age_baselines[age].append(text)
     
+    # LLM Analysis
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
+
     baseline_stats = {}
     baseline_prompt = "Identify if this person mentions physical hardship (mud, heat, dust). Intensity: None, Low, Medium, High.\nText: \"{{TEXT}}\""
     
@@ -40,7 +116,8 @@ async def run_analysis():
             baseline_stats[age] = 0
             continue
         # Limit sample for baseline to save tokens/time
-        res = await utils.batch_process_with_llm(texts[:50], baseline_prompt, response_schema=SurvivalAnalysis)
+        sample = texts[:SAMPLE_SIZE] if SAMPLE_SIZE else texts
+        res = await utils.batch_process_with_llm(sample, baseline_prompt, response_schema=SurvivalAnalysis)
         valid = [r for r in res if "error" not in r]
         pct = sum([1 for r in valid if r.get("mentions_hardship")]) / len(valid) if valid else 0
         baseline_stats[age] = pct
@@ -67,6 +144,9 @@ async def run_analysis():
     prompt = "Analyze this Burning Man transformation narrative. Determine if physical hardship played a role.\nNarrative: \"{{TEXT}}\""
     
     # We need to process them, then bucket the results by age
+    if SAMPLE_SIZE:
+        test_subjects = test_subjects[:SAMPLE_SIZE]
+        
     narratives_only = [x[1] for x in test_subjects]
     results = await utils.batch_process_with_llm(narratives_only, prompt, response_schema=SurvivalAnalysis)
     
@@ -118,8 +198,9 @@ async def run_analysis():
             conclusion.append("**Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.")
 
     # Generate Report
+    sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 2: The 'Ordeal' as Catalyst (Survival vs. Epiphany)\n"]
-    report.append(f"**Methodology:** Comparative analysis of survival responses (Baseline) vs {total} transformation narratives, segmented by **Age**.\n")
+    report.append(f"**Methodology:** Comparative analysis of survival responses (Baseline) vs {total} transformation narratives, segmented by **Age**. Sample size: {sample_desc}.\n")
     
     report.append("### Findings")
     report.append(f"- **Transformation Narratives Mentioning Hardship:** {hardship_mention_pct:.1%}")
@@ -151,6 +232,38 @@ async def run_analysis():
 
     report.append("\n## Conclusion")
     report.append("> " + " ".join(conclusion))
+
+    q6_2024 = get_surprising_equipment(survival_data)
+    q6_2025 = get_surprising_equipment(survival_data_2025)
+    combined_q6 = q6_2024 + q6_2025
+    stats_2024 = equipment_stats(q6_2024)
+    stats_2025 = equipment_stats(q6_2025)
+    stats_combined = equipment_stats(combined_q6)
+
+    report.append("\n## Surprising/Unconventional Gear (Q6)")
+    report.append(
+        f"**Sample sizes (non-blank Q6):** 2024 n={stats_2024['total']}, 2025 n={stats_2025['total']}, combined n={stats_combined['total']}."
+    )
+    report.append(
+        f"- **Uniqueness rate:** 2024 {stats_2024['unique_rate']:.1%}, 2025 {stats_2025['unique_rate']:.1%}, combined {stats_combined['unique_rate']:.1%}."
+    )
+    report.append(
+        f"- **Most common item share:** 2024 {stats_2024['top_share']:.1%}, 2025 {stats_2025['top_share']:.1%}, combined {stats_combined['top_share']:.1%}."
+    )
+
+    report.append("\n### Most Common Exact Items (Combined)")
+    report.append("| Item | Count |")
+    report.append("| :--- | :--- |")
+    for item, count in stats_combined["top_exact"]:
+        report.append(f"| {md_escape(item)} | {count} |")
+
+    report.append("\n### Category Mix (Combined)")
+    report.append("| Category | Count | Share | Example |")
+    report.append("| :--- | :--- | :--- | :--- |")
+    for category, count in stats_combined["categories"].most_common():
+        share = count / stats_combined["total"] if stats_combined["total"] else 0
+        example = md_escape(stats_combined["examples"].get(category, ""))
+        report.append(f"| {category} | {count} | {share:.1%} | {example} |")
 
     utils.save_report("module_2_survival.md", "\n".join(report))
 

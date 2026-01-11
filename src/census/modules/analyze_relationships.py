@@ -36,6 +36,9 @@ async def run_analysis():
         print("No relationship narratives found.")
         return
 
+    # LLM Analysis
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
+
     prompt = """
     Analyze this response about relationships at Burning Man. 
     Compare the quality of connection to the 'default world'.
@@ -43,7 +46,7 @@ async def run_analysis():
     Response: "{{TEXT}}"
     """
     
-    results = await utils.batch_process_with_llm(narratives, prompt, response_schema=RelationshipAnalysis)
+    results = await utils.batch_process_with_llm(narratives[:SAMPLE_SIZE] if SAMPLE_SIZE else narratives, prompt, response_schema=RelationshipAnalysis)
     
     stats = Counter([r.get("rel_type") for r in results if "error" not in r])
     comparison = Counter([r.get("playa_vs_default") for r in results if "error" not in r])
@@ -59,7 +62,8 @@ async def run_analysis():
             age_stats[age] = 0
             continue
         # Reuse cache via batch process
-        res = await utils.batch_process_with_llm(texts, prompt, response_schema=RelationshipAnalysis)
+        sample = texts[:SAMPLE_SIZE] if SAMPLE_SIZE else texts
+        res = await utils.batch_process_with_llm(sample, prompt, response_schema=RelationshipAnalysis)
         c = Counter([r.get("playa_vs_default") for r in res if "error" not in r])
         tot = sum(c.values())
         if tot > 0:
@@ -84,9 +88,10 @@ async def run_analysis():
         conclusion.append(f"**Generational Connection:** The perception of heightened intimacy peaks in the **{max_age}** cohort ({age_stats.get(max_age, 0):.1%}) and is lowest among **{min_age}** participants ({age_stats.get(min_age, 0):.1%}).")
 
     # Report
+    sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 6: Playa Love vs. Default Love (Relationships)\n"]
     report.append("**Research Question:** How do relationship dynamics and intimacy differ in the temporary autonomous zone?\n")
-    report.append(f"**Methodology:** Analysis of {total} narratives regarding relationships and intimacy, segmented by **Age**.\n")
+    report.append(f"**Methodology:** Analysis of {total} narratives regarding relationships and intimacy, segmented by **Age**. Sample size: {sample_desc}.\n")
     
     report.append("## Results & Analysis")
     report.append(f"- **Top Relationship Type:** {stats.most_common(1)[0][0] if stats else 'N/A'}")

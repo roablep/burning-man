@@ -28,9 +28,12 @@ async def run_analysis():
             if age in age_cohorts:
                 age_cohorts[age].append(text)
     
+    # LLM Analysis
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
+
     prompt = "Analyze this response to 'Do you wear costumes at Burning Man?'. Categorize the motivation.\nResponse: \"{{TEXT}}\""
     
-    results = await utils.batch_process_with_llm(narratives, prompt, response_schema=CostumeMotivation)
+    results = await utils.batch_process_with_llm(narratives[:SAMPLE_SIZE] if SAMPLE_SIZE else narratives, prompt, response_schema=CostumeMotivation)
     
     stats = Counter([r.get("motivation_type") for r in results if "error" not in r])
     total = sum(stats.values())
@@ -49,7 +52,8 @@ async def run_analysis():
             age_stats[age] = Counter()
             continue
         # Cache hit expected
-        res = await utils.batch_process_with_llm(texts, prompt, response_schema=CostumeMotivation)
+        sample = texts[:SAMPLE_SIZE] if SAMPLE_SIZE else texts
+        res = await utils.batch_process_with_llm(sample, prompt, response_schema=CostumeMotivation)
         age_stats[age] = Counter([r.get("motivation_type") for r in res if "error" not in r])
 
     # Dynamic Conclusion Logic
@@ -80,9 +84,10 @@ async def run_analysis():
             conclusion.append(f"Data suggests the costume functions more as a **Mask** (Disguise: {disguise_pct:.1%}) than a **Mirror** (Authenticity: {auth_pct:.1%}).")
 
     # Report
+    sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 3: The Mask vs. The Mirror (Identity)\n"]
     report.append("**Research Question:** Do participants wear costumes to hide (Mask) or to reveal their true selves (Mirror)?\n")
-    report.append(f"**Methodology:** Semantic classification of {total} responses regarding costume motivation from the 2024 dataset, segmented by **Age**.\n")
+    report.append(f"**Methodology:** Semantic classification of {total} responses regarding costume motivation from the 2024 dataset, segmented by **Age**. Sample size: {sample_desc}.\n")
     
     report.append("## Results & Analysis")
     for m_type, count in stats.most_common():

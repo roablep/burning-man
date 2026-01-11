@@ -25,8 +25,11 @@ async def run_analysis():
     data_div = utils.load_data(2024, "Diversity")
     div_narratives = [r.get("Q5", "") + " " + r.get("Q7", "") for r in data_div if len(r.get("Q5", "")) > 20]
     
+    # LLM Analysis
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
+
     div_prompt = "Analyze this response regarding diversity. Determine impact and themes.\nResponse: \"{{TEXT}}\""
-    div_results = await utils.batch_process_with_llm(div_narratives, div_prompt, response_schema=DiversityExperience)
+    div_results = await utils.batch_process_with_llm(div_narratives[:SAMPLE_SIZE] if SAMPLE_SIZE else div_narratives, div_prompt, response_schema=DiversityExperience)
     
     # 2. General Experience Analysis (Do they have more friction in other areas?)
     # Load 'Experiences' and 'Emotions' to check for general friction
@@ -48,7 +51,8 @@ async def run_analysis():
         if not texts: return 0, 0
         prompt = "Score the sentiment and detect social friction (exclusion, microaggressions, identity discomfort) in this Burning Man experience.\nResponse: \"{{TEXT}}\""
         # Limit sample size for efficiency
-        results = await utils.batch_process_with_llm(texts[:150], prompt, response_schema=SentimentAnalysis)
+        sample = texts[:SAMPLE_SIZE] if SAMPLE_SIZE else texts
+        results = await utils.batch_process_with_llm(sample, prompt, response_schema=SentimentAnalysis)
         
         valid = [r for r in results if "error" not in r]
         if not valid: return 0, 0
@@ -94,9 +98,10 @@ async def run_analysis():
         conclusion.append("Insufficient data to draw conclusions.")
 
     # Report
+    sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 5: The 'Other' in Utopia (Diversity & Inclusion)\n"]
     report.append("**Research Question:** How does the marginalized experience differ from the 'Radical Inclusion' ideal?\n")
-    report.append(f"**Methodology:** Comparative analysis of {total_valid} diversity narratives and cross-set sentiment analysis of {len(marginalized) + len(majority)} general responses, segmented by Identity and **Age**.\n")
+    report.append(f"**Methodology:** Comparative analysis of {total_valid} diversity narratives and cross-set sentiment analysis of {len(marginalized) + len(majority)} general responses, segmented by Identity and **Age**. Sample size: {sample_desc}.\n")
     
     report.append("\n## Important Methodology Note")
     if total_valid > 0:
