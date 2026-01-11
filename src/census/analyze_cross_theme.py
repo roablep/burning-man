@@ -13,6 +13,12 @@ import os
 import re
 from collections import Counter, defaultdict
 
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
+import numpy as np
+from sklearn.cluster import KMeans
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 DATA_DIR = "src/census/data"
 REPORT_DIR = "reports/cross_theme"
 
@@ -182,57 +188,66 @@ def build_records(year: int) -> list[dict]:
     return records
 
 
-def tf_idf_theme_assignment(records: list[dict], target_theme_count: int) -> dict:
-    docs = [rec["tokens"] for rec in records]
-    df = Counter()
-    for tokens in docs:
-        df.update(set(tokens))
-    doc_count = len(docs)
+def cluster_themes(records: list[dict], target_theme_count: int) -> dict:
+    texts = [rec["text"] for rec in records]
+    doc_count = len(texts)
+    if doc_count < 2:
+        for rec in records:
+            rec["theme_id"] = "t0"
+            rec["theme_label"] = "misc"
+        return {"labels": {"t0": "misc"}, "theme_counts": Counter({"t0": doc_count})}
 
-    candidate_count = max(target_theme_count * 4, target_theme_count + 3)
-    min_df = max(5, int(doc_count * 0.02))
-    max_df = int(doc_count * 0.6)
-    filtered = [
-        (token, count)
-        for token, count in df.items()
-        if count >= min_df and count <= max_df and token not in STOPWORDS
-    ]
-    filtered.sort(key=lambda x: (-x[1], x[0]))
-    candidates = [token for token, _ in filtered[:candidate_count]]
-    if not candidates:
-        candidates = [
-            token for token, _ in df.most_common(candidate_count)
-            if token not in STOPWORDS
-        ]
-    candidate_set = set(candidates)
+    cluster_count = min(target_theme_count, max(2, int(math.sqrt(doc_count))))
+    vectorizer = TfidfVectorizer(
+        stop_words=sorted(STOPWORDS),
+        token_pattern=r"[a-zA-Z]{3,}",
+        min_df=2,
+        max_df=0.6,
+    )
 
-    for rec in records:
-        tf = Counter(token for token in rec["tokens"] if token in candidate_set)
-        best_token = None
-        best_score = 0.0
-        for token, count in tf.items():
-            score = count * (math.log((doc_count + 1) / (df[token] + 1)) + 1.0)
-            if score > best_score:
-                best_score = score
-                best_token = token
-        rec["theme_raw"] = best_token or "other"
+    try:
+        matrix = vectorizer.fit_transform(texts)
+    except ValueError:
+        vectorizer = TfidfVectorizer(
+            stop_words=sorted(STOPWORDS),
+            token_pattern=r"[a-zA-Z]{3,}",
+            min_df=1,
+            max_df=0.8,
+        )
+        matrix = vectorizer.fit_transform(texts)
 
-    theme_counts = Counter(rec["theme_raw"] for rec in records)
-    top_themes = {t for t, _ in theme_counts.most_common(target_theme_count)}
+    if matrix.shape[1] == 0:
+        for rec in records:
+            rec["theme_id"] = "t0"
+            rec["theme_label"] = "misc"
+        return {"labels": {"t0": "misc"}, "theme_counts": Counter({"t0": doc_count})}
 
-    for rec in records:
-        rec["theme"] = rec["theme_raw"] if rec["theme_raw"] in top_themes else "other"
+    kmeans = KMeans(n_clusters=cluster_count, n_init=10, random_state=42)
+    labels = kmeans.fit_predict(matrix)
+
+    terms = vectorizer.get_feature_names_out()
+    label_map: dict[str, str] = {}
+    for idx in range(cluster_count):
+        centroid = kmeans.cluster_centers_[idx]
+        top_indices = np.argsort(centroid)[-5:][::-1]
+        top_terms = [terms[i] for i in top_indices if centroid[i] > 0]
+        label_map[f"t{idx}"] = " / ".join(top_terms[:3]) or "misc"
+
+    for rec, label in zip(records, labels, strict=False):
+        theme_id = f"t{label}"
+        rec["theme_id"] = theme_id
+        rec["theme_label"] = label_map.get(theme_id, "misc")
 
     return {
-        "themes": top_themes,
-        "theme_counts": Counter(rec["theme"] for rec in records),
+        "labels": label_map,
+        "theme_counts": Counter(rec["theme_id"] for rec in records),
     }
 
 
 def build_theme_catalog(records: list[dict], set_name: str) -> list[dict]:
     by_theme = defaultdict(list)
     for rec in records:
-        by_theme[rec["theme"]].append(rec)
+        by_theme[rec["theme_id"]].append(rec)
 
     catalog = []
     total = len(records)
@@ -244,7 +259,8 @@ def build_theme_catalog(records: list[dict], set_name: str) -> list[dict]:
         example = next((rec["text"] for rec in group if rec["text"]), "")
         catalog.append({
             "set": set_name,
-            "theme": theme,
+            "theme_id": theme,
+            "theme_label": group[0].get("theme_label", "misc"),
             "count": len(group),
             "pct": round((len(group) / total) * 100.0, 2) if total else 0.0,
             "key_terms": ", ".join(key_terms),
@@ -261,7 +277,7 @@ def cohort_prevalence(records: list[dict], cohort_key: str, min_n: int) -> list[
         if not cohort_value:
             continue
         cohort_totals[cohort_value] += 1
-        cohort_theme_counts[cohort_value][rec["theme"]] += 1
+        cohort_theme_counts[cohort_value][rec["theme_id"]] += 1
 
     output = []
     for cohort_value, total in cohort_totals.items():
@@ -272,7 +288,8 @@ def cohort_prevalence(records: list[dict], cohort_key: str, min_n: int) -> list[
             output.append({
                 "cohort_type": cohort_key,
                 "cohort": cohort_value,
-                "theme": theme,
+                "theme_id": theme,
+                "theme_label": "",
                 "count": count,
                 "cohort_n": total,
                 "prevalence": round(count / total, 6),
@@ -297,9 +314,7 @@ def build_correlation_rows(prevalence_rows: list[dict], set_pairs: list[tuple], 
     # Build lookup: (set, cohort_type, cohort) -> theme -> prevalence
     lookup = defaultdict(lambda: defaultdict(dict))
     for row in prevalence_rows:
-        if row["theme"] == "other":
-            continue
-        lookup[(row["set"], row["cohort_type"], row["cohort"])][row["theme"]] = row["prevalence"]
+        lookup[(row["set"], row["cohort_type"], row["cohort"])][row["theme_id"]] = row["prevalence"]
 
     # Gather cohorts per set/cohort_type
     cohorts_by_set_type = defaultdict(set)
@@ -334,9 +349,9 @@ def build_correlation_rows(prevalence_rows: list[dict], set_pairs: list[tuple], 
                         "year": year,
                         "cohort_type": cohort_type,
                         "set_a": set_a,
-                        "theme_a": theme_a,
+                        "theme_a_id": theme_a,
                         "set_b": set_b,
-                        "theme_b": theme_b,
+                        "theme_b_id": theme_b,
                         "n_cohorts": len(cohorts),
                         "correlation": round(corr, 4),
                     })
@@ -374,7 +389,7 @@ def main() -> None:
 
         for set_key, set_records in records_by_set.items():
             target = theme_targets.get(set_key, 8)
-            tf_idf_theme_assignment(set_records, target)
+            cluster_themes(set_records, target)
 
             set_label = f"{set_key} - {set_names[set_key]}"
             for rec in set_records:
@@ -388,6 +403,10 @@ def main() -> None:
                 for row in rows:
                     row["year"] = year
                     row["set"] = set_label
+                    row["theme_label"] = next(
+                        (rec["theme_label"] for rec in set_records if rec["theme_id"] == row["theme_id"]),
+                        "misc",
+                    )
                 all_prevalence_rows.extend(rows)
 
             # Optional two-way cohorts
@@ -406,7 +425,7 @@ def main() -> None:
                         continue
                     cohort = f"{val_a} | {val_b}"
                     cohort_counts[cohort] += 1
-                    theme_counts[cohort][rec["theme"]] += 1
+                    theme_counts[cohort][rec["theme_id"]] += 1
                 for cohort, total in cohort_counts.items():
                     if total < MIN_TWO_WAY_N:
                         continue
@@ -416,39 +435,50 @@ def main() -> None:
                             "set": set_label,
                             "cohort_type": f"{key_a}x{key_b}",
                             "cohort": cohort,
-                            "theme": theme,
+                            "theme_id": theme,
+                            "theme_label": next(
+                                (rec["theme_label"] for rec in set_records if rec["theme_id"] == theme),
+                                "misc",
+                            ),
                             "count": count,
                             "cohort_n": total,
                             "prevalence": round(count / total, 6),
                         })
 
-            for theme, count in Counter(rec["theme"] for rec in set_records).items():
+            for theme, count in Counter(rec["theme_id"] for rec in set_records).items():
                 all_count_rows.append({
                     "year": year,
                     "set": set_label,
-                    "theme": theme,
+                    "theme_id": theme,
+                    "theme_label": next(
+                        (rec["theme_label"] for rec in set_records if rec["theme_id"] == theme),
+                        "misc",
+                    ),
                     "count": count,
                 })
 
     write_csv(
         os.path.join(REPORT_DIR, "theme_catalog.csv"),
         all_catalog_rows,
-        ["set", "theme", "count", "pct", "key_terms", "example"],
+        ["set", "theme_id", "theme_label", "count", "pct", "key_terms", "example"],
     )
 
     write_csv(
         os.path.join(REPORT_DIR, "theme_prevalence.csv"),
         all_prevalence_rows,
-        ["year", "set", "cohort_type", "cohort", "theme", "count", "cohort_n", "prevalence"],
+        ["year", "set", "cohort_type", "cohort", "theme_id", "theme_label", "count", "cohort_n", "prevalence"],
     )
 
     write_csv(
         os.path.join(REPORT_DIR, "theme_counts.csv"),
         all_count_rows,
-        ["year", "set", "theme", "count"],
+        ["year", "set", "theme_id", "theme_label", "count"],
     )
 
     # Cross-set correlations
+    theme_label_lookup = {
+        (row["set"], row["theme_id"]): row["theme_label"] for row in all_catalog_rows
+    }
     set_pairs_2024 = [
         ("B - Symbolism", "C - Emotions"),
         ("B - Symbolism", "H - Experiences"),
@@ -480,10 +510,25 @@ def main() -> None:
         pairs = set_pairs_2024 if year == 2024 else set_pairs_2025
         correlations.extend(build_correlation_rows(rows, pairs, year))
 
+    for row in correlations:
+        row["theme_a_label"] = theme_label_lookup.get((row["set_a"], row["theme_a_id"]), "misc")
+        row["theme_b_label"] = theme_label_lookup.get((row["set_b"], row["theme_b_id"]), "misc")
+
     write_csv(
         os.path.join(REPORT_DIR, "cross_set_correlations.csv"),
         correlations,
-        ["year", "cohort_type", "set_a", "theme_a", "set_b", "theme_b", "n_cohorts", "correlation"],
+        [
+            "year",
+            "cohort_type",
+            "set_a",
+            "theme_a_id",
+            "theme_a_label",
+            "set_b",
+            "theme_b_id",
+            "theme_b_label",
+            "n_cohorts",
+            "correlation",
+        ],
     )
 
     # Summary markdown
@@ -492,6 +537,7 @@ def main() -> None:
     with open(summary_path, "w") as f:
         f.write("# Cross-Theme Cohort Analysis Summary\n\n")
         f.write("This analysis uses cohort-level joins (no respondent linkage). Correlations are ecological.\n\n")
+        f.write("Theme labels are derived from top TF-IDF terms per cluster and are descriptive, not definitive.\n\n")
 
         for year in (2024, 2025):
             f.write(f"## {year}\n\n")
@@ -503,9 +549,11 @@ def main() -> None:
             top = sorted(year_rows, key=lambda r: abs(r["correlation"]), reverse=True)[:20]
             f.write("Top correlations (by absolute value):\n\n")
             for row in top:
+                theme_a = row["theme_a_label"]
+                theme_b = row["theme_b_label"]
                 f.write(
-                    f"- {row['cohort_type']} | {row['set_a']}:{row['theme_a']} "
-                    f"vs {row['set_b']}:{row['theme_b']} => r={row['correlation']} (n={row['n_cohorts']})\n"
+                    f"- {row['cohort_type']} | {row['set_a']}:{theme_a} "
+                    f"vs {row['set_b']}:{theme_b} => r={row['correlation']} (n={row['n_cohorts']})\n"
                 )
             f.write("\n")
 

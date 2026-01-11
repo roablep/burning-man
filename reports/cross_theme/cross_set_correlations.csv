@@ -1,488 +1,641 @@
-year,cohort_type,set_a,theme_a,set_b,theme_b,n_cohorts,correlation
-2024,burn_status,B - Symbolism,let,C - Emotions,love,4,0.6591
-2024,burn_status,B - Symbolism,let,C - Emotions,all,4,-0.3836
-2024,burn_status,B - Symbolism,let,C - Emotions,campmate,4,0.5643
-2024,burn_status,B - Symbolism,let,C - Emotions,amazement,4,-0.9048
-2024,burn_status,B - Symbolism,let,C - Emotions,excitement,4,-0.3836
-2024,burn_status,B - Symbolism,let,C - Emotions,emotion,4,0.636
-2024,burn_status,B - Symbolism,let,C - Emotions,how,4,0.9793
-2024,burn_status,B - Symbolism,let,C - Emotions,connection,4,0.5902
-2024,burn_status,B - Symbolism,peace,C - Emotions,love,4,-0.4959
-2024,burn_status,B - Symbolism,peace,C - Emotions,all,4,0.7821
-2024,burn_status,B - Symbolism,peace,C - Emotions,campmate,4,-0.3964
-2024,burn_status,B - Symbolism,peace,C - Emotions,amazement,4,0.1575
-2024,burn_status,B - Symbolism,peace,C - Emotions,excitement,4,0.7821
-2024,burn_status,B - Symbolism,peace,C - Emotions,emotion,4,-0.4548
-2024,burn_status,B - Symbolism,peace,C - Emotions,how,4,0.1155
-2024,burn_status,B - Symbolism,peace,C - Emotions,connection,4,0.6763
-2024,burn_status,B - Symbolism,humanity,C - Emotions,love,4,0.4328
-2024,burn_status,B - Symbolism,humanity,C - Emotions,all,4,-0.5362
-2024,burn_status,B - Symbolism,humanity,C - Emotions,campmate,4,0.8924
-2024,burn_status,B - Symbolism,humanity,C - Emotions,amazement,4,-0.8592
-2024,burn_status,B - Symbolism,humanity,C - Emotions,excitement,4,-0.5362
-2024,burn_status,B - Symbolism,humanity,C - Emotions,emotion,4,0.8568
-2024,burn_status,B - Symbolism,humanity,C - Emotions,how,4,0.879
-2024,burn_status,B - Symbolism,humanity,C - Emotions,connection,4,0.0241
-2024,burn_status,B - Symbolism,life,C - Emotions,love,4,0.1711
-2024,burn_status,B - Symbolism,life,C - Emotions,all,4,0.2537
-2024,burn_status,B - Symbolism,life,C - Emotions,campmate,4,0.0267
-2024,burn_status,B - Symbolism,life,C - Emotions,amazement,4,-0.4619
-2024,burn_status,B - Symbolism,life,C - Emotions,excitement,4,0.2537
-2024,burn_status,B - Symbolism,life,C - Emotions,emotion,4,0.0643
-2024,burn_status,B - Symbolism,life,C - Emotions,how,4,0.6751
-2024,burn_status,B - Symbolism,life,C - Emotions,connection,4,0.8817
-2024,burn_status,B - Symbolism,world,C - Emotions,love,4,-0.5943
-2024,burn_status,B - Symbolism,world,C - Emotions,all,4,0.5961
-2024,burn_status,B - Symbolism,world,C - Emotions,campmate,4,-0.0392
-2024,burn_status,B - Symbolism,world,C - Emotions,amazement,4,0.0712
-2024,burn_status,B - Symbolism,world,C - Emotions,excitement,4,0.5961
-2024,burn_status,B - Symbolism,world,C - Emotions,emotion,4,-0.1782
-2024,burn_status,B - Symbolism,world,C - Emotions,how,4,0.1642
-2024,burn_status,B - Symbolism,world,C - Emotions,connection,4,0.2744
-2024,burn_status,B - Symbolism,home,C - Emotions,love,4,0.1711
-2024,burn_status,B - Symbolism,home,C - Emotions,all,4,0.2537
-2024,burn_status,B - Symbolism,home,C - Emotions,campmate,4,0.0267
-2024,burn_status,B - Symbolism,home,C - Emotions,amazement,4,-0.4619
-2024,burn_status,B - Symbolism,home,C - Emotions,excitement,4,0.2537
-2024,burn_status,B - Symbolism,home,C - Emotions,emotion,4,0.0643
-2024,burn_status,B - Symbolism,home,C - Emotions,how,4,0.6751
-2024,burn_status,B - Symbolism,home,C - Emotions,connection,4,0.8817
-2024,burn_status,B - Symbolism,better,C - Emotions,love,4,0.2848
-2024,burn_status,B - Symbolism,better,C - Emotions,all,4,-0.1122
-2024,burn_status,B - Symbolism,better,C - Emotions,campmate,4,-0.4714
-2024,burn_status,B - Symbolism,better,C - Emotions,amazement,4,0.3087
-2024,burn_status,B - Symbolism,better,C - Emotions,excitement,4,-0.1122
-2024,burn_status,B - Symbolism,better,C - Emotions,emotion,4,-0.3271
-2024,burn_status,B - Symbolism,better,C - Emotions,how,4,-0.455
-2024,burn_status,B - Symbolism,better,C - Emotions,connection,4,-0.0
-2024,burn_status,J - Survival,ask,H - Experiences,vibe,4,0.1282
-2024,burn_status,J - Survival,ask,H - Experiences,community,4,0.8217
-2024,burn_status,J - Survival,ask,H - Experiences,art,4,0.6545
-2024,burn_status,J - Survival,ask,H - Experiences,camp,4,0.1444
-2024,burn_status,J - Survival,ask,H - Experiences,weather,4,-0.8036
-2024,burn_status,J - Survival,ask,H - Experiences,bike,4,0.0389
-2024,burn_status,J - Survival,ask,H - Experiences,dust,4,0.5872
-2024,burn_status,J - Survival,bottle,H - Experiences,vibe,4,0.4002
-2024,burn_status,J - Survival,bottle,H - Experiences,community,4,-0.4683
-2024,burn_status,J - Survival,bottle,H - Experiences,art,4,-0.0712
-2024,burn_status,J - Survival,bottle,H - Experiences,camp,4,-0.4965
-2024,burn_status,J - Survival,bottle,H - Experiences,weather,4,-0.112
-2024,burn_status,J - Survival,bottle,H - Experiences,bike,4,-0.4633
-2024,burn_status,J - Survival,bottle,H - Experiences,dust,4,-0.277
-2024,burn_status,J - Survival,water,H - Experiences,vibe,4,0.3883
-2024,burn_status,J - Survival,water,H - Experiences,community,4,-0.7452
-2024,burn_status,J - Survival,water,H - Experiences,art,4,0.1024
-2024,burn_status,J - Survival,water,H - Experiences,camp,4,-0.5276
-2024,burn_status,J - Survival,water,H - Experiences,weather,4,0.241
-2024,burn_status,J - Survival,water,H - Experiences,bike,4,-0.4778
-2024,burn_status,J - Survival,water,H - Experiences,dust,4,-0.8673
-2024,burn_status,J - Survival,cup,H - Experiences,vibe,4,0.9268
-2024,burn_status,J - Survival,cup,H - Experiences,community,4,-0.4175
-2024,burn_status,J - Survival,cup,H - Experiences,art,4,0.646
-2024,burn_status,J - Survival,cup,H - Experiences,camp,4,-0.9001
-2024,burn_status,J - Survival,cup,H - Experiences,weather,4,-0.6757
-2024,burn_status,J - Survival,cup,H - Experiences,bike,4,-0.9188
-2024,burn_status,J - Survival,cup,H - Experiences,dust,4,-0.5437
-2024,burn_status,J - Survival,bike,H - Experiences,vibe,4,0.5134
-2024,burn_status,J - Survival,bike,H - Experiences,community,4,-0.3792
-2024,burn_status,J - Survival,bike,H - Experiences,art,4,0.5139
-2024,burn_status,J - Survival,bike,H - Experiences,camp,4,-0.5136
-2024,burn_status,J - Survival,bike,H - Experiences,weather,4,-0.1743
-2024,burn_status,J - Survival,bike,H - Experiences,bike,4,-0.5182
-2024,burn_status,J - Survival,bike,H - Experiences,dust,4,-0.6786
-2024,burn_status,J - Survival,days,H - Experiences,vibe,4,0.1924
-2024,burn_status,J - Survival,days,H - Experiences,community,4,-0.4695
-2024,burn_status,J - Survival,days,H - Experiences,art,4,0.1186
-2024,burn_status,J - Survival,days,H - Experiences,camp,4,-0.2761
-2024,burn_status,J - Survival,days,H - Experiences,weather,4,0.2428
-2024,burn_status,J - Survival,days,H - Experiences,bike,4,-0.2459
-2024,burn_status,J - Survival,days,H - Experiences,dust,4,-0.6453
-2024,burn_status,J - Survival,self,H - Experiences,vibe,4,0.1449
-2024,burn_status,J - Survival,self,H - Experiences,community,4,-0.8763
-2024,burn_status,J - Survival,self,H - Experiences,art,4,-0.4949
-2024,burn_status,J - Survival,self,H - Experiences,camp,4,-0.3977
-2024,burn_status,J - Survival,self,H - Experiences,weather,4,0.5254
-2024,burn_status,J - Survival,self,H - Experiences,bike,4,-0.3022
-2024,burn_status,J - Survival,self,H - Experiences,dust,4,-0.6169
-2024,age_band,J - Survival,ask,H - Experiences,vibe,5,-0.7223
-2024,age_band,J - Survival,ask,H - Experiences,community,5,-0.7223
-2024,age_band,J - Survival,ask,H - Experiences,art,5,-0.5471
-2024,age_band,J - Survival,ask,H - Experiences,camp,5,0.4158
-2024,age_band,J - Survival,ask,H - Experiences,weather,5,0.626
-2024,age_band,J - Survival,ask,H - Experiences,bike,5,0.7271
-2024,age_band,J - Survival,ask,H - Experiences,dust,5,0.5192
-2024,age_band,J - Survival,bottle,H - Experiences,vibe,5,-0.0076
-2024,age_band,J - Survival,bottle,H - Experiences,community,5,-0.0076
-2024,age_band,J - Survival,bottle,H - Experiences,art,5,0.6935
-2024,age_band,J - Survival,bottle,H - Experiences,camp,5,-0.4485
-2024,age_band,J - Survival,bottle,H - Experiences,weather,5,-0.4578
-2024,age_band,J - Survival,bottle,H - Experiences,bike,5,-0.5153
-2024,age_band,J - Survival,bottle,H - Experiences,dust,5,-0.1514
-2024,age_band,J - Survival,water,H - Experiences,vibe,5,0.5215
-2024,age_band,J - Survival,water,H - Experiences,community,5,0.5215
-2024,age_band,J - Survival,water,H - Experiences,art,5,-0.2108
-2024,age_band,J - Survival,water,H - Experiences,camp,5,-0.4987
-2024,age_band,J - Survival,water,H - Experiences,weather,5,-0.2459
-2024,age_band,J - Survival,water,H - Experiences,bike,5,-0.4011
-2024,age_band,J - Survival,water,H - Experiences,dust,5,-0.3662
-2024,age_band,J - Survival,cup,H - Experiences,vibe,5,0.4524
-2024,age_band,J - Survival,cup,H - Experiences,community,5,0.4524
-2024,age_band,J - Survival,cup,H - Experiences,art,5,-0.4628
-2024,age_band,J - Survival,cup,H - Experiences,camp,5,-0.2217
-2024,age_band,J - Survival,cup,H - Experiences,weather,5,-0.3798
-2024,age_band,J - Survival,cup,H - Experiences,bike,5,0.3374
-2024,age_band,J - Survival,cup,H - Experiences,dust,5,0.539
-2024,age_band,J - Survival,bike,H - Experiences,vibe,5,-0.2247
-2024,age_band,J - Survival,bike,H - Experiences,community,5,-0.2247
-2024,age_band,J - Survival,bike,H - Experiences,art,5,0.4251
-2024,age_band,J - Survival,bike,H - Experiences,camp,5,0.6341
-2024,age_band,J - Survival,bike,H - Experiences,weather,5,0.5452
-2024,age_band,J - Survival,bike,H - Experiences,bike,5,-0.2938
-2024,age_band,J - Survival,bike,H - Experiences,dust,5,-0.7586
-2024,age_band,J - Survival,days,H - Experiences,vibe,5,-0.4294
-2024,age_band,J - Survival,days,H - Experiences,community,5,-0.4294
-2024,age_band,J - Survival,days,H - Experiences,art,5,-0.7685
-2024,age_band,J - Survival,days,H - Experiences,camp,5,0.1365
-2024,age_band,J - Survival,days,H - Experiences,weather,5,0.3715
-2024,age_band,J - Survival,days,H - Experiences,bike,5,0.7487
-2024,age_band,J - Survival,days,H - Experiences,dust,5,0.6764
-2024,age_band,J - Survival,self,H - Experiences,vibe,5,0.1619
-2024,age_band,J - Survival,self,H - Experiences,community,5,0.1619
-2024,age_band,J - Survival,self,H - Experiences,art,5,0.767
-2024,age_band,J - Survival,self,H - Experiences,camp,5,-0.0037
-2024,age_band,J - Survival,self,H - Experiences,weather,5,-0.0165
-2024,age_band,J - Survival,self,H - Experiences,bike,5,-0.8489
-2024,age_band,J - Survival,self,H - Experiences,dust,5,-0.9853
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,appearance,4,-0.6851
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,hair,4,-0.353
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,asian,4,0.0279
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,most,4,-0.5315
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,being,4,-0.8729
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,expres,4,0.0117
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,sometime,4,-0.2322
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,white,4,-0.5294
-2024,burn_status,F - Costumes,costume,K - Diversity & Inclusion,been,4,0.5738
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,appearance,4,0.6659
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,hair,4,0.3581
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,asian,4,0.0844
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,most,4,0.55
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,being,4,0.9166
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,expres,4,-0.0169
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,sometime,4,0.2948
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,white,4,0.4482
-2024,burn_status,F - Costumes,comfortable,K - Diversity & Inclusion,been,4,-0.5382
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,appearance,4,-0.4287
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,hair,4,-0.3259
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,asian,4,-0.608
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,most,4,-0.5141
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,being,4,-0.9451
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,expres,4,0.0216
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,sometime,4,-0.5217
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,white,4,0.038
-2024,burn_status,F - Costumes,clothe,K - Diversity & Inclusion,been,4,0.2472
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,appearance,4,-0.992
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,hair,4,0.5357
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,asian,4,0.3951
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,most,4,-0.9298
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,being,4,-0.2555
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,expres,4,0.7838
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,sometime,4,-0.6684
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,white,4,-0.844
-2024,burn_status,F - Costumes,don,K - Diversity & Inclusion,been,4,0.9952
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,appearance,4,0.6588
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,hair,4,0.1142
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,asian,4,0.4225
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,most,4,0.7217
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,being,4,0.8877
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,expres,4,-0.2575
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,sometime,4,0.6599
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,white,4,0.2036
-2024,burn_status,F - Costumes,all,K - Diversity & Inclusion,been,4,-0.5021
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,appearance,4,-0.6689
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,hair,4,0.7399
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,asian,4,0.8182
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,most,4,-0.5431
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,being,4,0.4061
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,expres,4,0.7404
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,sometime,4,-0.2767
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,white,4,-0.8567
-2024,burn_status,F - Costumes,both,K - Diversity & Inclusion,been,4,0.799
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,appearance,4,0.6659
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,hair,4,0.3581
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,asian,4,0.0844
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,most,4,0.55
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,being,4,0.9166
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,expres,4,-0.0169
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,sometime,4,0.2948
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,white,4,0.4482
-2024,burn_status,F - Costumes,plann,K - Diversity & Inclusion,been,4,-0.5382
-2024,burn_status,F - Costumes,costume,I - Relationships,love,4,-0.1483
-2024,burn_status,F - Costumes,costume,I - Relationships,great,4,-0.0914
-2024,burn_status,F - Costumes,costume,I - Relationships,together,4,0.4569
-2024,burn_status,F - Costumes,costume,I - Relationships,way,4,0.4883
-2024,burn_status,F - Costumes,costume,I - Relationships,partner,4,-0.8495
-2024,burn_status,F - Costumes,costume,I - Relationships,yet,4,-0.068
-2024,burn_status,F - Costumes,costume,I - Relationships,world,4,0.074
-2024,burn_status,F - Costumes,costume,I - Relationships,here,4,0.0584
-2024,burn_status,F - Costumes,costume,I - Relationships,new,4,0.0209
-2024,burn_status,F - Costumes,comfortable,I - Relationships,love,4,0.0601
-2024,burn_status,F - Costumes,comfortable,I - Relationships,great,4,0.1685
-2024,burn_status,F - Costumes,comfortable,I - Relationships,together,4,-0.4882
-2024,burn_status,F - Costumes,comfortable,I - Relationships,way,4,-0.4183
-2024,burn_status,F - Costumes,comfortable,I - Relationships,partner,4,0.8549
-2024,burn_status,F - Costumes,comfortable,I - Relationships,yet,4,0.0698
-2024,burn_status,F - Costumes,comfortable,I - Relationships,world,4,0.0412
-2024,burn_status,F - Costumes,comfortable,I - Relationships,here,4,0.0046
-2024,burn_status,F - Costumes,comfortable,I - Relationships,new,4,-0.1356
-2024,burn_status,F - Costumes,clothe,I - Relationships,love,4,0.3626
-2024,burn_status,F - Costumes,clothe,I - Relationships,great,4,-0.4909
-2024,burn_status,F - Costumes,clothe,I - Relationships,together,4,0.5534
-2024,burn_status,F - Costumes,clothe,I - Relationships,way,4,0.0105
-2024,burn_status,F - Costumes,clothe,I - Relationships,partner,4,-0.7005
-2024,burn_status,F - Costumes,clothe,I - Relationships,yet,4,-0.0804
-2024,burn_status,F - Costumes,clothe,I - Relationships,world,4,-0.5857
-2024,burn_status,F - Costumes,clothe,I - Relationships,here,4,-0.2911
-2024,burn_status,F - Costumes,clothe,I - Relationships,new,4,0.6534
-2024,burn_status,F - Costumes,don,I - Relationships,love,4,0.2854
-2024,burn_status,F - Costumes,don,I - Relationships,great,4,-0.515
-2024,burn_status,F - Costumes,don,I - Relationships,together,4,-0.441
-2024,burn_status,F - Costumes,don,I - Relationships,way,4,-0.1249
-2024,burn_status,F - Costumes,don,I - Relationships,partner,4,-0.8938
-2024,burn_status,F - Costumes,don,I - Relationships,yet,4,0.7468
-2024,burn_status,F - Costumes,don,I - Relationships,world,4,0.3312
-2024,burn_status,F - Costumes,don,I - Relationships,here,4,-0.5298
-2024,burn_status,F - Costumes,don,I - Relationships,new,4,-0.0403
-2024,burn_status,F - Costumes,all,I - Relationships,love,4,-0.4155
-2024,burn_status,F - Costumes,all,I - Relationships,great,4,0.5909
-2024,burn_status,F - Costumes,all,I - Relationships,together,4,-0.3419
-2024,burn_status,F - Costumes,all,I - Relationships,way,4,0.0468
-2024,burn_status,F - Costumes,all,I - Relationships,partner,4,0.8651
-2024,burn_status,F - Costumes,all,I - Relationships,yet,4,-0.1583
-2024,burn_status,F - Costumes,all,I - Relationships,world,4,0.4238
-2024,burn_status,F - Costumes,all,I - Relationships,here,4,0.4229
-2024,burn_status,F - Costumes,all,I - Relationships,new,4,-0.5692
-2024,burn_status,F - Costumes,both,I - Relationships,love,4,0.0104
-2024,burn_status,F - Costumes,both,I - Relationships,great,4,-0.1468
-2024,burn_status,F - Costumes,both,I - Relationships,together,4,-0.8088
-2024,burn_status,F - Costumes,both,I - Relationships,way,4,-0.1134
-2024,burn_status,F - Costumes,both,I - Relationships,partner,4,-0.384
-2024,burn_status,F - Costumes,both,I - Relationships,yet,4,0.7756
-2024,burn_status,F - Costumes,both,I - Relationships,world,4,0.742
-2024,burn_status,F - Costumes,both,I - Relationships,here,4,-0.3
-2024,burn_status,F - Costumes,both,I - Relationships,new,4,-0.5073
-2024,burn_status,F - Costumes,plann,I - Relationships,love,4,0.0601
-2024,burn_status,F - Costumes,plann,I - Relationships,great,4,0.1685
-2024,burn_status,F - Costumes,plann,I - Relationships,together,4,-0.4882
-2024,burn_status,F - Costumes,plann,I - Relationships,way,4,-0.4183
-2024,burn_status,F - Costumes,plann,I - Relationships,partner,4,0.8549
-2024,burn_status,F - Costumes,plann,I - Relationships,yet,4,0.0698
-2024,burn_status,F - Costumes,plann,I - Relationships,world,4,0.0412
-2024,burn_status,F - Costumes,plann,I - Relationships,here,4,0.0046
-2024,burn_status,F - Costumes,plann,I - Relationships,new,4,-0.1356
-2024,burn_status,I - Relationships,love,C - Emotions,love,4,-0.3011
-2024,burn_status,I - Relationships,love,C - Emotions,all,4,0.4273
-2024,burn_status,I - Relationships,love,C - Emotions,campmate,4,0.1075
-2024,burn_status,I - Relationships,love,C - Emotions,amazement,4,-0.2233
-2024,burn_status,I - Relationships,love,C - Emotions,excitement,4,0.4273
-2024,burn_status,I - Relationships,love,C - Emotions,emotion,4,0.0169
-2024,burn_status,I - Relationships,love,C - Emotions,how,4,0.462
-2024,burn_status,I - Relationships,love,C - Emotions,connection,4,0.4864
-2024,burn_status,I - Relationships,great,C - Emotions,love,4,0.4947
-2024,burn_status,I - Relationships,great,C - Emotions,all,4,-0.6534
-2024,burn_status,I - Relationships,great,C - Emotions,campmate,4,0.1537
-2024,burn_status,I - Relationships,great,C - Emotions,amazement,4,-0.0295
-2024,burn_status,I - Relationships,great,C - Emotions,excitement,4,-0.6534
-2024,burn_status,I - Relationships,great,C - Emotions,emotion,4,0.2503
-2024,burn_status,I - Relationships,great,C - Emotions,how,4,-0.2325
-2024,burn_status,I - Relationships,great,C - Emotions,connection,4,-0.517
-2024,burn_status,I - Relationships,together,C - Emotions,love,4,-0.3885
-2024,burn_status,I - Relationships,together,C - Emotions,all,4,-0.1836
-2024,burn_status,I - Relationships,together,C - Emotions,campmate,4,0.211
-2024,burn_status,I - Relationships,together,C - Emotions,amazement,4,0.3706
-2024,burn_status,I - Relationships,together,C - Emotions,excitement,4,-0.1836
-2024,burn_status,I - Relationships,together,C - Emotions,emotion,4,0.0827
-2024,burn_status,I - Relationships,together,C - Emotions,how,4,-0.5186
-2024,burn_status,I - Relationships,together,C - Emotions,connection,4,-0.9807
-2024,burn_status,I - Relationships,way,C - Emotions,love,4,-0.0738
-2024,burn_status,I - Relationships,way,C - Emotions,all,4,-0.1621
-2024,burn_status,I - Relationships,way,C - Emotions,campmate,4,-0.2794
-2024,burn_status,I - Relationships,way,C - Emotions,amazement,4,0.534
-2024,burn_status,I - Relationships,way,C - Emotions,excitement,4,-0.1621
-2024,burn_status,I - Relationships,way,C - Emotions,emotion,4,-0.2532
-2024,burn_status,I - Relationships,way,C - Emotions,how,4,-0.74
-2024,burn_status,I - Relationships,way,C - Emotions,connection,4,-0.6386
-2024,burn_status,I - Relationships,partner,C - Emotions,love,4,0.8833
-2024,burn_status,I - Relationships,partner,C - Emotions,all,4,-0.981
-2024,burn_status,I - Relationships,partner,C - Emotions,campmate,4,0.8558
-2024,burn_status,I - Relationships,partner,C - Emotions,amazement,4,-0.8504
-2024,burn_status,I - Relationships,partner,C - Emotions,excitement,4,-0.981
-2024,burn_status,I - Relationships,partner,C - Emotions,emotion,4,0.9361
-2024,burn_status,I - Relationships,partner,C - Emotions,how,4,0.6766
-2024,burn_status,I - Relationships,partner,C - Emotions,connection,4,-0.2028
-2024,burn_status,I - Relationships,yet,C - Emotions,love,4,-0.1025
-2024,burn_status,I - Relationships,yet,C - Emotions,all,4,0.613
-2024,burn_status,I - Relationships,yet,C - Emotions,campmate,4,-0.4624
-2024,burn_status,I - Relationships,yet,C - Emotions,amazement,4,-0.0181
-2024,burn_status,I - Relationships,yet,C - Emotions,excitement,4,0.613
-2024,burn_status,I - Relationships,yet,C - Emotions,emotion,4,-0.4142
-2024,burn_status,I - Relationships,yet,C - Emotions,how,4,0.2544
-2024,burn_status,I - Relationships,yet,C - Emotions,connection,4,0.9513
-2024,burn_status,I - Relationships,world,C - Emotions,love,4,0.334
-2024,burn_status,I - Relationships,world,C - Emotions,all,4,0.01
-2024,burn_status,I - Relationships,world,C - Emotions,campmate,4,-0.5528
-2024,burn_status,I - Relationships,world,C - Emotions,amazement,4,0.2204
-2024,burn_status,I - Relationships,world,C - Emotions,excitement,4,0.01
-2024,burn_status,I - Relationships,world,C - Emotions,emotion,4,-0.3836
-2024,burn_status,I - Relationships,world,C - Emotions,how,4,-0.2999
-2024,burn_status,I - Relationships,world,C - Emotions,connection,4,0.3172
-2024,burn_status,I - Relationships,here,C - Emotions,love,4,0.3237
-2024,burn_status,I - Relationships,here,C - Emotions,all,4,-0.5938
-2024,burn_status,I - Relationships,here,C - Emotions,campmate,4,0.1496
-2024,burn_status,I - Relationships,here,C - Emotions,amazement,4,0.0954
-2024,burn_status,I - Relationships,here,C - Emotions,excitement,4,-0.5938
-2024,burn_status,I - Relationships,here,C - Emotions,emotion,4,0.205
-2024,burn_status,I - Relationships,here,C - Emotions,how,4,-0.3602
-2024,burn_status,I - Relationships,here,C - Emotions,connection,4,-0.6851
-2024,burn_status,I - Relationships,new,C - Emotions,love,4,-0.4695
-2024,burn_status,I - Relationships,new,C - Emotions,all,4,0.2588
-2024,burn_status,I - Relationships,new,C - Emotions,campmate,4,0.3308
-2024,burn_status,I - Relationships,new,C - Emotions,amazement,4,-0.1126
-2024,burn_status,I - Relationships,new,C - Emotions,excitement,4,0.2588
-2024,burn_status,I - Relationships,new,C - Emotions,emotion,4,0.1636
-2024,burn_status,I - Relationships,new,C - Emotions,how,4,0.2687
-2024,burn_status,I - Relationships,new,C - Emotions,connection,4,-0.0686
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,love,4,-0.5324
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,all,4,-0.0122
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,campmate,4,0.358
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,amazement,4,0.1958
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,excitement,4,-0.0122
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,emotion,4,0.1712
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,how,4,-0.2226
-2024,burn_status,D - Boundaries of Humanity,love,C - Emotions,connection,4,-0.7714
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,love,4,-0.6072
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,all,4,0.6914
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,campmate,4,-0.9375
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,amazement,4,0.9353
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,excitement,4,0.6914
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,emotion,4,-0.9375
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,how,4,-0.9089
-2024,burn_status,D - Boundaries of Humanity,capacity,C - Emotions,connection,4,-0.0055
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,love,4,0.553
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,all,4,-0.1338
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,campmate,4,0.2771
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,amazement,4,-0.7404
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,excitement,4,-0.1338
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,emotion,4,0.3684
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,how,4,0.8666
-2024,burn_status,D - Boundaries of Humanity,complex,C - Emotions,connection,4,0.8135
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,love,4,0.3321
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,all,4,0.0033
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,campmate,4,-0.5498
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,amazement,4,0.2258
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,excitement,4,0.0033
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,emotion,4,-0.3815
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,how,4,-0.3092
-2024,burn_status,D - Boundaries of Humanity,empathy,C - Emotions,connection,4,0.3005
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,love,4,0.9281
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,all,4,-0.8772
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,campmate,4,0.8163
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,amazement,4,-0.9597
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,excitement,4,-0.8772
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,emotion,4,0.9138
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,how,4,0.8521
-2024,burn_status,D - Boundaries of Humanity,human,C - Emotions,connection,4,0.0874
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,love,4,-0.9666
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,all,4,0.6845
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,campmate,4,-0.3333
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,amazement,4,0.6845
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,excitement,4,0.6845
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,emotion,4,-0.5168
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,how,4,-0.5672
-2024,burn_status,D - Boundaries of Humanity,hope,C - Emotions,connection,4,-0.3333
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,love,4,-0.5103
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,all,4,0.0778
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,campmate,4,0.4193
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,amazement,4,0.0181
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,excitement,4,0.0778
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,emotion,4,0.2282
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,how,4,0.037
-2024,burn_status,D - Boundaries of Humanity,emotion,C - Emotions,connection,4,-0.4991
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,love,4,0.9262
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,all,4,-0.9765
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,campmate,4,0.7657
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,amazement,4,-0.8052
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,excitement,4,-0.9765
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,emotion,4,0.8708
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,how,4,0.6175
-2024,burn_status,D - Boundaries of Humanity,different,C - Emotions,connection,4,-0.1649
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,love,4,-0.8183
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,all,4,0.9305
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,campmate,4,-0.5596
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,amazement,4,0.5206
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,excitement,4,0.9305
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,emotion,4,-0.671
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,how,4,-0.2759
-2024,burn_status,D - Boundaries of Humanity,compassion,C - Emotions,connection,4,0.3587
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,love,5,0.5903
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,campmate,5,-0.3936
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,all,5,-0.1358
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,some,5,-0.4076
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,amazement,5,0.2846
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,excitement,5,-0.5289
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,emotion,5,0.1667
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,how,5,-0.0931
-2024,burn_status,G - Drinking & Smoking,smoke,C - Emotions,connection,5,-0.3924
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,love,5,0.7553
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,campmate,5,-0.4911
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,all,5,-0.0345
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,some,5,-0.519
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,amazement,5,0.2043
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,excitement,5,-0.5178
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,emotion,5,0.2269
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,how,5,0.1565
-2024,burn_status,G - Drinking & Smoking,change,C - Emotions,connection,5,-0.1509
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,love,5,0.5095
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,campmate,5,0.5503
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,all,5,-0.8668
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,some,5,0.0787
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,amazement,5,-0.5799
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,excitement,5,-0.902
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,emotion,5,0.7837
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,how,5,0.3494
-2024,burn_status,G - Drinking & Smoking,same,C - Emotions,connection,5,-0.4498
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,love,5,-0.2675
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,campmate,5,-0.8687
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,all,5,0.9615
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,some,5,-0.5557
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,amazement,5,0.9392
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,excitement,5,0.5684
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,emotion,5,-0.5242
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,how,5,-0.3622
-2024,burn_status,G - Drinking & Smoking,drink,C - Emotions,connection,5,-0.1711
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,love,5,0.6513
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,campmate,5,0.551
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,all,5,-0.7411
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,some,5,0.0378
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,amazement,5,-0.8438
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,excitement,5,-0.7984
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,emotion,5,0.8781
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,how,5,0.7972
-2024,burn_status,G - Drinking & Smoking,more,C - Emotions,connection,5,0.0424
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,love,5,-0.2328
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,campmate,5,0.4819
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,all,5,-0.1749
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,some,5,0.6361
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,amazement,5,-0.6181
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,excitement,5,0.3903
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,emotion,5,-0.2434
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,how,5,0.1848
-2024,burn_status,G - Drinking & Smoking,weed,C - Emotions,connection,5,0.9362
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,love,5,0.7493
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,campmate,5,-0.3154
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,all,5,-0.1272
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,some,5,-0.739
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,amazement,5,0.143
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,excitement,5,-0.825
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,emotion,5,0.748
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,how,5,0.4211
-2024,burn_status,G - Drinking & Smoking,help,C - Emotions,connection,5,-0.7343
+year,cohort_type,set_a,theme_a_id,theme_a_label,set_b,theme_b_id,theme_b_label,n_cohorts,correlation
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t3,freedom / happy / would,4,-0.0622
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t0,all / some / lack,4,-0.6441
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t6,friends / lost / most,4,-0.5373
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t5,excitement / lights / all,4,0.8927
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t7,joy / friend / happiness,4,0.7514
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t4,art / love / nova,4,0.3691
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t2,campmates / all / missing,4,-0.3112
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t9,overwhelmed / here / friend,4,-0.796
+2024,burn_status,B - Symbolism,t3,stories / here / there,C - Emotions,t8,myself / camp / night,4,-0.539
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t3,freedom / happy / would,4,-0.0622
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t0,all / some / lack,4,-0.6441
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t6,friends / lost / most,4,-0.5373
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t5,excitement / lights / all,4,0.8927
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t7,joy / friend / happiness,4,0.7514
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t4,art / love / nova,4,0.3691
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t2,campmates / all / missing,4,-0.3112
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t9,overwhelmed / here / friend,4,-0.796
+2024,burn_status,B - Symbolism,t0,away / others / free,C - Emotions,t8,myself / camp / night,4,-0.539
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t3,freedom / happy / would,4,0.1867
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t0,all / some / lack,4,-0.0197
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t6,friends / lost / most,4,-0.1173
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t5,excitement / lights / all,4,-0.0677
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t7,joy / friend / happiness,4,0.3702
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t4,art / love / nova,4,-0.5443
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t2,campmates / all / missing,4,0.4586
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t9,overwhelmed / here / friend,4,-0.181
+2024,burn_status,B - Symbolism,t6,ashes / faith / there,C - Emotions,t8,myself / camp / night,4,-0.6134
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t3,freedom / happy / would,4,0.5869
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t0,all / some / lack,4,-0.7819
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t6,friends / lost / most,4,-0.7353
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t5,excitement / lights / all,4,0.1479
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t7,joy / friend / happiness,4,0.1339
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t4,art / love / nova,4,0.9718
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t2,campmates / all / missing,4,0.2837
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t1,laughter / there / excitement,4,-0.3699
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t9,overwhelmed / here / friend,4,0.0003
+2024,burn_status,B - Symbolism,t5,art / non / space,C - Emotions,t8,myself / camp / night,4,0.0011
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t3,freedom / happy / would,4,-0.0622
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t0,all / some / lack,4,-0.6441
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t6,friends / lost / most,4,-0.5373
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t5,excitement / lights / all,4,0.8927
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t7,joy / friend / happiness,4,0.7514
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t4,art / love / nova,4,0.3691
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t2,campmates / all / missing,4,-0.3112
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t9,overwhelmed / here / friend,4,-0.796
+2024,burn_status,B - Symbolism,t2,show / healing / represents,C - Emotions,t8,myself / camp / night,4,-0.539
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t3,freedom / happy / would,4,0.0522
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t0,all / some / lack,4,0.646
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t6,friends / lost / most,4,0.5673
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t5,excitement / lights / all,4,-0.941
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t7,joy / friend / happiness,4,-0.9409
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t4,art / love / nova,4,-0.1315
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t2,campmates / all / missing,4,0.2039
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t1,laughter / there / excitement,4,0.6798
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t9,overwhelmed / here / friend,4,0.9348
+2024,burn_status,B - Symbolism,t4,place / love / community,C - Emotions,t8,myself / camp / night,4,0.8049
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t3,freedom / happy / would,4,-0.6385
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t0,all / some / lack,4,-0.029
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t6,friends / lost / most,4,0.1069
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t5,excitement / lights / all,4,0.824
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t7,joy / friend / happiness,4,0.4015
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t4,art / love / nova,4,-0.0161
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t2,campmates / all / missing,4,-0.8353
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t1,laughter / there / excitement,4,0.1207
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t9,overwhelmed / here / friend,4,-0.6756
+2024,burn_status,B - Symbolism,t7,freedom / emotional,C - Emotions,t8,myself / camp / night,4,-0.1309
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t3,freedom / happy / would,4,0.1867
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t0,all / some / lack,4,-0.0197
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t6,friends / lost / most,4,-0.1173
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t5,excitement / lights / all,4,-0.0677
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t7,joy / friend / happiness,4,0.3702
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t4,art / love / nova,4,-0.5443
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t2,campmates / all / missing,4,0.4586
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t9,overwhelmed / here / friend,4,-0.181
+2024,burn_status,B - Symbolism,t1,creating / expression / humanity,C - Emotions,t8,myself / camp / night,4,-0.6134
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t3,art / was / own,5,-0.5582
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t0,drugs / bad / too,5,-0.3696
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t6,fun / dust / love,5,0.0771
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t5,camp / doing / issues,5,0.8843
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t2,being / here / new,5,0.4428
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t4,weather / art / serendipity,5,0.9086
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t7,all / positive / experiences,5,-0.8504
+2024,age_band,J - Survival,t3,bike / community / engagement,H - Experiences,t1,community / heat / friends,5,-0.1649
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t3,art / was / own,5,0.6757
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t0,drugs / bad / too,5,0.7981
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t6,fun / dust / love,5,-0.4723
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t5,camp / doing / issues,5,-0.584
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t2,being / here / new,5,0.5458
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t4,weather / art / serendipity,5,-0.3789
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t7,all / positive / experiences,5,-0.0272
+2024,age_band,J - Survival,t0,love / self / gifting,H - Experiences,t1,community / heat / friends,5,0.1131
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t3,art / was / own,5,-0.3262
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t0,drugs / bad / too,5,0.1702
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t6,fun / dust / love,5,-0.2165
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t5,camp / doing / issues,5,0.5723
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t2,being / here / new,5,-0.2143
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t4,weather / art / serendipity,5,0.7638
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t7,all / positive / experiences,5,-0.635
+2024,age_band,J - Survival,t6,ask / days / help,H - Experiences,t1,community / heat / friends,5,0.0042
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t3,art / was / own,5,-0.0152
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t0,drugs / bad / too,5,-0.319
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t6,fun / dust / love,5,0.1025
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t5,camp / doing / issues,5,-0.4608
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t2,being / here / new,5,-0.4972
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t4,weather / art / serendipity,5,-0.7221
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t7,all / positive / experiences,5,0.7499
+2024,age_band,J - Survival,t5,cup / supplies / shade,H - Experiences,t1,community / heat / friends,5,0.3102
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t3,art / was / own,5,-0.6875
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t0,drugs / bad / too,5,-0.2999
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t6,fun / dust / love,5,-0.1115
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t5,camp / doing / issues,5,0.9457
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t2,being / here / new,5,0.1744
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t4,weather / art / serendipity,5,0.9907
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t7,all / positive / experiences,5,-0.9201
+2024,age_band,J - Survival,t7,emotional / support / camp,H - Experiences,t1,community / heat / friends,5,0.0377
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t3,art / was / own,5,-0.255
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t0,drugs / bad / too,5,-0.6255
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t6,fun / dust / love,5,0.6364
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t5,camp / doing / issues,5,0.1098
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t2,being / here / new,5,-0.584
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t4,weather / art / serendipity,5,-0.0876
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t7,all / positive / experiences,5,0.5036
+2024,age_band,J - Survival,t4,weeks / cup / tent,H - Experiences,t1,community / heat / friends,5,-0.2876
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t3,art / was / own,5,-0.7474
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t0,drugs / bad / too,5,-0.7469
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t6,fun / dust / love,5,0.0293
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t5,camp / doing / issues,5,0.3391
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t2,being / here / new,5,-0.6141
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t4,weather / art / serendipity,5,0.027
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t7,all / positive / experiences,5,0.1187
+2024,age_band,J - Survival,t2,share / food / good,H - Experiences,t1,community / heat / friends,5,0.4775
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t3,art / was / own,5,0.7723
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t0,drugs / bad / too,5,0.6487
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t6,fun / dust / love,5,0.1665
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t5,camp / doing / issues,5,-0.3596
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t2,being / here / new,5,0.5196
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t4,weather / art / serendipity,5,-0.0711
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t7,all / positive / experiences,5,0.0317
+2024,age_band,J - Survival,t1,days / water / bottle,H - Experiences,t1,community / heat / friends,5,-0.6283
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t3,art / was / own,4,0.8339
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t0,drugs / bad / too,4,-0.7909
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t6,fun / dust / love,4,-0.3333
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t5,camp / doing / issues,4,-0.9213
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t2,being / here / new,4,-0.1732
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t4,weather / art / serendipity,4,0.149
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t7,all / positive / experiences,4,-0.1866
+2024,burn_status,J - Survival,t3,bike / community / engagement,H - Experiences,t1,community / heat / friends,4,-0.3441
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t3,art / was / own,4,-0.3726
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t0,drugs / bad / too,4,0.9995
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t6,fun / dust / love,4,-0.0396
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t5,camp / doing / issues,4,0.6109
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t2,being / here / new,4,-0.1644
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t4,weather / art / serendipity,4,-0.1363
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t7,all / positive / experiences,4,-0.4105
+2024,burn_status,J - Survival,t0,love / self / gifting,H - Experiences,t1,community / heat / friends,4,0.5998
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t3,art / was / own,4,-0.2222
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t0,drugs / bad / too,4,-0.3705
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t6,fun / dust / love,4,0.9492
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t5,camp / doing / issues,4,-0.0463
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t2,being / here / new,4,0.9786
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t4,weather / art / serendipity,4,-0.7336
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t7,all / positive / experiences,4,0.8074
+2024,burn_status,J - Survival,t6,ask / days / help,H - Experiences,t1,community / heat / friends,4,-0.9188
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t3,art / was / own,4,0.3311
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t0,drugs / bad / too,4,-0.8443
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t6,fun / dust / love,4,0.513
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t5,camp / doing / issues,4,-0.6093
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t2,being / here / new,4,0.6374
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t4,weather / art / serendipity,4,-0.421
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t7,all / positive / experiences,4,0.5537
+2024,burn_status,J - Survival,t5,cup / supplies / shade,H - Experiences,t1,community / heat / friends,4,-0.9353
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t3,art / was / own,4,-0.8116
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t0,drugs / bad / too,4,-0.2133
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t6,fun / dust / love,4,0.6546
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t5,camp / doing / issues,4,0.5865
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t2,being / here / new,4,0.5814
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t4,weather / art / serendipity,4,-0.0864
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t7,all / positive / experiences,4,0.9528
+2024,burn_status,J - Survival,t2,share / food / good,H - Experiences,t1,community / heat / friends,4,-0.382
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t3,art / was / own,4,0.9092
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t0,drugs / bad / too,4,-0.2589
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t6,fun / dust / love,4,0.0012
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t5,camp / doing / issues,4,-0.9066
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t2,being / here / new,4,0.1448
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t4,weather / art / serendipity,4,-0.4949
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t7,all / positive / experiences,4,-0.4196
+2024,burn_status,J - Survival,t4,weeks / cup / tent,H - Experiences,t1,community / heat / friends,4,-0.4353
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t3,art / was / own,4,-0.7381
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t0,drugs / bad / too,4,0.8059
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t6,fun / dust / love,4,0.4636
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t5,camp / doing / issues,4,0.8156
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t2,being / here / new,4,0.3201
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t4,weather / art / serendipity,4,-0.3618
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t7,all / positive / experiences,4,0.1748
+2024,burn_status,J - Survival,t7,emotional / support / camp,H - Experiences,t1,community / heat / friends,4,0.2018
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t3,art / was / own,4,0.3951
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t0,drugs / bad / too,4,-0.301
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t6,fun / dust / love,4,-0.9256
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t5,camp / doing / issues,4,-0.2922
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t2,being / here / new,4,-0.8818
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t4,weather / art / serendipity,4,0.8799
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t7,all / positive / experiences,4,-0.4832
+2024,burn_status,J - Survival,t1,days / water / bottle,H - Experiences,t1,community / heat / friends,4,0.5458
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t3,look / sometimes / care,4,0.2075
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t0,white / male / art,4,0.3542
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t6,sometimes / english / hot,4,0.857
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t5,hair / dress / dye,4,0.1761
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t2,others / express / census,4,0.3127
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t4,sure / bit / watch,4,0.1476
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t7,fun / life / tattoos,4,0.0797
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t1,more / much / way,4,-0.3498
+2024,burn_status,F - Costumes,t3,mood / self / depends,K - Diversity & Inclusion,t8,white / skin / accent,4,-0.9471
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t3,look / sometimes / care,4,-0.3196
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t0,white / male / art,4,-0.1915
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t6,sometimes / english / hot,4,-0.2702
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t5,hair / dress / dye,4,-0.8417
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t2,others / express / census,4,0.7773
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t4,sure / bit / watch,4,0.7512
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t7,fun / life / tattoos,4,0.4223
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t1,more / much / way,4,-0.7809
+2024,burn_status,F - Costumes,t0,both / positively / most,K - Diversity & Inclusion,t8,white / skin / accent,4,0.5701
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t3,look / sometimes / care,4,-0.2814
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t0,white / male / art,4,0.7206
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t6,sometimes / english / hot,4,-0.0225
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t5,hair / dress / dye,4,0.9867
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t2,others / express / census,4,-0.4332
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t4,sure / bit / watch,4,-0.89
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t7,fun / life / tattoos,4,0.1877
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t1,more / much / way,4,0.6627
+2024,burn_status,F - Costumes,t6,outfits / love / more,K - Diversity & Inclusion,t8,white / skin / accent,4,-0.5858
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t3,look / sometimes / care,4,-0.0786
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t0,white / male / art,4,0.402
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t6,sometimes / english / hot,4,-0.1815
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t5,hair / dress / dye,4,0.9578
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t2,others / express / census,4,-0.7688
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t4,sure / bit / watch,4,-0.9693
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t7,fun / life / tattoos,4,-0.1326
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t1,more / much / way,4,0.9211
+2024,burn_status,F - Costumes,t5,good / conversation / fun,K - Diversity & Inclusion,t8,white / skin / accent,4,-0.3034
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t3,look / sometimes / care,4,-0.5919
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t0,white / male / art,4,0.773
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t6,sometimes / english / hot,4,0.1996
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t5,hair / dress / dye,4,0.075
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t2,others / express / census,4,0.7769
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t4,sure / bit / watch,4,0.1307
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t7,fun / life / tattoos,4,0.8224
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t1,more / much / way,4,-0.5564
+2024,burn_status,F - Costumes,t7,more / much / comfortable,K - Diversity & Inclusion,t8,white / skin / accent,4,-0.5252
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t3,look / sometimes / care,4,0.0956
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t0,white / male / art,4,-0.6892
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t6,sometimes / english / hot,4,-0.3752
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t5,hair / dress / dye,4,-0.8394
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t2,others / express / census,4,0.2193
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t4,sure / bit / watch,4,0.622
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t7,fun / life / tattoos,4,-0.1483
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t1,more / much / way,4,-0.3697
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,K - Diversity & Inclusion,t8,white / skin / accent,4,0.8726
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t3,look / sometimes / care,4,0.06
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t0,white / male / art,4,0.1275
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t6,sometimes / english / hot,4,-0.2962
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t5,hair / dress / dye,4,0.8176
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t2,others / express / census,4,-0.9132
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t4,sure / bit / watch,4,-0.9117
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t7,fun / life / tattoos,4,-0.3349
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t1,more / much / way,4,0.9966
+2024,burn_status,F - Costumes,t2,myself / comfort / express,K - Diversity & Inclusion,t8,white / skin / accent,4,-0.0446
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t3,look / sometimes / care,4,0.5256
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t0,white / male / art,4,-0.7603
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t6,sometimes / english / hot,4,0.3707
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t5,hair / dress / dye,4,-0.9486
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t2,others / express / census,4,0.4029
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t4,sure / bit / watch,4,0.9495
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t7,fun / life / tattoos,4,-0.3522
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t1,more / much / way,4,-0.708
+2024,burn_status,F - Costumes,t1,plan / ahead / others,K - Diversity & Inclusion,t8,white / skin / accent,4,0.2895
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t3,yet / here / sure,4,0.1331
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t0,been / great,4,-0.1424
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t6,yourself / default / let,4,0.4727
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t5,weirder,4,-0.6059
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t2,here / love / more,4,-0.3748
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t7,both / sure / recommend,4,-0.1424
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t4,seem / which / fleeting,4,0.5543
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t1,together / part / camp,4,-0.1424
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t9,would / over / maybe,4,0.4727
+2024,burn_status,F - Costumes,t3,mood / self / depends,I - Relationships,t8,seems / new / present,4,0.5543
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t3,yet / here / sure,4,0.396
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t0,been / great,4,-0.8999
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t6,yourself / default / let,4,0.1687
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t5,weirder,4,0.7441
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t2,here / love / more,4,0.1033
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t7,both / sure / recommend,4,-0.8999
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t4,seem / which / fleeting,4,0.0281
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t1,together / part / camp,4,-0.8999
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t9,would / over / maybe,4,0.1687
+2024,burn_status,F - Costumes,t0,both / positively / most,I - Relationships,t8,seems / new / present,4,0.0281
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t3,yet / here / sure,4,0.212
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t0,been / great,4,0.6576
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t6,yourself / default / let,4,-0.5743
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t5,weirder,4,-0.32
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t2,here / love / more,4,-0.6506
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t7,both / sure / recommend,4,0.6576
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t4,seem / which / fleeting,4,0.4911
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t1,together / part / camp,4,0.6576
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t9,would / over / maybe,4,-0.5743
+2024,burn_status,F - Costumes,t6,outfits / love / more,I - Relationships,t8,seems / new / present,4,0.4911
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t3,yet / here / sure,4,-0.1237
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t0,been / great,4,0.9048
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t6,yourself / default / let,4,-0.5987
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t5,weirder,4,-0.3556
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t2,here / love / more,4,-0.3077
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t7,both / sure / recommend,4,0.9048
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t4,seem / which / fleeting,4,0.0809
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t1,together / part / camp,4,0.9048
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t9,would / over / maybe,4,-0.5987
+2024,burn_status,F - Costumes,t5,good / conversation / fun,I - Relationships,t8,seems / new / present,4,0.0809
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t3,yet / here / sure,4,0.8503
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t0,been / great,4,-0.5792
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t6,yourself / default / let,4,-0.0797
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t5,weirder,4,0.2297
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t2,here / love / more,4,-0.8282
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t7,both / sure / recommend,4,-0.5792
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t4,seem / which / fleeting,4,0.9517
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t1,together / part / camp,4,-0.5792
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t9,would / over / maybe,4,-0.0797
+2024,burn_status,F - Costumes,t7,more / much / comfortable,I - Relationships,t8,seems / new / present,4,0.9517
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t3,yet / here / sure,4,-0.1908
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t0,been / great,4,-0.4637
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t6,yourself / default / let,4,0.2182
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t5,weirder,4,0.5392
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t2,here / love / more,4,0.6426
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t7,both / sure / recommend,4,-0.4637
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t4,seem / which / fleeting,4,-0.5986
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t1,together / part / camp,4,-0.4637
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t9,would / over / maybe,4,0.2182
+2024,burn_status,F - Costumes,t4,clothes / normal / ahead,I - Relationships,t8,seems / new / present,4,-0.5986
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t3,yet / here / sure,4,-0.3392
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t0,been / great,4,0.9676
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t6,yourself / default / let,4,-0.5596
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t5,weirder,4,-0.3162
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t2,here / love / more,4,-0.0273
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t7,both / sure / recommend,4,0.9676
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t4,seem / which / fleeting,4,-0.2238
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t1,together / part / camp,4,0.9676
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t9,would / over / maybe,4,-0.5596
+2024,burn_status,F - Costumes,t2,myself / comfort / express,I - Relationships,t8,seems / new / present,4,-0.2238
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t3,yet / here / sure,4,-0.3592
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t0,been / great,4,-0.6017
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t6,yourself / default / let,4,0.826
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t5,weirder,4,-0.0062
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t2,here / love / more,4,0.6922
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t7,both / sure / recommend,4,-0.6017
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t4,seem / which / fleeting,4,-0.4754
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t1,together / part / camp,4,-0.6017
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t9,would / over / maybe,4,0.826
+2024,burn_status,F - Costumes,t1,plan / ahead / others,I - Relationships,t8,seems / new / present,4,-0.4754
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t3,freedom / happy / would,4,0.3314
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t0,all / some / lack,4,0.1955
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t6,friends / lost / most,4,0.1639
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t5,excitement / lights / all,4,-0.8013
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t7,joy / friend / happiness,4,-0.8898
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t4,art / love / nova,4,0.4998
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t2,campmates / all / missing,4,0.2618
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t1,laughter / there / excitement,4,0.5372
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t9,overwhelmed / here / friend,4,0.9213
+2024,burn_status,I - Relationships,t3,yet / here / sure,C - Emotions,t8,myself / camp / night,4,0.8784
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t3,freedom / happy / would,4,0.1867
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t0,all / some / lack,4,-0.0197
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t6,friends / lost / most,4,-0.1173
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t5,excitement / lights / all,4,-0.0677
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t7,joy / friend / happiness,4,0.3702
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t4,art / love / nova,4,-0.5443
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t2,campmates / all / missing,4,0.4586
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t9,overwhelmed / here / friend,4,-0.181
+2024,burn_status,I - Relationships,t0,been / great,C - Emotions,t8,myself / camp / night,4,-0.6134
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t3,freedom / happy / would,4,-0.0622
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t0,all / some / lack,4,-0.6441
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t6,friends / lost / most,4,-0.5373
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t5,excitement / lights / all,4,0.8927
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t7,joy / friend / happiness,4,0.7514
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t4,art / love / nova,4,0.3691
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t2,campmates / all / missing,4,-0.3112
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t9,overwhelmed / here / friend,4,-0.796
+2024,burn_status,I - Relationships,t6,yourself / default / let,C - Emotions,t8,myself / camp / night,4,-0.539
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t3,freedom / happy / would,4,-0.4811
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t0,all / some / lack,4,0.8108
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t6,friends / lost / most,4,0.8265
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t5,excitement / lights / all,4,-0.511
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t7,joy / friend / happiness,4,-0.8779
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t4,art / love / nova,4,-0.1769
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t2,campmates / all / missing,4,-0.4568
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t1,laughter / there / excitement,4,0.9886
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t9,overwhelmed / here / friend,4,0.6331
+2024,burn_status,I - Relationships,t5,weirder,C - Emotions,t8,myself / camp / night,4,0.9367
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t3,freedom / happy / would,4,-0.7061
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t0,all / some / lack,4,0.0802
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t6,friends / lost / most,4,0.1639
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t5,excitement / lights / all,4,0.8806
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t7,joy / friend / happiness,4,0.6896
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t4,art / love / nova,4,-0.5415
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t2,campmates / all / missing,4,-0.7013
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t1,laughter / there / excitement,4,-0.1311
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t9,overwhelmed / here / friend,4,-0.9005
+2024,burn_status,I - Relationships,t2,here / love / more,C - Emotions,t8,myself / camp / night,4,-0.5627
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t3,freedom / happy / would,4,0.1867
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t0,all / some / lack,4,-0.0197
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t6,friends / lost / most,4,-0.1173
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t5,excitement / lights / all,4,-0.0677
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t7,joy / friend / happiness,4,0.3702
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t4,art / love / nova,4,-0.5443
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t2,campmates / all / missing,4,0.4586
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t9,overwhelmed / here / friend,4,-0.181
+2024,burn_status,I - Relationships,t7,both / sure / recommend,C - Emotions,t8,myself / camp / night,4,-0.6134
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t3,freedom / happy / would,4,0.7399
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t0,all / some / lack,4,-0.2588
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t6,friends / lost / most,4,-0.3117
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t5,excitement / lights / all,4,-0.722
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t7,joy / friend / happiness,4,-0.5968
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t4,art / love / nova,4,0.753
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t2,campmates / all / missing,4,0.6388
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t1,laughter / there / excitement,4,0.065
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t9,overwhelmed / here / friend,4,0.7964
+2024,burn_status,I - Relationships,t4,seem / which / fleeting,C - Emotions,t8,myself / camp / night,4,0.5402
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t3,freedom / happy / would,4,0.1867
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t0,all / some / lack,4,-0.0197
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t6,friends / lost / most,4,-0.1173
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t5,excitement / lights / all,4,-0.0677
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t7,joy / friend / happiness,4,0.3702
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t4,art / love / nova,4,-0.5443
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t2,campmates / all / missing,4,0.4586
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t9,overwhelmed / here / friend,4,-0.181
+2024,burn_status,I - Relationships,t1,together / part / camp,C - Emotions,t8,myself / camp / night,4,-0.6134
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t3,freedom / happy / would,4,-0.0622
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t0,all / some / lack,4,-0.6441
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t6,friends / lost / most,4,-0.5373
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t5,excitement / lights / all,4,0.8927
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t7,joy / friend / happiness,4,0.7514
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t4,art / love / nova,4,0.3691
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t2,campmates / all / missing,4,-0.3112
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t1,laughter / there / excitement,4,-0.4921
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t9,overwhelmed / here / friend,4,-0.796
+2024,burn_status,I - Relationships,t9,would / over / maybe,C - Emotions,t8,myself / camp / night,4,-0.539
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t3,freedom / happy / would,4,0.7399
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t0,all / some / lack,4,-0.2588
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t6,friends / lost / most,4,-0.3117
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t5,excitement / lights / all,4,-0.722
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t7,joy / friend / happiness,4,-0.5968
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t4,art / love / nova,4,0.753
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t2,campmates / all / missing,4,0.6388
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t1,laughter / there / excitement,4,0.065
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t9,overwhelmed / here / friend,4,0.7964
+2024,burn_status,I - Relationships,t8,seems / new / present,C - Emotions,t8,myself / camp / night,4,0.5402
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t3,freedom / happy / would,4,-0.349
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t0,all / some / lack,4,-0.4017
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t6,friends / lost / most,4,-0.2819
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t5,excitement / lights / all,4,0.9631
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t7,joy / friend / happiness,4,0.727
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t4,art / love / nova,4,0.1165
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t2,campmates / all / missing,4,-0.556
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t1,laughter / there / excitement,4,-0.3124
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t9,overwhelmed / here / friend,4,-0.8686
+2024,burn_status,D - Boundaries of Humanity,t3,consciousness / possibly / more,C - Emotions,t8,myself / camp / night,4,-0.4969
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t3,freedom / happy / would,4,-0.2219
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t0,all / some / lack,4,0.078
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t6,friends / lost / most,4,0.0371
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t5,excitement / lights / all,4,0.342
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t7,joy / friend / happiness,4,0.5963
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t4,art / love / nova,4,-0.7435
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t2,campmates / all / missing,4,0.014
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t1,laughter / there / excitement,4,-0.417
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t9,overwhelmed / here / friend,4,-0.5556
+2024,burn_status,D - Boundaries of Humanity,t0,physical / data / emotional,C - Emotions,t8,myself / camp / night,4,-0.7371
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t3,freedom / happy / would,4,-0.6411
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t0,all / some / lack,4,0.7217
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t6,friends / lost / most,4,0.7833
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t5,excitement / lights / all,4,-0.2007
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t7,joy / friend / happiness,4,-0.6861
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t4,art / love / nova,4,-0.134
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t2,campmates / all / missing,4,-0.6953
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t1,laughter / there / excitement,4,0.9542
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t9,overwhelmed / here / friend,4,0.3704
+2024,burn_status,D - Boundaries of Humanity,t6,compassion / future / only,C - Emotions,t8,myself / camp / night,4,0.8363
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t3,freedom / happy / would,4,-0.1256
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t0,all / some / lack,4,-0.0016
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t6,friends / lost / most,4,-0.0495
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t5,excitement / lights / all,4,0.3213
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t7,joy / friend / happiness,4,0.6198
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t4,art / love / nova,4,-0.6812
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t2,campmates / all / missing,4,0.1054
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t1,laughter / there / excitement,4,-0.4925
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t9,overwhelmed / here / friend,4,-0.5424
+2024,burn_status,D - Boundaries of Humanity,t5,emotions / can / humans,C - Emotions,t8,myself / camp / night,4,-0.7736
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t3,freedom / happy / would,4,0.6282
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t0,all / some / lack,4,0.0929
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t6,friends / lost / most,4,-0.0206
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t5,excitement / lights / all,4,-0.9582
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t7,joy / friend / happiness,4,-0.6852
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t4,art / love / nova,4,0.2496
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t2,campmates / all / missing,4,0.7374
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t1,laughter / there / excitement,4,0.1401
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t9,overwhelmed / here / friend,4,0.904
+2024,burn_status,D - Boundaries of Humanity,t7,love / hope / empathy,C - Emotions,t8,myself / camp / night,4,0.4828
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t3,freedom / happy / would,4,0.6399
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t0,all / some / lack,4,-0.9624
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t6,friends / lost / most,4,-0.9636
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t5,excitement / lights / all,4,0.4516
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t7,joy / friend / happiness,4,0.7698
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t4,art / love / nova,4,0.5014
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t2,campmates / all / missing,4,0.5167
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t1,laughter / there / excitement,4,-0.9675
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t9,overwhelmed / here / friend,4,-0.5057
+2024,burn_status,D - Boundaries of Humanity,t4,connection / yet / human,C - Emotions,t8,myself / camp / night,4,-0.7801
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t3,freedom / happy / would,4,0.5984
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t0,all / some / lack,4,0.0078
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t6,friends / lost / most,4,-0.0592
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t5,excitement / lights / all,4,-0.8753
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t7,joy / friend / happiness,4,-0.7783
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t4,art / love / nova,4,0.5509
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t2,campmates / all / missing,4,0.5676
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t1,laughter / there / excitement,4,0.275
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t9,overwhelmed / here / friend,4,0.9327
+2024,burn_status,D - Boundaries of Humanity,t2,human / all / machine,C - Emotions,t8,myself / camp / night,4,0.6901
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t3,freedom / happy / would,4,-0.9286
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t0,all / some / lack,4,0.5861
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t6,friends / lost / most,4,0.6922
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t5,excitement / lights / all,4,0.4025
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t7,joy / friend / happiness,4,-0.114
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t4,art / love / nova,4,-0.3866
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t2,campmates / all / missing,4,-0.9898
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t1,laughter / there / excitement,4,0.6692
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t9,overwhelmed / here / friend,4,-0.2671
+2024,burn_status,D - Boundaries of Humanity,t1,love / place / one,C - Emotions,t8,myself / camp / night,4,0.3253
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t3,freedom / happy / would,4,0.9497
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t0,all / some / lack,4,-0.7372
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t6,friends / lost / most,4,-0.7807
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t5,excitement / lights / all,4,-0.3366
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t7,joy / friend / happiness,4,-0.0608
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t4,art / love / nova,4,0.8843
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t2,campmates / all / missing,4,0.8003
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t1,laughter / there / excitement,4,-0.478
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t9,overwhelmed / here / friend,4,0.3672
+2024,burn_status,D - Boundaries of Humanity,t9,drink / more / moral,C - Emotions,t8,myself / camp / night,4,0.0094
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t3,freedom / happy / would,4,-0.1268
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t0,all / some / lack,4,-0.5234
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t6,friends / lost / most,4,-0.4659
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t5,excitement / lights / all,4,0.9194
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t7,joy / friend / happiness,4,0.9864
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t4,art / love / nova,4,-0.1148
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t2,campmates / all / missing,4,-0.1883
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t1,laughter / there / excitement,4,-0.6986
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t9,overwhelmed / here / friend,4,-0.9755
+2024,burn_status,D - Boundaries of Humanity,t8,empathy / emotion / cool,C - Emotions,t8,myself / camp / night,4,-0.9076
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t3,freedom / happy / would,5,-0.2966
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t0,all / some / lack,5,-0.1054
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t6,friends / lost / most,5,0.9056
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t5,excitement / lights / all,5,-0.6709
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t2,campmates / all / missing,5,-0.67
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t4,art / love / nova,5,-0.4897
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t7,joy / friend / happiness,5,-0.7939
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t1,laughter / there / excitement,5,0.9087
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t9,overwhelmed / here / friend,5,0.5532
+2024,burn_status,G - Drinking & Smoking,t3,cannabis / alcohol / daily,C - Emotions,t8,myself / camp / night,5,0.839
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t3,freedom / happy / would,5,-0.7446
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t0,all / some / lack,5,0.0007
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t6,friends / lost / most,5,0.1704
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t5,excitement / lights / all,5,0.7892
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t2,campmates / all / missing,5,-0.6538
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t4,art / love / nova,5,-0.302
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t7,joy / friend / happiness,5,0.529
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t1,laughter / there / excitement,5,0.0522
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t9,overwhelmed / here / friend,5,-0.8169
+2024,burn_status,G - Drinking & Smoking,t0,smoke / weed / drink,C - Emotions,t8,myself / camp / night,5,-0.0284
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t3,freedom / happy / would,5,-0.6291
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t0,all / some / lack,5,-0.1718
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t6,friends / lost / most,5,0.2444
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t5,excitement / lights / all,5,0.6345
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t2,campmates / all / missing,5,-0.7502
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t4,art / love / nova,5,-0.1424
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t7,joy / friend / happiness,5,0.3228
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t1,laughter / there / excitement,5,0.2051
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t9,overwhelmed / here / friend,5,-0.6316
+2024,burn_status,G - Drinking & Smoking,t6,little / drink / smoke,C - Emotions,t8,myself / camp / night,5,0.1851
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t3,freedom / happy / would,5,0.6512
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t0,all / some / lack,5,-0.5888
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t6,friends / lost / most,5,0.2855
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t5,excitement / lights / all,5,-0.8312
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t2,campmates / all / missing,5,0.0297
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t4,art / love / nova,5,0.0429
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t7,joy / friend / happiness,5,-0.548
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t1,laughter / there / excitement,5,0.1863
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t9,overwhelmed / here / friend,5,0.6747
+2024,burn_status,G - Drinking & Smoking,t5,less / smoking / play,C - Emotions,t8,myself / camp / night,5,0.685
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t3,freedom / happy / would,5,0.8742
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t0,all / some / lack,5,-0.1749
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t6,friends / lost / most,5,-0.7608
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t5,excitement / lights / all,5,-0.1421
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t2,campmates / all / missing,5,0.8004
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t4,art / love / nova,5,0.8872
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t7,joy / friend / happiness,5,0.0096
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t1,laughter / there / excitement,5,-0.5388
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t9,overwhelmed / here / friend,5,0.3268
+2024,burn_status,G - Drinking & Smoking,t2,more / fun / drinking,C - Emotions,t8,myself / camp / night,5,-0.3605
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t3,freedom / happy / would,5,-0.0221
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t0,all / some / lack,5,-0.416
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t6,friends / lost / most,5,-0.4221
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t5,excitement / lights / all,5,0.8588
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t2,campmates / all / missing,5,-0.0868
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t4,art / love / nova,5,0.1059
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t7,joy / friend / happiness,5,0.95
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t1,laughter / there / excitement,5,-0.6876
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t9,overwhelmed / here / friend,5,-0.9376
+2024,burn_status,G - Drinking & Smoking,t7,same / much / vape,C - Emotions,t8,myself / camp / night,5,-0.2531
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t3,freedom / happy / would,5,0.9652
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t0,all / some / lack,5,-0.3566
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t6,friends / lost / most,5,-0.429
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t5,excitement / lights / all,5,-0.5087
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t2,campmates / all / missing,5,0.7223
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t4,art / love / nova,5,0.432
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t7,joy / friend / happiness,5,-0.0998
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t1,laughter / there / excitement,5,-0.4742
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t9,overwhelmed / here / friend,5,0.4674
+2024,burn_status,G - Drinking & Smoking,t4,recreation / change / legal,C - Emotions,t8,myself / camp / night,5,-0.0251
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t3,freedom / happy / would,5,-0.4555
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t0,all / some / lack,5,0.9337
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t6,friends / lost / most,5,0.004
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t5,excitement / lights / all,5,-0.0165
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t2,campmates / all / missing,5,0.2612
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t4,art / love / nova,5,-0.2327
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t7,joy / friend / happiness,5,-0.1924
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t1,laughter / there / excitement,5,0.214
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t9,overwhelmed / here / friend,5,0.1625
+2024,burn_status,G - Drinking & Smoking,t1,all / shade / impact,C - Emotions,t8,myself / camp / night,5,-0.5332
