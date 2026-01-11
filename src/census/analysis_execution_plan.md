@@ -33,45 +33,45 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
 - [x] **Hypothesis Test:** Verify if "Ego Death" is a Virgin trait and "Service" is a Veteran trait.
 - [x] **Output:** `reports/module_1_transformation.md`
 
-## 3. Module 2: Maslow’s Inverted Pyramid (Survival vs. Epiphany)
+- [x] **Module 2: Maslow’s Inverted Pyramid (Survival vs. Epiphany)**
 *Research Question:* Does physical hardship correlate with emotional breakthrough?
 
-- [ ] **Data Prep:** Join "Survival" (Set J/B) and "Experiences" (Set H/C) data.
-- [ ] **Analysis Script (`analyze_survival.py`):**
-    -   **Hardship Index:** Score responses based on mentions of "Mud", "Dust", "Heat", "Hunger".
-    -   **Epiphany Index:** Score "Transformation" responses for "Life Changing" sentiment.
-    -   **Correlation:** Plot/Check overlap. Do those with high Hardship scores have high Epiphany scores?
-- [ ] **Output:** `reports/module_2_survival.md`
+- [x] **Data Prep:** Join "Survival" (Set J/B) and "Experiences" (Set H/C) data.
+- [x] **Analysis Script (`analyze_survival.py`):**
+    -   [x] **Hardship Index:** Score responses based on mentions of "Mud", "Dust", "Heat", "Hunger".
+    -   [x] **Epiphany Index:** Score "Transformation" responses for "Life Changing" sentiment.
+    -   [x] **Correlation:** Plot/Check overlap. Do those with high Hardship scores have high Epiphany scores?
+- [x] **Output:** `reports/module_2_survival.md`
 
-## 4. Module 3: The Mask vs. The Mirror (Identity)
+- [x] **Module 3: The Mask vs. The Mirror (Identity)**
 *Research Question:* Is the costume a mask (hiding) or a mirror (revealing)?
 
-- [ ] **Data Prep:** Focus on "Costumes" (Set F) and "Diversity" (Set K/F).
-- [ ] **Analysis Script (`analyze_identity.py`):**
-    -   **Semantic Classification:** Classify "Why do you wear costumes?" answers into:
+- [x] **Data Prep:** Focus on "Costumes" (Set F) and "Diversity" (Set K/F).
+- [x] **Analysis Script (`analyze_identity.py`):**
+    -   [x] **Semantic Classification:** Classify "Why do you wear costumes?" answers into:
         -   *Type A: Hiding/Blending In*
         -   *Type B: Revealing/Authenticity*
         -   *Type C: Play/Fun*
-    -   **Cross-Reference:** Check if *Type B* respondents report higher "Positive Interactions" in Diversity Q7.
-- [ ] **Output:** `reports/module_3_identity.md`
+    -   [x] **Cross-Reference:** Check if *Type B* respondents report higher "Positive Interactions" in Diversity Q7.
+- [x] **Output:** `reports/module_3_identity.md`
 
-## 5. Module 4: Sacred vs. Profane (Symbolism)
+- [x] **Module 4: Sacred vs. Profane (Symbolism)**
 *Research Question:* How do "The Man" and "The Temple" differ in emotional coding?
 
-- [ ] **Data Prep:** Focus on "Symbolism" (Set B).
-- [ ] **Analysis Script (`analyze_symbolism.py`):**
-    -   **Sentiment Contrast:** Compare sentiment scores for "The Man" vs. "The Temple".
-    -   **Gender Split:** Analyze if Men vs. Women describe these icons differently.
-- [ ] **Output:** `reports/module_4_symbolism.md`
+- [x] **Data Prep:** Focus on "Symbolism" (Set B).
+- [x] **Analysis Script (`analyze_symbolism.py`):**
+    -   [x] **Sentiment Contrast:** Compare sentiment scores for "The Man" vs. "The Temple".
+    -   [x] **Gender Split:** Analyze if Men vs. Women describe these icons differently.
+- [x] **Output:** `reports/module_4_symbolism.md`
 
-## 6. Module 5: The "Other" in Utopia (Radical Inclusion)
+- [x] **Module 5: The "Other" in Utopia (Radical Inclusion)**
 *Research Question:* How does the minority experience differ in Black Rock City?
 
-- [ ] **Data Prep:** Filter "Diversity" (Set K/F) for respondents indicating "Yes" to "Does your appearance impact interactions?"
-- [ ] **Analysis Script (`analyze_diversity.py`):**
-    -   **Pain Point Identification:** Cluster the "Negative" experiences for this group.
-    -   **Code Switching:** Analyze mentions of modifying behavior/appearance.
-- [ ] **Output:** `reports/module_5_diversity.md`
+- [x] **Data Prep:** Filter "Diversity" (Set K/F) for respondents indicating "Yes" to "Does your appearance impact interactions?"
+- [x] **Analysis Script (`analyze_diversity.py`):**
+    -   [x] **Pain Point Identification:** Cluster the "Negative" experiences for this group.
+    -   [x] **Code Switching:** Analyze mentions of modifying behavior/appearance.
+- [x] **Output:** `reports/module_5_diversity.md`
 
 ## 7. Final Synthesis
 - [ ] **Compile:** Aggregate all module reports into a master `FINAL_ANALYSIS_REPORT.md`.

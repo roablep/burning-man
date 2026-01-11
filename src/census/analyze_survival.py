@@ -92,4 +92,4 @@ async def run_analysis():
     utils.save_report("module_2_survival.md", "\n".join(report))
 
 if __name__ == "__main__":
-    asyncio.run(run_analysis())
+    asyncio.run(run_analysis()) 
