@@ -158,8 +158,32 @@ async def run_analysis():
         report.append(f"| {age} | {man_cel:.1%} | {temple_grf:.1%} |")
 
     report.append("\n## Voices")
-    report.append("- **The Man:** *\"The Man keeps my Sadness\"*") 
-    report.append("- **The Temple:** *\"Place of Solace, Shared grief, cleansing\"*")
+    
+    # Helper to find a representative quote
+    def find_quote(texts, results, target_emotion):
+        for i, res in enumerate(results):
+            if "error" in res: continue
+            if res.get("primary_emotion") == target_emotion and len(texts[i]) > 40:
+                return texts[i]
+        return "No quote found."
+
+    # Find dominant emotions
+    top_man_emotion = man_counts_all.most_common(1)[0][0] if man_counts_all else "Indifference"
+    top_temple_emotion = temple_counts_all.most_common(1)[0][0] if temple_counts_all else "Grief"
+    
+    # Get quotes (using the gender lists we processed earlier)
+    # Combine M/F lists for search
+    all_man_texts = man_resp_m + man_resp_f
+    all_man_res = man_res_m + man_res_f
+    
+    all_temple_texts = temple_resp_m + temple_resp_f
+    all_temple_res = temple_res_m + temple_res_f
+    
+    man_quote = find_quote(all_man_texts, all_man_res, top_man_emotion)
+    temple_quote = find_quote(all_temple_texts, all_temple_res, top_temple_emotion)
+    
+    report.append(f"- **The Man ({top_man_emotion}):** *\"{man_quote}\"*") 
+    report.append(f"- **The Temple ({top_temple_emotion}):** *\"{temple_quote}\"*")
 
     report.append("\n## Conclusion")
     report.append(f"> {' '.join(conclusion)}")
