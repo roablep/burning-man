@@ -99,6 +99,14 @@ async def run_analysis():
     for age in ["Under 30", "30-39", "40-49", "50+"]:
         report.append(f"| {age} | {age_stats.get(age, 0):.1%} |")
     
+    report.append("\n## Voices")
+    # Find a quote about intensity
+    for i, res in enumerate(results):
+        if "error" in res: continue
+        if res.get("playa_vs_default") in ["More Intense", "More Authentic"] and len(narratives[i]) > 50:
+            report.append(f"- **Intensity:** *\"{narratives[i]}\"*")
+            break
+    
     report.append("\n## Conclusion")
     report.append(f"> {' '.join(conclusion)}")
 

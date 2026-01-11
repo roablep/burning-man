@@ -104,10 +104,14 @@ async def run_analysis():
         report.append(f"| {age} | {auth:.1%} | {disg:.1%} | {play:.1%} |")
     
     report.append("\n## Voices")
+    
+    # Dynamic Voice Selection
+    top_motivation = sorted_stats[0][0] if sorted_stats else "Play"
+    
     for i, res in enumerate(results):
         if "error" in res: continue
-        if res.get("motivation_type") == "Authenticity":
-            report.append(f"- **Authenticity:** *\"{narratives[i]}\"*")
+        if res.get("motivation_type") == top_motivation and len(narratives[i]) > 50:
+            report.append(f"- **{top_motivation}:** *\"{narratives[i]}\"*")
             break
             
     report.append("\n## Conclusion")
