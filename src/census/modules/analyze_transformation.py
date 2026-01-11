@@ -36,14 +36,14 @@ async def run_analysis():
                 age_cohorts[age_bucket].append(q5_text)
             
     # LLM Analysis
-    SAMPLE_SIZE = 200
+    SAMPLE_SIZE = None # Set to an integer (e.g., 200) for testing, or None for full dataset
     
     # --- Tenure Analysis ---
     cohort_themes = {}
     cohort_pronouns = {}
     
     for cohort, responses in cohorts.items():
-        sample = responses[:SAMPLE_SIZE]
+        sample = responses[:SAMPLE_SIZE] if SAMPLE_SIZE else responses
         if not sample: continue
         
         # Theme Extraction
@@ -51,7 +51,7 @@ async def run_analysis():
         Analyze the following response to the question "Did Burning Man change you?".
         Extract 1 to 3 distinct themes (1-2 words each) representing the type of change.
         Format: Theme1, Theme2, Theme3
-        Response: "{{TEXT}}"
+        Response: """{{TEXT}}"""
         """
         themes_raw = await utils.batch_process_with_llm(sample, theme_prompt)
         
@@ -66,7 +66,7 @@ async def run_analysis():
         pronoun_prompt = """
         Analyze the grammatical structure of this response.
         Count the number of self-references (I, me, my) vs collective references (we, us, our).
-        Response: "{{TEXT}}"
+        Response: """{{TEXT}}"""
         """
         pronoun_results = await utils.batch_process_with_llm(sample, pronoun_prompt, response_schema=PronounAnalysis)
         
@@ -79,7 +79,7 @@ async def run_analysis():
     age_pronouns = {}
     
     for age_group, responses in age_cohorts.items():
-        sample = responses[:SAMPLE_SIZE]
+        sample = responses[:SAMPLE_SIZE] if SAMPLE_SIZE else responses
         if not sample: continue
         
         # Reuse prompts (themes)
@@ -136,9 +136,10 @@ async def run_analysis():
             conclusion.append("The narrative evolves subtly, maintaining core themes while shifting emphasis.")
 
     # Generate Report
+    sample_desc = f"{SAMPLE_SIZE} per cohort" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 1: The Pilgrim's Progress (Transformation)\n"]
     report.append("**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?\n")
-    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using **LLM-based Semantic Theme Extraction** and **Linguistic Pronoun Analysis**, segmented by **Burn Tenure** and **Age**.\n")
+    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using **LLM-based Semantic Theme Extraction** and **Linguistic Pronoun Analysis**, segmented by **Burn Tenure** and **Age**. Sample size for theme extraction: {sample_desc}.\n")
     
     report.append("## Results & Analysis (By Tenure)")
     
@@ -172,7 +173,8 @@ async def run_analysis():
     report.append("\n## Voices")
     for cohort in ["Virgin", "Sophomore", "Elder"]:
         if cohorts.get(cohort):
-            longest = max(cohorts[cohort][:SAMPLE_SIZE], key=len)
+            responses = cohorts[cohort]
+            longest = max(responses[:SAMPLE_SIZE] if SAMPLE_SIZE else responses, key=len)
             voice_block = f"- **{cohort}:** *\"{longest[:300]}\"*"
             report.append(voice_block)
 
