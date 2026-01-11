@@ -1,6 +1,7 @@
 import os
 import glob
 import re
+import .analysis_utils as utils
 
 def extract_conclusion(content):
     """Extracts the text under '## Conclusion'."""
@@ -44,8 +45,7 @@ def run_synthesis():
             final_report.append(f"\n{content}\n")
             final_report.append("---\n")
             
-    with open("FINAL_ANALYSIS_REPORT.md", "w", encoding='utf-8') as f:
-        f.write("\n".join(final_report))
+    utils.save_report("FINAL_ANALYSIS_REPORT.md", "\n".join(final_report))
         
     print("Final Report Generated: FINAL_ANALYSIS_REPORT.md")
 

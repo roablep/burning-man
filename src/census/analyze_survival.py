@@ -2,7 +2,7 @@ import asyncio
 from collections import Counter
 from pydantic import BaseModel, Field
 from typing import Literal
-import analysis_utils as utils
+import .analysis_utils as utils
 
 class SurvivalAnalysis(BaseModel):
     mentions_hardship: bool = Field(..., description="Does the participant mention physical hardships like mud, heat, dust, hunger, or exhaustion?")

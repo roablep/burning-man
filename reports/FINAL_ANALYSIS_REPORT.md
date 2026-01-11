@@ -2,109 +2,47 @@
 
 ## Executive Summary
 
-This report synthesizes findings from a mixed-method analysis of 2024-2025 field notes.
+This report synthesizes findings from a mixed-method analysis of 2024-2025 field notes. The conclusions below are derived directly from the semantic analysis of participant narratives.
 
-### 1. The Arc of Transformation
-- **Virgins** experience shock and anticipation.
-- **Sophomores** experience a 'slump' or disillusionment.
-- **Veterans/Elders** shift focus to service, community, and stewardship.
+### 1 Transformation
+There is a **distinct thematic shift** over time. Virgins uniquely emphasize **Transformation, Anticipation, Reflection, Uncertainty**. Elders uniquely emphasize **Creativity, Relationships, Openness, Connection**.
 
-### 2. The Role of Hardship
-- Contrary to the 'Ordeal' hypothesis, physical hardship is **rarely** cited as the primary catalyst for growth.
-- Transformation is driven by **Social Connection** and **Creative Freedom**, not suffering.
+### 2 Survival
+**Weak Link:** 9.9% mention hardship, only 7.6% link it to their growth.
 
-### 3. The Function of Costumes
-- Costumes are overwhelmingly a **Mirror** (Authenticity/Expression), not a Mask (Disguise).
-- Participants feel *more* like themselves in costume than in default clothes.
+### 3 Identity
+**The Mirror Wins:** Participants overwhelmingly view costumes as a tool for revealing their true selves ('Radical Self Expression') rather than hiding.
 
-### 4. Sacred Geography
-- **The Temple** is the emotional core of the city, associated with Grief and Release.
-- **The Man** is a more ambiguous symbol, associated with Community but also Indifference.
+### 4 Symbolism
+**The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man. **The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.
 
-### 5. The Friction of Utopia
-- Radical Inclusion is not evenly distributed.
-- Marginalized groups report high rates of **Negative** or **Mixed** experiences.
-- Key friction points: **Racism, Exoticism, and Invisibility**.
+### 5 Diversity
+**The Utopia Has Friction:** A majority (83.1%) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal. **The Cost of Entry:** 19.7% of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.
 
 ---
+
+# Detailed Findings
 
 
 # Module 1: The Pilgrim's Progress (Transformation)
 
-Analysis of how the narrative of change evolves by tenure.
+**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?
 
-## Virgin Themes
-| Theme | Count |
-| :--- | :--- |
-| No Change | 5 |
-| Anticipation | 4 |
-| Perspective | 3 |
-| Impact | 3 |
-| Uncertainty | 2 |
-| Reflection | 2 |
-| Excitement | 2 |
-| Creativity | 2 |
-| Freedom | 2 |
-| Potential | 2 |
+**Methodology:** Analyzed 154 transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder).
 
+## Results & Analysis
+- **Virgin:** Top themes are *Reflection, Anticipation, Transformation*.
+- **Sophomore:** Top themes are *Connection, Openness, Self-Expression*.
+- **Veteran:** Top themes are *Community, Acceptance, Connection*.
+- **Elder:** Top themes are *Community, Creativity, Connection*.
 
-**Representative Voice:**
-> *"from the 1st time I heard of it about 15 yr ago, so yeah... a calling that changed me and now that I'm here, MAKES SO MUCH SENSE - I need time to ponder on how it has changed me because I'm still navigating my 1st BURN - BUT I feel home partying with you all... "joy as an act of resistence" in such a hurt luored"*
+## Voices
+- **Virgin:** *"from the 1st time I heard of it about 15 yr ago, so yeah... a calling that changed me and now that I'm here, MAKES SO MUCH SENSE - I need time to ponder on how it has changed me because I'm still navigating my 1st BURN - BUT I feel home partying with you all... "joy as an act of resistence" in such "*
+- **Sophomore:** *"First bum, thursday 2023. I came in with every expectation & information, but I realized hat the reason people came here can't be put into words. I had a spiritual awareness don't with the right people."*
+- **Elder:** *"Yes. Burning man changed my life the moment I arrived! The people / community is the way I wish the default world could be. I feel free, happy; anything is possible. Pure magic exists here. I've also learned so many creative things here. It truly is home ♡"*
 
-## Sophomore Themes
-| Theme | Count |
-| :--- | :--- |
-| Connection | 3 |
-| Self-Expression | 2 |
-| Idealism | 2 |
-| Empathy | 2 |
-| Perspective | 2 |
-| Comfort | 2 |
-| Acceptance | 1 |
-| Exploration | 1 |
-| Unchanged | 1 |
-| Disillusionment | 1 |
-
-
-**Representative Voice:**
-> *"First bum, thursday 2023. I came in with every expectation & information, but I realized hat the reason people came here can't be put into words. I had a spiritual awareness don't with the right people."*
-
-## Veteran Themes
-| Theme | Count |
-| :--- | :--- |
-| Creativity | 5 |
-| Acceptance | 3 |
-| Connection | 3 |
-| Relationships | 3 |
-| Awareness | 2 |
-| Self-Expression | 2 |
-| Community | 2 |
-| Family | 1 |
-| Perspective | 1 |
-| Memories | 1 |
-
-
-**Representative Voice:**
-> *"I MINK IT'S TOO SOON TO SAY. AT TIMES & wave REFLECTOR ON THE WORMS of EMPATHY, Open Hearrenmess, PARTICIPATION MAT ARE EremPufies here, But Then ane elusive TO MOLD ONTO, IN Several INSTANCES της FPERIENCE ms Facsuration me ERARDENING of Remnonships I HAD WITH CAMPMATES, mose seen of the nort enovin valve roме, THE PASSING ACQUARTA COMPs mare here the Moke ernemerAL, isure to TAKE MORE THE CAN-DO TURiness and whinSIGL CReatury BACK IN refurr ufe."*
-
-## Elder Themes
-| Theme | Count |
-| :--- | :--- |
-| Creativity | 3 |
-| Community | 2 |
-| Relationships | 1 |
-| Openness | 1 |
-| Generosity | 1 |
-| Perspective | 1 |
-| Values | 1 |
-| Freedom | 1 |
-| Compassion | 1 |
-| Self-Worth | 1 |
-
-
-**Representative Voice:**
-> *"Yes. Burning man changed my life the moment I arrived! The people / community is the way I wish the default world could be. I feel free, happy; anything is possible. Pure magic exists here. I've also learned so many creative things here. It truly is home ♡"*
-
+## Conclusion
+> There is a **distinct thematic shift** over time. Virgins uniquely emphasize **Transformation, Anticipation, Reflection, Uncertainty**. Elders uniquely emphasize **Creativity, Relationships, Openness, Connection**.
 
 ---
 
@@ -133,95 +71,71 @@ Analysis of how the narrative of change evolves by tenure.
 - *"TES. IMRAN RAINSTORMS LAST 2R. CAMP YNAMICS NO - 1 OMY RECOGRZED AFTER WAND NG THE TREAT FUDGES..."*
 - *"Yes. Before Gate. Leap of Faith Yes, because it was an unknown which nobody could explain to me Both. During the Burn and after when contemplating what it meant to Burn. Yes, by being more open. Mothe..."*
 
-**Conclusion:**
-> **Nuanced:** While hardship is present, it is rarely cited as the *primary* driver of transformation. The 'Social' and 'Creative' elements appear to be stronger catalysts.
+## Conclusion
+> **Weak Link:** 9.9% mention hardship, only 7.6% link it to their growth.
 
 ---
 
 
 # Module 3: The Mask vs. The Mirror (Identity)
 
-**Research Question:** Is the costume a mask (hiding) or a mirror (revealing)?
+**Research Question:** Do participants wear costumes to hide (Mask) or to reveal their true selves (Mirror)?
 
-**Sample:** 114 responses from 2024.
+**Methodology:** Semantic classification of 114 responses regarding costume motivation.
 
-### Motivation Distribution
-| Motivation | Count | Percentage |
-| :--- | :--- | :--- |
-| Play | 61 | 53.5% |
-| Authenticity | 29 | 25.4% |
-| Comfort | 13 | 11.4% |
-| Other | 10 | 8.8% |
-| Disguise | 1 | 0.9% |
+## Results & Analysis
+- **Play/Fun:** 53 (46.5%)
+- **Authenticity (Mirror):** 26 (22.8%)
+- **Disguise (Mask):** 0 (0.0%)
 
-### Voices
+## Voices
+- **Authenticity:** *"Yes! I love to express myself."*
 
-**Authenticity:**
-- "I don't wear Costumes. I'm not confident enough" -> *not confident enough*
-- "Yes! I love to express myself." -> *express myself*
-- "Sono / I am that way it's not a costume" -> *I am that way*
-
-**Play:**
-- "MOST OF THE TIME - IT'S FUN" -> *IT'S FUN*
-- "most definetly." -> *most definetly*
-- "Fuck Yeah! Express Yo self!" -> *Express Yo self*
-
-**Disguise:**
-- "Yes! Somewhere to wear something I can't (or shouldn't)" -> *wear something I can't*
-
-**Conclusion:**
+## Conclusion
 > **The Mirror Wins:** Participants overwhelmingly view costumes as a tool for revealing their true selves ('Radical Self Expression') rather than hiding.
 
 ---
 
 
-# Module 4: Sacred vs. Profane (The Man vs. The Temple)
+# Module 4: Sacred vs. Profane (Symbolism)
 
-### Sentiment Score (-1 to 1)
-- **The Man:** 0.42
-- **The Temple:** 0.37
+**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ?
 
-### Emotional Profile
-| Emotion | The Man (Count) | The Temple (Count) |
-| :--- | :--- | :--- |
-| Anger | 2 | 0 |
-| Awe | 4 | 14 |
-| Celebration | 9 | 2 |
-| Community | 36 | 31 |
-| Grief | 2 | 19 |
-| Indifference | 30 | 16 |
-| Other | 3 | 2 |
-| Rebirth | 14 | 16 |
+**Methodology:** Comparative sentiment and emotion analysis of 100 Man responses vs 100 Temple responses.
 
-**Conclusion:**
-> **The Temple is the Vessel of Grief:** It carries a distinct emotional weight compared to the Man.
-> **The Man is Complicated:** Participants show more ambivalence or association with authority/structure regarding The Man.
+## Results & Analysis
+- **The Man Sentiment:** 0.36
+- **The Temple Sentiment:** 0.35
+
+**Dominant Emotions (Top 3):**
+- **The Man:** Indifference, Community, Celebration
+- **The Temple:** Community, Indifference, Grief
+
+## Voices
+- **The Man:** *"The Man keeps my Sadness"*
+- **The Temple:** *"Place of Solace, Shared grief, cleansing"*
+
+## Conclusion
+> **The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man. **The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.
 
 ---
 
 
 # Module 5: The 'Other' in Utopia (Diversity & Inclusion)
 
-### Impact of Identity on Experience
-| Impact | Count |
-| :--- | :--- |
-| Negative | 34 |
-| Mixed | 28 |
-| Positive | 17 |
-| None | 15 |
+**Research Question:** How does the minority/marginalized experience differ from the 'Radical Inclusion' ideal?
 
-**Code Switching Reported:** 14 / 94 (14.9%)
+**Methodology:** Analysis of 71 narratives from participants who indicated their identity impacted their experience.
 
-### Top Themes
-- **Racism:** 13
-- **None:** 12
-- **Exoticism:** 12
-- **Invisibility:** 12
-- **Liberation:** 9
-- **Ageism:** 7
-- **Privilege:** 3
-- **Disability:** 2
-- **Gender:** 2
-- **Other:** 2
+## Results & Analysis
+- **Negative/Mixed Impact:** 59 (83.1%)
+- **Code Switching:** 14 (19.7%)
+- **Top Themes:** Exoticism, Racism, Discrimination
+
+## Voices
+- *"YES - Being a POC women in America having to uphold asian cultural norms as well as white scandards yes - aces of service kicks up a lot which is dominant in Asian culture..."*
+
+## Conclusion
+> **The Utopia Has Friction:** A majority (83.1%) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal. **The Cost of Entry:** 19.7% of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.
 
 ---
