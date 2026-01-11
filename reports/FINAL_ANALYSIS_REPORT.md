@@ -5,19 +5,24 @@
 This report synthesizes findings from a mixed-method analysis of 2024-2025 field notes. The conclusions below are derived directly from the semantic analysis of participant narratives.
 
 ### 1 Transformation
-There is a **distinct thematic shift** over time. Virgins uniquely emphasize **Transformation, Anticipation, Reflection, Uncertainty**. Elders uniquely emphasize **Creativity, Relationships, Openness, Connection**.
+**Thematic Overlap:** 1 of the top 5 themes are shared between Virgins and Elders (Community), indicating core structural similarities. **Linguistic Stability:** Both groups maintain a similar balance of self-vs-collective language (Virgin: 6.7, Elder: 18.0). However, there is a **notable thematic shift**. Virgins prioritize **Anticipation, Uncertainty, Transformation, Reflection**. Elders shift towards **Connection, Creativity, Relationships, Openness**.
 
 ### 2 Survival
-**Weak Link:** 9.9% mention hardship, only 7.6% link it to their growth.
+**The Ordeal Gap:** While 8.1% of participants in survival surveys report significant physical hardship, only 8.4% of those describing a transformation mention it as a factor. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.
 
 ### 3 Identity
-**The Mirror Wins:** Participants overwhelmingly view costumes as a tool for revealing their true selves ('Radical Self Expression') rather than hiding.
+**Motivation Profile:** The most common motivation for wearing costumes is **Play** (46.5%). Play is the clear primary driver, with Authenticity (22.8%) as a secondary theme. Data suggests the costume functions more as a **Mirror** (Authenticity: 22.8%) than a **Mask** (Disguise: 0.0%).
 
 ### 4 Symbolism
-**The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man. **The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.
+**Temple leans towards Grief:** While present in both, Grief is more prevalent in Temple narratives (13.6% vs 3.0%). **Ambivalence toward the Man:** 'Indifference' is the most common reaction to the Man, suggesting a potential disconnect or routinization of the symbol. 
+
+**Gender Analysis:** **Male Resonance with Grief:** Men are more likely (16.1% vs 10.6%) to explicitly describe the Temple as a place of grief.
 
 ### 5 Diversity
-**The Utopia Has Friction:** A majority (83.1%) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal. **The Cost of Entry:** 19.7% of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.
+**Experience Breakdown:** 6.5% reported Positive experiences, while 82.3% reported Negative or Mixed impacts related to their identity. **Baseline Consistency:** General experience sentiment was relatively consistent between groups (Friction: 40.5% marginalized vs 46.8% majority).
+
+### 6 Relationships
+**Connection Intensity:** 58.3% of respondents report that playa relationships are more intense or authentic than those in the default world. There is a significant split in experience, with many finding deeper connections while others see them as similar to default world interactions.
 
 ---
 
@@ -28,9 +33,18 @@ There is a **distinct thematic shift** over time. Virgins uniquely emphasize **T
 
 **Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?
 
-**Methodology:** Analyzed 154 transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder).
+**Methodology:** Analyzed 154 transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: 200 per cohort.
 
 ## Results & Analysis
+### Linguistic Analysis (The 'Ego Death' Test)
+| Cohort | Self Refs (I/Me) | Collective Refs (We/Us) | Ratio (I:We) |
+| :--- | :--- | :--- | :--- |
+| Virgin | 47 | 7 | 6.71 |
+| Sophomore | 28 | 2 | 14.00 |
+| Veteran | 29 | 3 | 9.67 |
+| Elder | 18 | 1 | 18.00 |
+
+### Thematic Analysis
 - **Virgin:** Top themes are *Reflection, Anticipation, Transformation*.
 - **Sophomore:** Top themes are *Connection, Openness, Self-Expression*.
 - **Veteran:** Top themes are *Community, Acceptance, Connection*.
@@ -42,37 +56,30 @@ There is a **distinct thematic shift** over time. Virgins uniquely emphasize **T
 - **Elder:** *"Yes. Burning man changed my life the moment I arrived! The people / community is the way I wish the default world could be. I feel free, happy; anything is possible. Pure magic exists here. I've also learned so many creative things here. It truly is home ♡"*
 
 ## Conclusion
-> There is a **distinct thematic shift** over time. Virgins uniquely emphasize **Transformation, Anticipation, Reflection, Uncertainty**. Elders uniquely emphasize **Creativity, Relationships, Openness, Connection**.
+> **Thematic Overlap:** 1 of the top 5 themes are shared between Virgins and Elders (Community), indicating core structural similarities. **Linguistic Stability:** Both groups maintain a similar balance of self-vs-collective language (Virgin: 6.7, Elder: 18.0). However, there is a **notable thematic shift**. Virgins prioritize **Anticipation, Uncertainty, Transformation, Reflection**. Elders shift towards **Connection, Creativity, Relationships, Openness**.
 
 ---
 
 
 # Module 2: The 'Ordeal' as Catalyst (Survival vs. Epiphany)
 
-**Methodology:** Analyzed 131 narratives using structured LLM extraction.
+**Methodology:** Comparative analysis of 74 survival responses (Baseline) vs 131 transformation narratives.
 
 ### Findings
-- **Mentions Hardship:** 13 (9.9%)
-- **Mentions Breakthrough:** 106 (80.9%)
-- **Hardship as Catalyst:** 10 (7.6%)
+- **Baseline Hardship Prevalence:** 8.1%
+- **Transformation Narratives Mentioning Hardship:** 8.4%
+- **Hardship as Explicit Catalyst:** 3.1%
 
-### Hardship Intensity Distribution
+### Hardship Intensity (Transformation Set)
 | Level | Count |
 | :--- | :--- |
 | High | 1 |
-| Medium | 10 |
-| Low | 2 |
-| None | 118 |
-
-### Examples of the 'Ordeal' leading to Transformation
-- *"YES, learned about building and manual skills, furthermore, survival skills in the desert :) #NAME? gradual, as I var building with My campmates #NAME? Meeting new people that are expalinced borners, ..."*
-- *"Majorly. I am fully Self Contand and I do my best to keep Sustainabatf in mind. yes-grey water tanks, Jorar Power Snower, Solar Power coulers Yes - working there I step at a torer Yes- to relp us all ..."*
-- *"YES., transfomed my mindset and life. 2017 YES. my husband was when he went Both Yes. more open. accepting and non-judgemental the effort coming to the playa. building with a team..."*
-- *"TES. IMRAN RAINSTORMS LAST 2R. CAMP YNAMICS NO - 1 OMY RECOGRZED AFTER WAND NG THE TREAT FUDGES..."*
-- *"Yes. Before Gate. Leap of Faith Yes, because it was an unknown which nobody could explain to me Both. During the Burn and after when contemplating what it meant to Burn. Yes, by being more open. Mothe..."*
+| Medium | 7 |
+| Low | 3 |
+| None | 120 |
 
 ## Conclusion
-> **Weak Link:** 9.9% mention hardship, only 7.6% link it to their growth.
+> **The Ordeal Gap:** While 8.1% of participants in survival surveys report significant physical hardship, only 8.4% of those describing a transformation mention it as a factor. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.
 
 ---
 
@@ -81,61 +88,88 @@ There is a **distinct thematic shift** over time. Virgins uniquely emphasize **T
 
 **Research Question:** Do participants wear costumes to hide (Mask) or to reveal their true selves (Mirror)?
 
-**Methodology:** Semantic classification of 114 responses regarding costume motivation.
+**Methodology:** Semantic classification of 114 responses regarding costume motivation from the 2024 dataset.
 
 ## Results & Analysis
-- **Play/Fun:** 53 (46.5%)
-- **Authenticity (Mirror):** 26 (22.8%)
-- **Disguise (Mask):** 0 (0.0%)
+- **Play:** 53 (46.5%)
+- **Authenticity:** 26 (22.8%)
+- **Other:** 18 (15.8%)
+- **Comfort:** 17 (14.9%)
 
 ## Voices
 - **Authenticity:** *"Yes! I love to express myself."*
 
 ## Conclusion
-> **The Mirror Wins:** Participants overwhelmingly view costumes as a tool for revealing their true selves ('Radical Self Expression') rather than hiding.
+> **Motivation Profile:** The most common motivation for wearing costumes is **Play** (46.5%). Play is the clear primary driver, with Authenticity (22.8%) as a secondary theme. Data suggests the costume functions more as a **Mirror** (Authenticity: 22.8%) than a **Mask** (Disguise: 0.0%).
 
 ---
 
 
-# Module 4: Sacred vs. Profane (Symbolism)
+# Module 4: Sacred vs. Profane (Symbolism & Gender)
 
-**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ?
+**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ, and is there a gender divide?
 
-**Methodology:** Comparative sentiment and emotion analysis of 100 Man responses vs 100 Temple responses.
+**Methodology:** Comparative sentiment and emotion analysis of 101 Man responses vs 103 Temple responses, segmented by Gender.
 
 ## Results & Analysis
-- **The Man Sentiment:** 0.36
-- **The Temple Sentiment:** 0.35
+- **The Man Sentiment (M/F):** 0.40 / 0.44
+- **The Temple Sentiment (M/F):** 0.28 / 0.44
 
 **Dominant Emotions (Top 3):**
-- **The Man:** Indifference, Community, Celebration
-- **The Temple:** Community, Indifference, Grief
+- **The Man (All):** Community, Indifference, Celebration
+- **The Temple (All):** Community, Awe, Indifference
+
+### Gender Breakdown (Temple Grief)
+- **Men:** 16.1%
+- **Women:** 10.6%
 
 ## Voices
 - **The Man:** *"The Man keeps my Sadness"*
 - **The Temple:** *"Place of Solace, Shared grief, cleansing"*
 
 ## Conclusion
-> **The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man. **The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.
+> **Temple leans towards Grief:** While present in both, Grief is more prevalent in Temple narratives (13.6% vs 3.0%). **Ambivalence toward the Man:** 'Indifference' is the most common reaction to the Man, suggesting a potential disconnect or routinization of the symbol. 
+
+**Gender Analysis:** **Male Resonance with Grief:** Men are more likely (16.1% vs 10.6%) to explicitly describe the Temple as a place of grief.
 
 ---
 
 
 # Module 5: The 'Other' in Utopia (Diversity & Inclusion)
 
-**Research Question:** How does the minority/marginalized experience differ from the 'Radical Inclusion' ideal?
+**Research Question:** How does the marginalized experience differ from the 'Radical Inclusion' ideal?
 
-**Methodology:** Analysis of 71 narratives from participants who indicated their identity impacted their experience.
+**Methodology:** Comparative analysis of 62 diversity narratives and cross-set sentiment analysis of 171 general responses.
 
-## Results & Analysis
-- **Negative/Mixed Impact:** 59 (83.1%)
-- **Code Switching:** 14 (19.7%)
-- **Top Themes:** Exoticism, Racism, Discrimination
+## 1. Diversity Survey Results
+- **Negative/Mixed Impact:** 51 (82.3%)
+- **Code Switching:** 11 (17.7%)
+- **Top Themes:** Exoticism, Racism, Othering
 
-## Voices
-- *"YES - Being a POC women in America having to uphold asian cultural norms as well as white scandards yes - aces of service kicks up a lot which is dominant in Asian culture..."*
+## 2. General Experience Baseline (Cross-Set Analysis)
+| Group | Avg Sentiment | Friction Rate |
+| :--- | :--- | :--- |
+| Majority (Men) | 0.07 | 46.8% |
+| Marginalized (NB/O) | -0.02 | 40.5% |
 
 ## Conclusion
-> **The Utopia Has Friction:** A majority (83.1%) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal. **The Cost of Entry:** 19.7% of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.
+> **Experience Breakdown:** 6.5% reported Positive experiences, while 82.3% reported Negative or Mixed impacts related to their identity. **Baseline Consistency:** General experience sentiment was relatively consistent between groups (Friction: 40.5% marginalized vs 46.8% majority).
+
+---
+
+
+# Module 6: Playa Love vs. Default Love (Relationships)
+
+**Research Question:** How do relationship dynamics and intimacy differ in the temporary autonomous zone?
+
+**Methodology:** Analysis of 60 narratives regarding relationships and intimacy.
+
+## Results & Analysis
+- **Top Relationship Type:** Romantic
+- **More Intense/Authentic:** 58.3%
+- **Top Themes:** None, Boundaries, Vulnerability
+
+## Conclusion
+> **Connection Intensity:** 58.3% of respondents report that playa relationships are more intense or authentic than those in the default world. There is a significant split in experience, with many finding deeper connections while others see them as similar to default world interactions.
 
 ---

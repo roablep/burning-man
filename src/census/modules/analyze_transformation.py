@@ -106,7 +106,7 @@ async def run_analysis():
     # Generate Report
     report = ["# Module 1: The Pilgrim's Progress (Transformation)\n"]
     report.append("**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?\n")
-    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: {SAMPLE_SIZE} per cohort.\n")
+    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using **LLM-based Semantic Theme Extraction** and **Linguistic Pronoun Analysis**, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: {SAMPLE_SIZE} per cohort.\n")
     
     report.append("## Results & Analysis")
     

@@ -1,16 +1,19 @@
 # Module 5: The 'Other' in Utopia (Diversity & Inclusion)
 
-**Research Question:** How does the minority/marginalized experience differ from the 'Radical Inclusion' ideal?
+**Research Question:** How does the marginalized experience differ from the 'Radical Inclusion' ideal?
 
-**Methodology:** Analysis of 71 narratives from participants who indicated their identity impacted their experience.
+**Methodology:** Comparative analysis of 62 diversity narratives and cross-set sentiment analysis of 171 general responses.
 
-## Results & Analysis
-- **Negative/Mixed Impact:** 59 (83.1%)
-- **Code Switching:** 14 (19.7%)
-- **Top Themes:** Exoticism, Racism, Discrimination
+## 1. Diversity Survey Results
+- **Negative/Mixed Impact:** 51 (82.3%)
+- **Code Switching:** 11 (17.7%)
+- **Top Themes:** Exoticism, Racism, Othering
 
-## Voices
-- *"YES - Being a POC women in America having to uphold asian cultural norms as well as white scandards yes - aces of service kicks up a lot which is dominant in Asian culture..."*
+## 2. General Experience Baseline (Cross-Set Analysis)
+| Group | Avg Sentiment | Friction Rate |
+| :--- | :--- | :--- |
+| Majority (Men) | 0.07 | 46.8% |
+| Marginalized (NB/O) | -0.02 | 40.5% |
 
 ## Conclusion
-> **The Utopia Has Friction:** A majority (83.1%) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal. **The Cost of Entry:** 19.7% of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.
+> **Experience Breakdown:** 6.5% reported Positive experiences, while 82.3% reported Negative or Mixed impacts related to their identity. **Baseline Consistency:** General experience sentiment was relatively consistent between groups (Friction: 40.5% marginalized vs 46.8% majority).
