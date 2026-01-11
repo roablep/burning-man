@@ -15,35 +15,47 @@ async def run_analysis():
     
     prompt = "Analyze this response to 'Do you wear costumes at Burning Man?'. Categorize the motivation.\nResponse: \"{{TEXT}}\""
     
-    results = await utils.batch_process_with_llm(narratives[:150], prompt, response_schema=CostumeMotivation)
+    results = await utils.batch_process_with_llm(narratives, prompt, response_schema=CostumeMotivation)
     
     stats = Counter([r.get("motivation_type") for r in results if "error" not in r])
     total = sum(stats.values())
     
     # Dynamic Conclusion Logic
-    auth_score = stats['Authenticity']
-    disguise_score = stats['Disguise']
-    play_score = stats['Play']
-    
-    conclusion = []
-    if auth_score > disguise_score * 2:
-        conclusion.append("**The Mirror Wins:** Participants overwhelmingly view costumes as a tool for revealing their true selves ('Radical Self Expression') rather than hiding.")
-    elif disguise_score > auth_score:
-        conclusion.append("**The Mask Wins:** Participants primarily use costumes to escape their identity.")
-    elif play_score > (auth_score + disguise_score):
-        conclusion.append("**It's Just a Game:** The dominant motivation is 'Play', suggesting costumes are less about deep identity work and more about situational fun.")
+    if total == 0:
+        conclusion = ["No valid responses found."]
     else:
-        conclusion.append("**It's Complicated:** The function of the costume is split between revelation, play, and escapism with no dominant narrative.")
+        # Sort stats to find top motivations
+        sorted_stats = stats.most_common()
+        top_type, top_count = sorted_stats[0]
+        top_pct = top_count / total
+        
+        conclusion = []
+        conclusion.append(f"**Motivation Profile:** The most common motivation for wearing costumes is **{top_type}** ({top_pct:.1%}).")
+        
+        if len(sorted_stats) > 1:
+            second_type, second_count = sorted_stats[1]
+            second_pct = second_count / total
+            if (top_pct - second_pct) < 0.10:
+                conclusion.append(f"Motivations are **highly distributed**, with {second_type} ({second_pct:.1%}) following closely behind.")
+            else:
+                conclusion.append(f"{top_type} is the clear primary driver, with {second_type} ({second_pct:.1%}) as a secondary theme.")
+        
+        # Specific Identity Insight
+        auth_pct = stats.get('Authenticity', 0) / total
+        disguise_pct = stats.get('Disguise', 0) / total
+        if auth_pct > disguise_pct:
+            conclusion.append(f"Data suggests the costume functions more as a **Mirror** (Authenticity: {auth_pct:.1%}) than a **Mask** (Disguise: {disguise_pct:.1%}).")
+        else:
+            conclusion.append(f"Data suggests the costume functions more as a **Mask** (Disguise: {disguise_pct:.1%}) than a **Mirror** (Authenticity: {auth_pct:.1%}).")
 
     # Report
     report = ["# Module 3: The Mask vs. The Mirror (Identity)\n"]
     report.append("**Research Question:** Do participants wear costumes to hide (Mask) or to reveal their true selves (Mirror)?\n")
-    report.append(f"**Methodology:** Semantic classification of {len(results)} responses regarding costume motivation.\n")
+    report.append(f"**Methodology:** Semantic classification of {total} responses regarding costume motivation from the 2024 dataset.\n")
     
     report.append("## Results & Analysis")
-    report.append(f"- **Play/Fun:** {stats['Play']} ({stats['Play']/total:.1%})")
-    report.append(f"- **Authenticity (Mirror):** {stats['Authenticity']} ({stats['Authenticity']/total:.1%})")
-    report.append(f"- **Disguise (Mask):** {stats['Disguise']} ({stats['Disguise']/total:.1%})")
+    for m_type, count in stats.most_common():
+        report.append(f"- **{m_type}:** {count} ({count/total:.1%})")
     
     report.append("\n## Voices")
     for i, res in enumerate(results):

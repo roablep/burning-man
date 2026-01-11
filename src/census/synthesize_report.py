@@ -1,7 +1,7 @@
 import os
 import glob
 import re
-import .analysis_utils as utils
+import analysis_utils as utils
 
 def extract_conclusion(content):
     """Extracts the text under '## Conclusion'."""
