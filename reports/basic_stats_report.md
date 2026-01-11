@@ -1,7 +1,7 @@
 # Burning Man Field Notes: Basic Demographic Statistics
 
 ## Year 2024 Analysis
-**Total Responses:** 1658
+**Total Responses:** 1913
 - **Average Age:** 39.6
 - **Median Age:** 37.0
 - **Average Burn Count:** 13.0
@@ -45,7 +45,7 @@ Unknown         | 139  ########
 ```
 
 ## Year 2025 Analysis
-**Total Responses:** 139
+**Total Responses:** 181
 - **Average Age:** 38.1
 - **Median Age:** 39
 - **Average Burn Count:** 20.4
