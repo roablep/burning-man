@@ -37,7 +37,7 @@ async def run_analysis():
     
     # Run Batch Process with Schema
     results = await utils.batch_process_with_llm(
-        test_subjects[:150], 
+        test_subjects, 
         prompt,
         response_schema=SurvivalAnalysis
     )
@@ -46,8 +46,10 @@ async def run_analysis():
     stats = Counter()
     linked_examples = []
 
+    valid_results = 0
     for i, res in enumerate(results):
         if isinstance(res, dict) and "error" in res: continue
+        valid_results += 1
         
         # res is a dict matching the Pydantic model
         if res.get("mentions_hardship"): stats["Hardship"] += 1
@@ -61,17 +63,23 @@ async def run_analysis():
         stats[f"Level_{level}"] += 1
 
     # Dynamic Conclusion Logic
-    total = len(results)
-    linked_pct = stats['Linked'] / total if total else 0
-    hardship_pct = stats['Hardship'] / total if total else 0
-    
-    conclusion = []
-    if linked_pct > 0.20:
-        conclusion.append(f"**Strong Link:** A significant portion ({linked_pct:.1%}) of participants explicitly cite the 'Ordeal' as the driver of their transformation.")
-    elif linked_pct > 0.05:
-        conclusion.append(f"**Weak Link:**  {hardship_pct:.1%} mention hardship, only {linked_pct:.1%} link it to their growth.")
+    total = valid_results
+    if total == 0:
+        conclusion = ["No valid narratives found for analysis."]
     else:
-        conclusion.append(f"**No Link:** The narrative of the 'Ordeal' leading to epiphany is largely absent from this sample (<5%).")
+        linked_pct = stats['Linked'] / total
+        hardship_pct = stats['Hardship'] / total
+        breakthrough_pct = stats['Breakthrough'] / total
+        
+        conclusion = []
+        conclusion.append(f"**Prevalence of Hardship:** {hardship_pct:.1%} of transformation narratives explicitly mention physical hardships.")
+        
+        if linked_pct > 0.20:
+            conclusion.append(f"**Catalytic Role:** For a significant minority ({linked_pct:.1%}), this hardship was explicitly cited as the driver of their breakthrough.")
+        elif linked_pct > 0.05:
+            conclusion.append(f"**Occasional Catalyst:** While hardship is common, only {linked_pct:.1%} of participants explicitly link it as the cause of their transformation.")
+        else:
+            conclusion.append(f"**Rarely Causal:** Despite the prevalence of hardship ({hardship_pct:.1%}), it is almost never ({linked_pct:.1%}) described as the primary catalyst for epiphany.")
 
     # Generate Report
     report = ["# Module 2: The 'Ordeal' as Catalyst (Survival vs. Epiphany)\n"]

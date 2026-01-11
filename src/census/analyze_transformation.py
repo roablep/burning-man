@@ -18,7 +18,7 @@ async def run_analysis():
             cohorts[status].append(q5_text)
             
     # LLM Analysis
-    SAMPLE_SIZE = 50
+    SAMPLE_SIZE = 200
     cohort_themes = {}
     
     for cohort, responses in cohorts.items():
@@ -48,19 +48,23 @@ async def run_analysis():
     distinct_elder = set(elder_top) - set(virgin_top)
     
     conclusion = []
-    if len(common_themes) >= 3:
-        conclusion.append("There is **high thematic continuity** across tenure. Virgins and Elders describe transformation in very similar terms.")
-    else:
-        conclusion.append("There is a **distinct thematic shift** over time.")
+    conclusion.append(f"**Thematic Overlap:** {len(common_themes)} of the top 5 themes are shared between Virgins and Elders ({', '.join(common_themes)}), indicating core structural similarities.")
+    
+    if len(common_themes) >= 4:
+        conclusion.append("This suggests a **highly consistent** narrative of transformation regardless of tenure.")
+    elif len(common_themes) <= 2:
+        conclusion.append("However, there is a **notable shift** in focus.")
         if distinct_virgin:
-            conclusion.append(f"Virgins uniquely emphasize **{', '.join(distinct_virgin)}**.")
+            conclusion.append(f"Virgins prioritize **{', '.join(distinct_virgin)}**.")
         if distinct_elder:
-            conclusion.append(f"Elders uniquely emphasize **{', '.join(distinct_elder)}**.")
+            conclusion.append(f"Elders shift towards **{', '.join(distinct_elder)}**.")
+    else:
+        conclusion.append("The narrative evolves subtly, maintaining core themes while shifting emphasis.")
 
     # Generate Report
     report = ["# Module 1: The Pilgrim's Progress (Transformation)\n"]
     report.append("**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?\n")
-    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder).\n")
+    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder). Sample size for theme extraction: {SAMPLE_SIZE} per cohort.\n")
     
     report.append("## Results & Analysis")
     for cohort, counter in cohort_themes.items():

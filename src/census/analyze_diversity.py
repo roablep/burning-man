@@ -16,24 +16,40 @@ async def run_analysis():
     narratives = [r.get("Q5", "") + " " + r.get("Q7", "") for r in (data_2024 + data_2025) if len(r.get("Q5", "")) > 20]
     
     prompt = "Analyze this response regarding diversity. Determine impact and themes.\nResponse: \"{{TEXT}}\""
-    results = await utils.batch_process_with_llm(narratives[:100], prompt, response_schema=DiversityExperience)
+    results = await utils.batch_process_with_llm(narratives, prompt, response_schema=DiversityExperience)
     
     stats = Counter([r.get("identity_impact") for r in results if "error" not in r])
     themes = Counter([r.get("key_theme") for r in results if "error" not in r])
     code_switch = sum([1 for r in results if "error" not in r and r.get("code_switching")])
     
     # Dynamic Conclusion
-    negative_pct = (stats['Negative'] + stats['Mixed']) / len(results) if results else 0
-    code_switch_pct = code_switch / len(results) if results else 0
-    
-    conclusion = []
-    if negative_pct > 0.5:
-        conclusion.append(f"**The Utopia Has Friction:** A majority ({negative_pct:.1%}) of marginalized participants report Negative or Mixed experiences, challenging the 'Radical Inclusion' ideal.")
+    total_valid = len([r for r in results if "error" not in r])
+    if total_valid == 0:
+        conclusion = ["No valid data points analyzed."]
     else:
-        conclusion.append(f"**Inclusion is Working:** The majority of marginalized participants report Positive or Neutral experiences, suggesting the principle of Radical Inclusion is effective.")
+        neg_count = stats['Negative']
+        mixed_count = stats['Mixed']
+        pos_count = stats['Positive']
+        none_count = stats['None']
         
-    if code_switch_pct > 0.1:
-        conclusion.append(f"**The Cost of Entry:** {code_switch_pct:.1%} of respondents report 'Code Switching' (modifying behavior/appearance) to feel safe or accepted.")
+        negative_pct = (neg_count + mixed_count) / total_valid
+        pos_pct = pos_count / total_valid
+        code_switch_pct = code_switch / total_valid
+        
+        conclusion = []
+        conclusion.append(f"**Experience Breakdown:** {pos_pct:.1%} reported Positive experiences, while {negative_pct:.1%} reported Negative or Mixed impacts related to their identity.")
+        
+        if negative_pct > 0.4:
+            conclusion.append(f"**Significant Friction:** A substantial portion of marginalized participants ({negative_pct:.1%}) encountered challenges, citing themes like {', '.join([t for t,c in themes.most_common(2)])}.")
+        elif negative_pct > 0.15:
+            conclusion.append(f"**Uneven Utopia:** While the majority reported positive inclusion, a distinct minority ({negative_pct:.1%}) experienced exclusion or friction.")
+        else:
+            conclusion.append(f"**Largely Inclusive:** The vast majority ({pos_pct:.1%}) reported positive or neutral experiences, suggesting high efficacy of the Radical Inclusion principle.")
+            
+        if code_switch_pct > 0.15:
+            conclusion.append(f"**The Cost of Adaptation:** {code_switch_pct:.1%} of respondents reported 'Code Switching' to navigate the space safely.")
+        elif code_switch_pct > 0.05:
+            conclusion.append(f"**Some Adaptation Required:** {code_switch_pct:.1%} felt the need to modify their behavior or appearance.")
 
     # Report
     report = ["# Module 5: The 'Other' in Utopia (Diversity & Inclusion)\n"]

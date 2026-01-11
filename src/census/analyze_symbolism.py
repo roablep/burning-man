@@ -16,12 +16,14 @@ async def run_analysis():
     
     prompt = "Analyze this symbol description. Determine sentiment and emotion.\nDescription: \"{{TEXT}}\""
     
-    man_res = await utils.batch_process_with_llm(man_resp[:100], prompt, response_schema=SymbolAnalysis)
-    temple_res = await utils.batch_process_with_llm(temple_resp[:100], prompt, response_schema=SymbolAnalysis)
+    man_res = await utils.batch_process_with_llm(man_resp, prompt, response_schema=SymbolAnalysis)
+    temple_res = await utils.batch_process_with_llm(temple_resp, prompt, response_schema=SymbolAnalysis)
     
     def get_stats(results):
-        c = Counter([r.get("primary_emotion") for r in results if "error" not in r])
-        sent = sum([r.get("sentiment_score", 0) for r in results if "error" not in r]) / len(results) if results else 0
+        valid = [r for r in results if "error" not in r]
+        if not valid: return Counter(), 0
+        c = Counter([r.get("primary_emotion") for r in valid])
+        sent = sum([r.get("sentiment_score", 0) for r in valid]) / len(valid)
         return c, sent
 
     man_counts, man_score = get_stats(man_res)
@@ -30,17 +32,32 @@ async def run_analysis():
     # Dynamic Conclusion
     conclusion = []
     
+    # Calculate percentages for key emotions to allow robust comparison
+    def get_pct(counter, key, total):
+        return (counter[key] / total) if total > 0 else 0
+
+    man_total = sum(man_counts.values())
+    temple_total = sum(temple_counts.values())
+    
+    man_grief_pct = get_pct(man_counts, 'Grief', man_total)
+    temple_grief_pct = get_pct(temple_counts, 'Grief', temple_total)
+    
+    man_cel_pct = get_pct(man_counts, 'Celebration', man_total)
+    temple_cel_pct = get_pct(temple_counts, 'Celebration', temple_total)
+
     # Temple Analysis
-    if temple_counts['Grief'] > man_counts['Grief'] * 2:
-        conclusion.append("**The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man.")
-    elif temple_counts['Grief'] > 0:
-        conclusion.append("**Shared Grief:** Both symbols carry elements of grief, but the Temple is the primary site.")
+    if temple_grief_pct > 0.4:
+        conclusion.append(f"**Temple as Grief Vessel:** The Temple is strongly associated with Grief ({temple_grief_pct:.1%}), significantly more than the Man ({man_grief_pct:.1%}).")
+    elif temple_grief_pct > man_grief_pct:
+        conclusion.append(f"**Temple leans towards Grief:** While present in both, Grief is more prevalent in Temple narratives ({temple_grief_pct:.1%} vs {man_grief_pct:.1%}).")
         
     # Man Analysis
-    if man_counts['Indifference'] > temple_counts['Indifference']:
-        conclusion.append("**The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.")
-    elif man_counts['Celebration'] > temple_counts['Celebration']:
-        conclusion.append("**The Man is Celebration:** The Man is clearly the locus of joy and party, contrasting the Temple's solemnity.")
+    if man_cel_pct > 0.4:
+        conclusion.append(f"**Man as Celebration:** The Man is primarily a symbol of Celebration ({man_cel_pct:.1%}), contrasting with the Temple's lower association ({temple_cel_pct:.1%}).")
+    elif man_counts['Indifference'] > man_counts['Celebration']:
+        conclusion.append("**Ambivalence toward the Man:** 'Indifference' is the most common reaction to the Man, suggesting a potential disconnect or routinization of the symbol.")
+    else:
+        conclusion.append(f"**Mixed Signals on the Man:** The Man evokes a broad range of emotions, with Celebration ({man_cel_pct:.1%}) being a leading but not dominant theme.")
 
     # Report
     report = ["# Module 4: Sacred vs. Profane (Symbolism)\n"]
