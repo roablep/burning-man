@@ -22,5 +22,5 @@
 - *"TES. IMRAN RAINSTORMS LAST 2R. CAMP YNAMICS NO - 1 OMY RECOGRZED AFTER WAND NG THE TREAT FUDGES..."*
 - *"Yes. Before Gate. Leap of Faith Yes, because it was an unknown which nobody could explain to me Both. During the Burn and after when contemplating what it meant to Burn. Yes, by being more open. Mothe..."*
 
-**Conclusion:**
-> **Nuanced:** While hardship is present, it is rarely cited as the *primary* driver of transformation. The 'Social' and 'Creative' elements appear to be stronger catalysts.
+## Conclusion
+> **Weak Link:** 9.9% mention hardship, only 7.6% link it to their growth.

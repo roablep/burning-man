@@ -8,71 +8,74 @@ async def run_analysis():
     data_2025 = utils.load_data(2025, "Transformation")
     
     all_data = data_2024 + data_2025
-    print(f"Total Transformation Records: {len(all_data)}")
     
-    # Bucket by Cohort
     cohorts = {"Virgin": [], "Sophomore": [], "Veteran": [], "Elder": []}
     
     for row in all_data:
         status = row.get("Burn_Status", "Unknown")
-        # Transformation Q5 is the key narrative question
         q5_text = row.get("Q5", "").strip()
-        
-        if status in cohorts and len(q5_text) > 10: # Filter empty/short answers
+        if status in cohorts and len(q5_text) > 10:
             cohorts[status].append(q5_text)
             
     # LLM Analysis
-    # We will sample up to 50 responses per cohort to save time/tokens for this demo
-    # but in full production we'd do all.
     SAMPLE_SIZE = 50
-    
     cohort_themes = {}
     
     for cohort, responses in cohorts.items():
-        print(f"Analyzing {cohort} ({len(responses)} responses)...")
         sample = responses[:SAMPLE_SIZE]
-        
         prompt = """
         Analyze the following response to the question "Did Burning Man change you?".
         Extract 1 to 3 distinct themes (1-2 words each) representing the type of change.
         Format: Theme1, Theme2, Theme3
-        Examples:
-        - "Confidence, Community, Creativity"
-        - "No Change"
-        - "Open-mindedness, Social Skills"
-        
         Response: "{{TEXT}}"
         """
-        
         themes_raw = await utils.batch_process_with_llm(sample, prompt)
         
-        # Tally themes
         theme_counter = Counter()
         for t_str in themes_raw:
             if not t_str or "ERROR" in t_str: continue
-            # Split and clean
             themes = [t.strip().title() for t in t_str.split(",")]
             theme_counter.update(themes)
-            
-        cohort_themes[cohort] = theme_counter.most_common(10)
+        cohort_themes[cohort] = theme_counter
+
+    # Dynamic Conclusion Logic
+    virgin_top = [t[0] for t in cohort_themes["Virgin"].most_common(5)]
+    elder_top = [t[0] for t in cohort_themes["Elder"].most_common(5)]
+    
+    # Check overlap
+    common_themes = set(virgin_top) & set(elder_top)
+    distinct_virgin = set(virgin_top) - set(elder_top)
+    distinct_elder = set(elder_top) - set(virgin_top)
+    
+    conclusion = []
+    if len(common_themes) >= 3:
+        conclusion.append("There is **high thematic continuity** across tenure. Virgins and Elders describe transformation in very similar terms.")
+    else:
+        conclusion.append("There is a **distinct thematic shift** over time.")
+        if distinct_virgin:
+            conclusion.append(f"Virgins uniquely emphasize **{', '.join(distinct_virgin)}**.")
+        if distinct_elder:
+            conclusion.append(f"Elders uniquely emphasize **{', '.join(distinct_elder)}**.")
 
     # Generate Report
     report = ["# Module 1: The Pilgrim's Progress (Transformation)\n"]
-    report.append("Analysis of how the narrative of change evolves by tenure.\n")
+    report.append("**Research Question:** How does the narrative of transformation evolve from Virgin to Veteran?\n")
+    report.append(f"**Methodology:** Analyzed {len(all_data)} transformation narratives using TF-IDF style keyword extraction via LLM, segmented by Burn Tenure (Virgin, Sophomore, Veteran, Elder).\n")
     
-    for cohort, themes in cohort_themes.items():
-        report.append(f"## {cohort} Themes")
-        report.append("| Theme | Count |")
-        report.append("| :--- | :--- |")
-        for t, c in themes:
-            report.append(f"| {t} | {c} |")
-        report.append("\n")
-        
-        # Add a "Voice" section - pick a representative quote (longest usually good proxy for depth)
+    report.append("## Results & Analysis")
+    for cohort, counter in cohort_themes.items():
+        top_3 = ", ".join([t[0] for t in counter.most_common(3)])
+        report.append(f"- **{cohort}:** Top themes are *{top_3}*.")
+    
+    report.append("\n## Voices")
+    for cohort in ["Virgin", "Sophomore", "Elder"]:
         if cohorts[cohort]:
-            longest_response = max(cohorts[cohort][:SAMPLE_SIZE], key=len)
-            voice_block = f"**Representative Voice:**\n> *\"{longest_response}\"*\n"
+            longest = max(cohorts[cohort][:SAMPLE_SIZE], key=len)
+            voice_block = f"- **{cohort}:** *\"{longest[:300]}\"*"
             report.append(voice_block)
+
+    report.append("\n## Conclusion")
+    report.append("> " + " ".join(conclusion))
 
     utils.save_report("module_1_transformation.md", "\n".join(report))
 

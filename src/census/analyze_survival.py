@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field
 from typing import Literal
 import analysis_utils as utils
 
-# Define the Output Schema
 class SurvivalAnalysis(BaseModel):
     mentions_hardship: bool = Field(..., description="Does the participant mention physical hardships like mud, heat, dust, hunger, or exhaustion?")
     hardship_level: Literal["None", "Low", "Medium", "High"] = Field(..., description="The intensity of the physical ordeal described.")
@@ -39,7 +38,7 @@ async def run_analysis():
     # Run Batch Process with Schema
     results = await utils.batch_process_with_llm(
         test_subjects[:150], 
-        prompt, 
+        prompt,
         response_schema=SurvivalAnalysis
     )
     
@@ -60,6 +59,19 @@ async def run_analysis():
 
         level = res.get("hardship_level", "None")
         stats[f"Level_{level}"] += 1
+
+    # Dynamic Conclusion Logic
+    total = len(results)
+    linked_pct = stats['Linked'] / total if total else 0
+    hardship_pct = stats['Hardship'] / total if total else 0
+    
+    conclusion = []
+    if linked_pct > 0.20:
+        conclusion.append(f"**Strong Link:** A significant portion ({linked_pct:.1%}) of participants explicitly cite the 'Ordeal' as the driver of their transformation.")
+    elif linked_pct > 0.05:
+        conclusion.append(f"**Weak Link:**  {hardship_pct:.1%} mention hardship, only {linked_pct:.1%} link it to their growth.")
+    else:
+        conclusion.append(f"**No Link:** The narrative of the 'Ordeal' leading to epiphany is largely absent from this sample (<5%).")
 
     # Generate Report
     report = ["# Module 2: The 'Ordeal' as Catalyst (Survival vs. Epiphany)\n"]
@@ -83,13 +95,10 @@ async def run_analysis():
     else:
         report.append("*None found in this sample.*")
 
-    report.append("\n**Conclusion:**")
-    if stats['Linked'] > len(results) * 0.2:
-        report.append("> **Confirmed:** A significant portion of participants link their growth directly to the struggle.")
-    else:
-        report.append("> **Nuanced:** While hardship is present, it is rarely cited as the *primary* driver of transformation. The 'Social' and 'Creative' elements appear to be stronger catalysts.")
+    report.append("\n## Conclusion")
+    report.append("> " + " ".join(conclusion))
 
     utils.save_report("module_2_survival.md", "\n".join(report))
 
 if __name__ == "__main__":
-    asyncio.run(run_analysis()) 
+    asyncio.run(run_analysis())

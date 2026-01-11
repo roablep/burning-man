@@ -1,21 +1,20 @@
-# Module 4: Sacred vs. Profane (The Man vs. The Temple)
+# Module 4: Sacred vs. Profane (Symbolism)
 
-### Sentiment Score (-1 to 1)
-- **The Man:** 0.42
-- **The Temple:** 0.37
+**Research Question:** How do the emotional profiles of 'The Man' and 'The Temple' differ?
 
-### Emotional Profile
-| Emotion | The Man (Count) | The Temple (Count) |
-| :--- | :--- | :--- |
-| Anger | 2 | 0 |
-| Awe | 4 | 14 |
-| Celebration | 9 | 2 |
-| Community | 36 | 31 |
-| Grief | 2 | 19 |
-| Indifference | 30 | 16 |
-| Other | 3 | 2 |
-| Rebirth | 14 | 16 |
+**Methodology:** Comparative sentiment and emotion analysis of 100 Man responses vs 100 Temple responses.
 
-**Conclusion:**
-> **The Temple is the Vessel of Grief:** It carries a distinct emotional weight compared to the Man.
-> **The Man is Complicated:** Participants show more ambivalence or association with authority/structure regarding The Man.
+## Results & Analysis
+- **The Man Sentiment:** 0.36
+- **The Temple Sentiment:** 0.35
+
+**Dominant Emotions (Top 3):**
+- **The Man:** Indifference, Community, Celebration
+- **The Temple:** Community, Indifference, Grief
+
+## Voices
+- **The Man:** *"The Man keeps my Sadness"*
+- **The Temple:** *"Place of Solace, Shared grief, cleansing"*
+
+## Conclusion
+> **The Temple is the Vessel of Grief:** It carries a distinct emotional weight (Grief/Loss) that is largely absent from the Man. **The Man is Ambiguous:** Participants show significantly higher rates of 'Indifference' or mixed feelings toward the Man compared to the Temple.
