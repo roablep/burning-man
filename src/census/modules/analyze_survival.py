@@ -2,6 +2,7 @@ import sys
 import os
 import asyncio
 import re
+import statistics
 from collections import Counter
 from pydantic import BaseModel, Field
 from typing import Literal, Iterable, Dict, List, Tuple
@@ -26,6 +27,14 @@ EQUIPMENT_CATEGORY_RULES: List[Tuple[str, List[str]]] = [
     ("art/play/music", [r"accordion", r"flow", r"lamp", r"dance", r"watercolou?r", r"paint", r"wizard", r"crystal", r"orb"]),
     ("comfort/warmth", [r"onesie", r"blanket", r"hoodie", r"chair", r"shoes", r"cot"]),
     ("substances/medicine", [r"mushroom", r"psychedelic", r"tequila", r"pepto", r"insulin", r"\bmed\b"]),
+]
+
+Q8_THEME_RULES: List[Tuple[str, List[str]]] = [
+    ("material support", [r"meal", r"food", r"water", r"shade", r"supplies", r"generator", r"power", r"camp", r"infrastructure"]),
+    ("emotional support", [r"emotional", r"moral", r"support", r"kindness", r"friend", r"family", r"connection", r"community"]),
+    ("knowledge/teaching", [r"teach", r"learn", r"tips", r"advice", r"help me", r"show", r"guide", r"how things work"]),
+    ("labor/coordination", [r"setup", r"breakdown", r"work", r"hands", r"participation", r"roles", r"checkins", r"check-ins"]),
+    ("self-reliance", [r"self-reliance", r"solo", r"on my own", r"i dont ask", r"i don't ask", r"pride myself"]),
 ]
 
 def normalize_equipment(text: str) -> str:
@@ -86,6 +95,78 @@ def equipment_stats(items: Iterable[str]) -> Dict[str, object]:
 
 def md_escape(text: str) -> str:
     return text.replace("|", "/")
+
+def get_equipment_items(rows: Iterable[Dict[str, str]], field: str) -> List[str]:
+    items = []
+    for row in rows:
+        text = (row.get(field) or "").strip()
+        if not text or is_invalid_equipment(text):
+            continue
+        items.append(text)
+    return items
+
+def parse_survival_days(text: str) -> float | None:
+    lowered = text.lower()
+    numbers = [float(n) for n in re.findall(r"\d+(?:\.\d+)?", lowered)]
+    if not numbers:
+        return None
+    if "week" in lowered:
+        value = sum(numbers) / len(numbers)
+        return value * 7
+    if "month" in lowered:
+        value = sum(numbers) / len(numbers)
+        return value * 30
+    return sum(numbers) / len(numbers)
+
+def percentile(values: List[float], pct: float) -> float | None:
+    if not values:
+        return None
+    values = sorted(values)
+    k = (len(values) - 1) * pct
+    f = int(k)
+    c = min(f + 1, len(values) - 1)
+    if f == c:
+        return values[f]
+    return values[f] + (values[c] - values[f]) * (k - f)
+
+def analyze_q7(rows: Iterable[Dict[str, str]]) -> Dict[str, float]:
+    values = []
+    for row in rows:
+        raw = (row.get("Q7") or "").strip()
+        if not raw:
+            continue
+        parsed = parse_survival_days(raw)
+        if parsed is None:
+            continue
+        if parsed > 90:
+            continue
+        values.append(parsed)
+    if not values:
+        return {}
+    return {
+        "count": len(values),
+        "mean": statistics.mean(values),
+        "median": statistics.median(values),
+        "min": min(values),
+        "max": max(values),
+        "p10": percentile(values, 0.1),
+        "p90": percentile(values, 0.9),
+    }
+
+def analyze_q8_themes(rows: Iterable[Dict[str, str]]) -> Counter:
+    theme_counts = Counter()
+    for row in rows:
+        text = (row.get("Q8") or "").strip().lower()
+        if not text:
+            continue
+        matched = False
+        for theme, patterns in Q8_THEME_RULES:
+            if any(re.search(pattern, text) for pattern in patterns):
+                theme_counts[theme] += 1
+                matched = True
+        if not matched:
+            theme_counts["other/unclear"] += 1
+    return theme_counts
 
 async def run_analysis():
     print("Loading Survival and Transformation Data...")
@@ -197,6 +278,47 @@ async def run_analysis():
         else:
             conclusion.append("**Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.")
 
+    survival_rows = survival_data + survival_data_2025
+    q5_items = get_equipment_items(survival_rows, "Q5")
+    q6_items = get_surprising_equipment(survival_rows)
+    q5_stats = equipment_stats(q5_items)
+    q6_stats = equipment_stats(q6_items)
+    q6_2024 = get_surprising_equipment(survival_data)
+    q6_2025 = get_surprising_equipment(survival_data_2025)
+    stats_2024 = equipment_stats(q6_2024)
+    stats_2025 = equipment_stats(q6_2025)
+    stats_combined = equipment_stats(q6_items)
+
+    q5_unique = set(normalize_equipment(item) for item in q5_items)
+    q6_unique = set(normalize_equipment(item) for item in q6_items)
+    overlap_unique = q5_unique & q6_unique
+    overlap_share = (len(overlap_unique) / len(q6_unique)) if q6_unique else 0
+
+    q7_summary = analyze_q7(survival_rows)
+    q8_themes = analyze_q8_themes(survival_rows)
+    q8_total_mentions = sum(q8_themes.values()) or 0
+
+    cohort_rows = {}
+    for row in survival_rows:
+        status = (row.get("Burn_Status") or "Unknown").strip()
+        cohort_rows.setdefault(status, []).append(row)
+
+    cohort_q7 = {}
+    cohort_q6_uniqueness = {}
+    cohort_q8_top = {}
+    for status, rows in cohort_rows.items():
+        q7_stats = analyze_q7(rows)
+        cohort_q7[status] = q7_stats
+        q6_items_cohort = get_surprising_equipment(rows)
+        q6_stats_cohort = equipment_stats(q6_items_cohort)
+        cohort_q6_uniqueness[status] = q6_stats_cohort["unique_rate"]
+        q8_counts = analyze_q8_themes(rows)
+        if q8_counts:
+            top_theme = q8_counts.most_common(1)[0][0]
+        else:
+            top_theme = "n/a"
+        cohort_q8_top[status] = top_theme
+
     # Generate Report
     sample_desc = f"{SAMPLE_SIZE}" if SAMPLE_SIZE else "Full Dataset"
     report = ["# Module 2: The 'Ordeal' as Catalyst (Survival vs. Epiphany)\n"]
@@ -230,15 +352,57 @@ async def run_analysis():
             
         report.append(f"| {age} | {base:.1%} | {trans_hard:.1%} | {cat_rate:.1%} |")
 
-    report.append("\n## Conclusion")
-    report.append("> " + " ".join(conclusion))
+    report.append("\n## Equipment Contrast (Q5 vs Q6)")
+    report.append(
+        f"- **Q5 (most important) items:** n={q5_stats['total']} | **Q6 (surprising) items:** n={q6_stats['total']}."
+    )
+    report.append(
+        f"- **Exact overlap (unique items):** {len(overlap_unique)} of {len(q6_unique)} Q6 items also appear in Q5 ({overlap_share:.1%})."
+    )
+    report.append("\n### Category Mix: Q5 vs Q6")
+    report.append("| Category | Q5 Share | Q6 Share |")
+    report.append("| :--- | :--- | :--- |")
+    categories = set(q5_stats["categories"].keys()) | set(q6_stats["categories"].keys())
+    for category in sorted(categories):
+        q5_share = (q5_stats["categories"][category] / q5_stats["total"]) if q5_stats["total"] else 0
+        q6_share = (q6_stats["categories"][category] / q6_stats["total"]) if q6_stats["total"] else 0
+        report.append(f"| {category} | {q5_share:.1%} | {q6_share:.1%} |")
 
-    q6_2024 = get_surprising_equipment(survival_data)
-    q6_2025 = get_surprising_equipment(survival_data_2025)
-    combined_q6 = q6_2024 + q6_2025
-    stats_2024 = equipment_stats(q6_2024)
-    stats_2025 = equipment_stats(q6_2025)
-    stats_combined = equipment_stats(combined_q6)
+    report.append("\n## Survival Days (Q7)")
+    if q7_summary:
+        report.append(
+            f"- **Count:** {q7_summary['count']} | **Median:** {q7_summary['median']:.1f} | **Mean:** {q7_summary['mean']:.1f} | **P10/P90:** {q7_summary['p10']:.1f}/{q7_summary['p90']:.1f} | **Range:** {q7_summary['min']:.1f}-{q7_summary['max']:.1f}"
+        )
+    else:
+        report.append("- No parseable Q7 responses found.")
+
+    report.append("\n### Survival Days by Burn Status")
+    report.append("| Burn Status | Count | Median Days | Mean Days |")
+    report.append("| :--- | :--- | :--- | :--- |")
+    for status in sorted(cohort_q7.keys()):
+        stats = cohort_q7[status]
+        if not stats:
+            report.append(f"| {status} | 0 | n/a | n/a |")
+            continue
+        report.append(
+            f"| {status} | {stats['count']} | {stats['median']:.1f} | {stats['mean']:.1f} |"
+        )
+
+    report.append("\n## Community Reliance Themes (Q8)")
+    report.append("- Multi-label keyword tagging; counts can exceed response count.")
+    report.append("| Theme | Count | Share of Mentions |")
+    report.append("| :--- | :--- | :--- |")
+    for theme, count in q8_themes.most_common():
+        share = (count / q8_total_mentions) if q8_total_mentions else 0
+        report.append(f"| {theme} | {count} | {share:.1%} |")
+
+    report.append("\n### Cohort Highlights")
+    report.append("| Burn Status | Q6 Uniqueness | Top Q8 Theme |")
+    report.append("| :--- | :--- | :--- |")
+    for status in sorted(cohort_q6_uniqueness.keys()):
+        report.append(
+            f"| {status} | {cohort_q6_uniqueness[status]:.1%} | {cohort_q8_top[status]} |"
+        )
 
     report.append("\n## Surprising/Unconventional Gear (Q6)")
     report.append(
@@ -264,6 +428,9 @@ async def run_analysis():
         share = count / stats_combined["total"] if stats_combined["total"] else 0
         example = md_escape(stats_combined["examples"].get(category, ""))
         report.append(f"| {category} | {count} | {share:.1%} | {example} |")
+
+    report.append("\n## Conclusion")
+    report.append("> " + " ".join(conclusion))
 
     utils.save_report("module_2_survival.md", "\n".join(report))
 
