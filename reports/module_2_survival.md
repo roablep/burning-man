@@ -20,7 +20,7 @@
 | Under 30 | 6.2% | 15.8% | 5.3% |
 | 30-39 | 0.0% | 8.9% | 6.7% |
 | 40-49 | 11.1% | 11.1% | 3.7% |
-| 50+ | 12.5% | 7.4% | 3.7% |
+| 50+ | 17.6% | 7.4% | 3.7% |
 
 ## Equipment Contrast (Q5 vs Q6)
 - **Q5 (most important) items:** n=185 | **Q6 (surprising) items:** n=169.
@@ -100,4 +100,4 @@
 | food/cooking | 3 | 1.8% | deep fryer |
 
 ## Conclusion
-> **The Ordeal Gap:** Hardship is prevalent (Baseline ~7.5%), but only 9.2% of transformation narratives mention it. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.
+> **The Ordeal Gap:** Hardship is prevalent (Baseline ~8.8%), but only 9.2% of transformation narratives mention it. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.

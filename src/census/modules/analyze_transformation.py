@@ -47,12 +47,12 @@ async def run_analysis():
         if not sample: continue
         
         # Theme Extraction
-        theme_prompt = """
-        Analyze the following response to the question "Did Burning Man change you?".
-        Extract 1 to 3 distinct themes (1-2 words each) representing the type of change.
-        Format: Theme1, Theme2, Theme3
-        Response: """{{TEXT}}"""
-        """
+        theme_prompt = (
+            "Analyze the following response to the question \"Did Burning Man change you?\".\n"
+            "Extract 1 to 3 distinct themes (1-2 words each) representing the type of change.\n"
+            "Format: Theme1, Theme2, Theme3\n"
+            "Response: \"{{TEXT}}\""
+        )
         themes_raw = await utils.batch_process_with_llm(sample, theme_prompt)
         
         theme_counter = Counter()
@@ -63,11 +63,11 @@ async def run_analysis():
         cohort_themes[cohort] = theme_counter
         
         # Pronoun Analysis
-        pronoun_prompt = """
-        Analyze the grammatical structure of this response.
-        Count the number of self-references (I, me, my) vs collective references (we, us, our).
-        Response: """{{TEXT}}"""
-        """
+        pronoun_prompt = (
+            "Analyze the grammatical structure of this response.\n"
+            "Count the number of self-references (I, me, my) vs collective references (we, us, our).\n"
+            "Response: \"{{TEXT}}\""
+        )
         pronoun_results = await utils.batch_process_with_llm(sample, pronoun_prompt, response_schema=PronounAnalysis)
         
         total_self = sum([r.get('self_refs', 0) for r in pronoun_results if "error" not in r])
