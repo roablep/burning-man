@@ -370,6 +370,127 @@ The `analysis_plan.md` proposes five major theoretical lenses:
 
 ---
 
+## Creative Research Directions: Provocative Angles to Explore
+
+Beyond the standard analyses, here are five high-impact research directions that could yield surprising insights:
+
+### 1. The "Sophomore Slump" Deep Dive 📉
+
+**What We've Seen**: Module 1 analysis revealed that 2nd/3rd-year burners express themes of "Disillusionment" alongside "Connection"—a stark contrast to Virgin "Anticipation" and Elder "Service."
+
+**Research Question**: *"Is there a predictable arc of disenchantment → re-enchantment across the Burner lifecycle?"*
+
+**Methodology**:
+- Sentiment analysis on Transformation responses by exact burn count (not just cohorts)
+- Plot sentiment scores (1st burn → 20th burn) to visualize the curve
+- Identify the "trough" point: Is it burn #2? #3? #5?
+- Qualitative theme extraction: What words appear in the slump that disappear later?
+
+**Why It Matters**: This challenges the mythos of Burning Man as universally transformative. If there's a predictable disillusionment phase, the community should address it (or acknowledge it as part of the journey).
+
+**Hypothesis**: The slump occurs when:
+- The novelty wears off (not a Virgin anymore)
+- Reality intrudes (logistics, dust, exhaustion)
+- But the "Elder wisdom" hasn't developed yet (haven't found their role in the community)
+
+### 2. The Language of Liminality: "I" vs. "We" 🗣️
+
+**Observation**: Elders talk more about "community" and "service." Virgins focus on personal transformation.
+
+**Research Question**: *"Do Burners linguistically shift from individual to collective identity as tenure increases?"*
+
+**Methodology**:
+- TF-IDF analysis by cohort on Transformation responses
+- Count pronoun usage: "I/me/my/mine" vs. "we/us/our/ours"
+- Track keywords:
+  - **Virgin-specific**: "myself", "first time", "overwhelmed", "discovering"
+  - **Elder-specific**: "contribute", "teach", "build", "gift", "steward"
+- Sentiment + self-reference correlation: Are self-focused responses more positive or negative?
+
+**Why It Matters**: If we can measure the linguistic shift, we can:
+- Quantify the "ego death" phenomenon
+- Predict when someone becomes a "true Burner" (not by years, but by language)
+- Design interventions to accelerate the shift (if desirable)
+
+**Bonus Analysis**: Apply this to the "Beyond BRC" question set—do people who use collective language also report taking principles home?
+
+### 3. The Boundaries of Humanity: Burners vs. AI in 2024-2025 🤖
+
+**Unique Opportunity**: Question Set D asks "What distinguishes humans from AI?" during the peak of ChatGPT/AI hype (2024-2025).
+
+**Research Question**: *"How do Burners—a community centered on radical self-expression—conceptualize human uniqueness in the age of AI?"*
+
+**Methodology**:
+- Theme clustering on Q6: "What distinguishes humans from AI?"
+- Demographic splits:
+  - **Tech workers** (SF/Bay Area) vs. non-tech
+  - **Age cohorts**: Gen Z digital natives vs. Boomers
+  - **Burn tenure**: Do veterans think differently?
+- Cross-reference with Q8: "What would AI never understand?"
+- Sentiment analysis: Are responses fearful, optimistic, dismissive?
+
+**Why It Matters**: Burning Man is a *highly* tech-heavy community (lots of Silicon Valley). Their answers reveal how people who *build* AI think about human identity.
+
+**Provocative Sub-Questions**:
+- Do tech workers actually have *different* answers than artists?
+- Does psychedelic use correlate with different AI perspectives? (If we have data on Set G - Drinking/Smoking)
+- Do responses reference consciousness, emotions, creativity, embodiment, or something else?
+
+### 4. Gender & The Sacred: The Man vs. The Temple ⚧️🔥
+
+**Observation**: The Man = destruction/celebration. The Temple = healing/grief. These seem gendered.
+
+**Research Question**: *"Are Burning Man's two central rituals coded differently by gender? Is The Man masculine and The Temple feminine?"*
+
+**Methodology**:
+- Semantic analysis on Symbolism Set B (2024):
+  - Q6: "What does the Burning Man mean to you?"
+  - Q7: "What does the Temple mean to you?"
+- Generate embeddings for each response
+- Calculate "semantic distance" between Man and Temple responses
+- Segment by gender (M, F, NB, O):
+  - Do men describe The Man differently than women?
+  - Do women engage more with The Temple?
+  - How do non-binary folks describe these symbols?
+- Keyword extraction: Look for gendered language (power, softness, aggression, nurturing)
+
+**Why It Matters**: If the central rituals *are* gendered, this has implications for:
+- Whose experiences are centered in Burning Man lore
+- Why some people connect more with one ritual than the other
+- Whether "Radical Inclusion" extends to symbolic architecture
+
+**Bonus Analysis**: Cross-reference with Emotions Set C—do people who cry more go to The Temple? Do people who laugh more go to The Man burn?
+
+### 5. The Radical Inclusion Stress Test: Whose Utopia? 🌈
+
+**Critical Question**: Burning Man claims "Radical Inclusion," but does utopia feel utopian for everyone?
+
+**Research Question**: *"Do marginalized identities (POC, LGBTQ+, disabled, etc.) report different experiences of 'freedom' and 'inclusion' than the majority?"*
+
+**Methodology**:
+- **Identify marginalized respondents** via Diversity Set K/F:
+  - Q5: Self-report of identity impact in default world
+  - Keywords: "Black", "Asian", "Trans", "Queer", "disabled", "fat", etc.
+- **Compare their responses** to Transformation, Experiences, and Emotions sets:
+  - Do they report *more* or *less* transformation?
+  - Are their negative experiences different? (harassment vs. logistics)
+  - Sentiment analysis: Is their playa experience as positive as the majority?
+- **Code-Switching Analysis**:
+  - Q6 & Q8: Do they modify appearance/behavior on playa vs. default world?
+  - Hypothesis: If radical inclusion is real, modification should *decrease* on playa
+  - Counter-hypothesis: Even in "utopia," marginalized folks still modify to stay safe
+- **Language of Safety**:
+  - Do keywords like "safe", "unsafe", "threatening", "free" appear more in marginalized responses?
+
+**Why It Matters**: This is the most politically charged analysis—it tests whether Burning Man's rhetoric matches reality. If marginalized folks report *more* friction on playa, that's a major finding.
+
+**Ethical Note**: This requires sensitivity. Consider:
+- Not "outing" anyone's identity without consent
+- Framing as "community learning" not "gotcha journalism"
+- Sharing findings with diversity/inclusion camps at BRC
+
+---
+
 ## Technical Architecture: The Code Behind the Curtain
 
 ### File Structure
@@ -485,6 +606,77 @@ python src/census/analyze_survival.py
 - **Anonymity**: No identifying information collected (age/gender insufficient to de-anonymize)
 - **Dust & Durability**: Physical journals are fragile—did some responses get lost to the elements?
 - **Power Dynamics**: Researchers are also Burners—insider/outsider status affects interpretation
+
+### Critical Data Quality Issues 🔍
+
+**1. The 2024 vs. 2025 Sample Disparity**
+
+The dramatic difference in sample size (1,658 vs. 139 responses) raises important questions:
+
+**Possible Explanations**:
+- **Journal placement strategy**: Were fewer journals deployed in 2025? Were they placed at different camps?
+- **The 2024 "Mud Year" trauma**: The 2024 event was impacted by rain and mud, creating an unusually challenging year. Did this:
+  - *Reduce* 2025 attendance overall?
+  - *Change* who came back (more veterans, fewer virgins)?
+  - *Affect* engagement with reflective activities?
+- **Timing effects**: Were journals available for the full week in both years? Early departure in 2025?
+- **Camp/demographic clustering**: If journals were hosted by specific camps, 2025 data may reflect that camp's demographics more than the broader population
+
+**Research Implications**:
+- **Cannot compare 2024 vs. 2025 as equivalent samples**—they represent different populations
+- **2025 is NOT representative** of Burning Man broadly (54% local, 20.4 average burns vs. 13.0 in 2024)
+- **Within-year analyses are valid**, between-year comparisons require caution
+- **Opportunity**: If placement data exists, analyze how journal location affects response demographics
+
+**Action Items**:
+- Document journal placement strategy for both years (which camps, when deployed, how advertised)
+- If future data collection occurs, implement systematic placement across diverse camps
+- Consider weighting 2025 data if using both years in aggregate analyses
+
+**2. OCR Quality and Transcription Fidelity**
+
+As seen in Module 1 "Representative Voices," some transcriptions are heavily garbled:
+> *"I MINK IT'S TOO SOON TO SAY. AT TIMES & wave REFLECTOR ON THE WORMS of EMPATHY..."*
+
+**Assessment**:
+- **Minor errors** (typos, word substitutions) are acceptable for thematic analysis
+- **Severe garbling** may lose critical meaning, especially for nuanced responses
+- **Visual context lost**: Drawings, diagrams, cross-outs, margin notes, emphasis (underlining/caps) not captured
+- **Handwriting quality variation**: Some participants have clearer handwriting than others
+
+**Solutions**:
+- **Human verification pass**: For key analyses (e.g., academic publication), manually verify a random sample (10-20%) of transcriptions
+- **Confidence scoring**: If Gemini provides confidence scores, filter low-confidence transcriptions for manual review
+- **Re-run critical responses**: For responses cited in papers or reports, re-transcribe with higher-quality models (GPT-4 Vision, Claude 3.5 with vision)
+- **Preserve originals**: Keep image files linked to transcriptions so researchers can review originals when meaning is unclear
+
+**Current Status**: Transcription errors are acknowledged but not systematically addressed. Consider this a limitation in findings.
+
+**3. Temporal Metadata: The "When" Problem**
+
+**The Issue**: We captured responses *during* the burn, but don't know *when* during the week.
+
+**Why This Matters**:
+- **Virgin on Monday**: "Did Burning Man change you?" → "Not yet, I just got here"
+- **Virgin on Saturday**: "Did Burning Man change you?" → "Yes, completely, here's a novel-length answer"
+- **Elder on Tuesday**: Might be in setup mode, focused on logistics
+- **Elder on Sunday**: Might be in teardown mode, reflective about closure
+
+**Current Blind Spots**:
+- Cannot track transformation *within* a single burn (arrival → midweek → departure)
+- Cannot control for "peak experience" timing (first night vs. last night)
+- Cannot separate early-week "anticipation" from late-week "integration"
+
+**Potential Recovery**:
+- **EXIF timestamp analysis**: Check if image files contain timestamp metadata
+  - Problem: Timestamps might be when photo was taken (could be days after participant wrote)
+  - Solution: Cluster by image timestamp as rough proxy for journal entry time
+- **Content-based temporal inference**: Use LLM to infer timing from responses
+  - Keywords like "just arrived", "first night", "leaving tomorrow", "last day"
+  - References to specific art burns (Man burns Saturday, Temple burns Sunday)
+- **Future data collection**: Add "What day is it?" or "How many days have you been here?" to demographic questions
+
+**Recommendation**: Acknowledge this as a limitation but consider it a feature of ecological validity—we captured the *immediate* experience, not curated retrospectives.
 
 ---
 
