@@ -23,9 +23,9 @@ import analyze_cross_theme
 def parse_args():
     parser = argparse.ArgumentParser(description="Run the Burning Man analysis pipeline.")
     parser.add_argument(
-        "--include-cross-theme",
+        "--skip-cross-theme",
         action="store_true",
-        help="Include cross-theme cohort analysis (TF-IDF clustering + correlations).",
+        help="Skip cross-theme cohort analysis (TF-IDF clustering + correlations).",
     )
     return parser.parse_args()
 
@@ -46,7 +46,7 @@ async def main():
         ("Synthesis: Final Report", synthesize_report.run_synthesis)
     ]
 
-    if args.include_cross_theme:
+    if not args.skip_cross_theme:
         steps.append(("Cross-Theme Cohort Analysis", analyze_cross_theme.main))
     
     for name, func in steps:
