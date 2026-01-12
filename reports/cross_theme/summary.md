@@ -6,9 +6,6 @@ Theme labels are derived from top TF-IDF terms per cluster and are descriptive, 
 
 ## 2024
 
-Narrative summary (cohort-level, ecological):
-Burn-status cohorts show several consistent cross-theme alignments. Survival themes centered on self-reliance/gifting track with cohorts that also report more negative experience drivers (e.g., "drugs / bad / too"), suggesting friction may co-occur with a more self-provisioning stance. Costume themes framed as "myself / comfort / express" align with diversity themes about appearance/identity negotiation, hinting that cohorts emphasizing costumes as self-expression also report more active identity management. Relationship themes that read as "weirder" align with laughter/excitement emotions, pointing to a playful, exploratory emotional profile in those cohorts. Symbolism themes emphasizing art/space align with emotion clusters around art/wonder, reinforcing a shared aesthetic-spiritual emphasis. Substance use themes framed as recreation/legalization align with freedom/happiness emotions, suggesting a cohort-level pairing of permissive substance framing and liberation-oriented affect.
-
 Top correlations (by absolute value):
 
 - burn_status | J - Survival:love / self / gifting vs H - Experiences:drugs / bad / too => r=0.9995 (n=4)
@@ -23,8 +20,8 @@ Top correlations (by absolute value):
 - burn_status | B - Symbolism:art / non / space vs C - Emotions:art / love / nova => r=0.9718 (n=4)
 - burn_status | F - Costumes:good / conversation / fun vs K - Diversity & Inclusion:sure / bit / watch => r=-0.9693 (n=4)
 - burn_status | F - Costumes:myself / comfort / express vs I - Relationships:been / great => r=0.9676 (n=4)
-- burn_status | F - Costumes:myself / comfort / express vs I - Relationships:both / sure / recommend => r=0.9676 (n=4)
 - burn_status | F - Costumes:myself / comfort / express vs I - Relationships:together / part / camp => r=0.9676 (n=4)
+- burn_status | F - Costumes:myself / comfort / express vs I - Relationships:both / sure / recommend => r=0.9676 (n=4)
 - burn_status | D - Boundaries of Humanity:connection / yet / human vs C - Emotions:laughter / there / excitement => r=-0.9675 (n=4)
 - burn_status | G - Drinking & Smoking:recreation / change / legal vs C - Emotions:freedom / happy / would => r=0.9652 (n=5)
 - burn_status | D - Boundaries of Humanity:connection / yet / human vs C - Emotions:friends / lost / most => r=-0.9636 (n=4)
@@ -35,3 +32,4 @@ Top correlations (by absolute value):
 ## 2025
 
 No correlations computed (insufficient cohort overlap).
+

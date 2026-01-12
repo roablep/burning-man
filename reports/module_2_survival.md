@@ -3,23 +3,23 @@
 **Methodology:** Comparative analysis of survival responses (Baseline) vs 131 transformation narratives, segmented by **Age**. Sample size: Full Dataset.
 
 ### Findings
-- **Transformation Narratives Mentioning Hardship:** 9.2%
-- **Hardship as Explicit Catalyst:** 4.6%
+- **Transformation Narratives Mentioning Hardship:** 8.4%
+- **Hardship as Explicit Catalyst:** 3.1%
 
 ### Hardship Intensity (Transformation Set)
 | Level | Count |
 | :--- | :--- |
-| High | 0 |
-| Medium | 8 |
-| Low | 4 |
-| None | 119 |
+| High | 1 |
+| Medium | 7 |
+| Low | 3 |
+| None | 120 |
 
 ### Age Analysis: Who Suffers, Who Grows?
 | Age Group | Baseline Hardship % | Transf. Hardship % | Catalyst Rate (Linked) |
 | :--- | :--- | :--- | :--- |
 | Under 30 | 6.2% | 15.8% | 5.3% |
-| 30-39 | 0.0% | 8.9% | 6.7% |
-| 40-49 | 11.1% | 11.1% | 3.7% |
+| 30-39 | 0.0% | 8.9% | 2.2% |
+| 40-49 | 11.1% | 7.4% | 3.7% |
 | 50+ | 17.6% | 7.4% | 3.7% |
 
 ## Equipment Contrast (Q5 vs Q6)
@@ -100,4 +100,4 @@
 | food/cooking | 3 | 1.8% | deep fryer |
 
 ## Conclusion
-> **The Ordeal Gap:** Hardship is prevalent (Baseline ~8.8%), but only 9.2% of transformation narratives mention it. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.
+> **The Ordeal Gap:** Hardship is prevalent (Baseline ~8.8%), but only 8.4% of transformation narratives mention it. **Hypothesis Weakened:** The 'Ordeal Hypothesis' is largely unsupported by the data; participants describe transformation through social and creative lenses, not physical survival.
