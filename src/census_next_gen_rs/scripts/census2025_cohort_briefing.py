@@ -164,6 +164,7 @@ def main() -> None:
     lines.append("# Census 2025 Cohort Analysis Briefing")
     lines.append("")
     lines.append("## Highlights")
+    lines.append("Summary of global linear trends across all cohorts for retention and youth participation.")
     lines.append("")
     lines.append(
         f"- Overall retention trend slope (overall, campPlaced=all): "
@@ -175,6 +176,7 @@ def main() -> None:
     )
     lines.append("")
     lines.append("## Top Retention Cells")
+    lines.append("The demographic segments (age and camp status) with the highest likelihood of returning to Black Rock City.")
     lines.append("")
     for _, row in top.iterrows():
         lines.append(
@@ -183,6 +185,7 @@ def main() -> None:
         )
     lines.append("")
     lines.append("## Lowest Retention Cells")
+    lines.append("Segments with the lowest return rates, highlighting where the community may be losing members.")
     lines.append("")
     for _, row in bottom.iterrows():
         lines.append(
@@ -191,6 +194,7 @@ def main() -> None:
         )
     lines.append("")
     lines.append("## CampPlaced Gaps (Yes - No)")
+    lines.append("The delta in retention rates between those in placed camps ('yes') versus those not ('no'). Positive values suggest placement correlates with higher retention.")
     lines.append("")
     for _, row in gaps.iterrows():
         if pd.isna(row.get("gap_yes_minus_no")):
@@ -198,6 +202,7 @@ def main() -> None:
         lines.append(f"- {row['age_band']}: {row['gap_yes_minus_no']:.4f}")
     lines.append("")
     lines.append("## Small-N Warnings (weighted_count < 30)")
+    lines.append("Data points where the weighted sample size is below 30, indicating results should be interpreted with caution due to high variance.")
     lines.append("")
     if small_n.empty:
         lines.append("- None")

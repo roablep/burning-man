@@ -150,9 +150,11 @@ def weighted_return_rate(group: pd.DataFrame) -> float:
 def camp_share_within_group(df: pd.DataFrame, group_col: str) -> pd.DataFrame:
     base = df[df["campPlaced_clean"].isin(["yes", "no"])].copy()
     grouped = (
-        base.groupby([group_col, "campPlaced_clean"])["weights"].sum().reset_index()
+        base.groupby([group_col, "campPlaced_clean"], observed=False)["weights"]
+        .sum()
+        .reset_index()
     )
-    totals = grouped.groupby(group_col)["weights"].sum().reset_index()
+    totals = grouped.groupby(group_col, observed=False)["weights"].sum().reset_index()
     merged = grouped.merge(totals, on=group_col, suffixes=("", "_total"))
     merged["weighted_pct"] = (merged["weights"] / merged["weights_total"]) * 100.0
     return merged
@@ -321,7 +323,11 @@ def main() -> None:
 
     # Weighted baselines
     weights = df["weights"]
-    age_dist = df.dropna(subset=["age_band"]).groupby("age_band")["weights"].sum()
+    age_dist = (
+        df.dropna(subset=["age_band"])
+        .groupby("age_band", observed=False)["weights"]
+        .sum()
+    )
     age_dist = (age_dist / age_dist.sum() * 100.0).reindex(AGE_LABELS)
 
     camp_dist = df.groupby("campPlaced_clean")["weights"].sum()
@@ -335,11 +341,17 @@ def main() -> None:
     under30_share = float((weights[under30_mask].sum() / weights[df["age"].notna()].sum()) * 100.0)
 
     # Under-30 by campPlaced
-    under30_by_camp = (
-        df[df["campPlaced_clean"].isin(["yes", "no"])].assign(under30=lambda d: d["age"] <= 29)
-        .groupby("campPlaced_clean")
-        .apply(lambda g: (g.loc[g["under30"], "weights"].sum() / g["weights"].sum()) * 100.0)
+    base_under30 = df[df["campPlaced_clean"].isin(["yes", "no"])].copy()
+    base_under30["under30"] = base_under30["age"] <= 29
+    under30_weights = (
+        base_under30[base_under30["under30"]]
+        .groupby("campPlaced_clean", observed=False)["weights"]
+        .sum()
     )
+    total_weights = (
+        base_under30.groupby("campPlaced_clean", observed=False)["weights"].sum()
+    )
+    under30_by_camp = (under30_weights / total_weights * 100.0).fillna(0.0)
 
     # campPlaced by age_band (yes/no only, within age band)
     camp_by_age = camp_share_within_group(df, "age_band")
@@ -369,19 +381,21 @@ def main() -> None:
         & df["campPlaced_clean"].isin(["yes", "no"])
     ].copy()
 
-    retention_table = (
-        retention_base.groupby(["age_band", "campPlaced_clean"])
-        .apply(
-            lambda g: pd.Series(
-                {
-                    "weighted_count": g["weights"].sum(),
-                    "weighted_return_rate": weighted_return_rate(g),
-                    "unweighted_n": len(g),
-                }
-            )
-        )
-        .reset_index()
+    retention_base["weighted_return"] = (
+        retention_base["weights"] * retention_base["return_next_year"]
     )
+    retention_grouped = retention_base.groupby(
+        ["age_band", "campPlaced_clean"], observed=False
+    )
+    retention_table = retention_grouped.agg(
+        weighted_count=("weights", "sum"),
+        weighted_return_sum=("weighted_return", "sum"),
+        unweighted_n=("return_next_year", "size"),
+    ).reset_index()
+    retention_table["weighted_return_rate"] = (
+        retention_table["weighted_return_sum"] / retention_table["weighted_count"]
+    ).fillna(0.0)
+    retention_table = retention_table.drop(columns=["weighted_return_sum"])
     retention_table["weighted_return_rate"] = retention_table["weighted_return_rate"].map(lambda v: f"{v:.3f}")
     retention_table["weighted_count"] = retention_table["weighted_count"].map(lambda v: f"{v:.1f}")
 

@@ -42,6 +42,15 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def normalize_sheet(sheet: object) -> object:
+    if isinstance(sheet, str):
+        stripped = sheet.strip()
+        if stripped.isdigit():
+            return int(stripped)
+        return stripped
+    return sheet
+
+
 def discover_attended_year_columns(df: pd.DataFrame) -> dict[int, list[str]]:
     year_map: dict[int, list[str]] = {}
     pattern = re.compile(r"^attendedYears\.(\d{4})")
@@ -238,7 +247,8 @@ def main() -> None:
     output_csv = Path(args.output_csv)
     output_md = Path(args.output_md)
 
-    df = pd.read_excel(input_path, sheet_name=args.sheet)
+    sheet = normalize_sheet(args.sheet)
+    df = pd.read_excel(input_path, sheet_name=sheet)
     df, year_map = prepare_cohort_dataframe(df)
 
     base_mask = df["cohort_year"].notna() & df["return_next_year"].notna()

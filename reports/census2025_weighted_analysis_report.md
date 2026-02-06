@@ -74,22 +74,22 @@ See `reports/census2025_weighted_crosstabs.md` and CSV outputs in `reports/`.
 
 The table below shows weighted return rates by age band and camp placement (yes/no). `dontKnow` and missing campPlaced are excluded from the comparison.
 
-| age_band | campPlaced_clean | weighted_count | weighted_return_rate | unweighted_n |
+| age_band | campPlaced_clean | weighted_count | unweighted_n | weighted_return_rate |
 | --- | --- | --- | --- | --- |
-| <=22 | no | 1.6 | 0.000 | 1.0 |
-| <=22 | yes | 13.9 | 0.881 | 9.0 |
-| 23-28 | no | 34.3 | 0.835 | 23.0 |
-| 23-28 | yes | 153.9 | 0.826 | 85.0 |
-| 29-34 | no | 112.1 | 0.756 | 98.0 |
-| 29-34 | yes | 430.4 | 0.809 | 358.0 |
-| 35-39 | no | 131.8 | 0.657 | 123.0 |
-| 35-39 | yes | 552.3 | 0.715 | 500.0 |
-| 40-49 | no | 186.5 | 0.672 | 217.0 |
-| 40-49 | yes | 703.0 | 0.728 | 823.0 |
-| 50-59 | no | 96.3 | 0.692 | 100.0 |
-| 50-59 | yes | 467.9 | 0.733 | 518.0 |
-| 60+ | no | 83.2 | 0.664 | 142.0 |
-| 60+ | yes | 207.0 | 0.785 | 448.0 |
+| <=22 | no | 1.6 | 1 | 0.000 |
+| <=22 | yes | 13.9 | 9 | 0.881 |
+| 23-28 | no | 34.3 | 23 | 0.835 |
+| 23-28 | yes | 153.9 | 85 | 0.826 |
+| 29-34 | no | 112.1 | 98 | 0.756 |
+| 29-34 | yes | 430.4 | 358 | 0.809 |
+| 35-39 | no | 131.8 | 123 | 0.657 |
+| 35-39 | yes | 552.3 | 500 | 0.715 |
+| 40-49 | no | 186.5 | 217 | 0.672 |
+| 40-49 | yes | 703.0 | 823 | 0.728 |
+| 50-59 | no | 96.3 | 100 | 0.692 |
+| 50-59 | yes | 467.9 | 518 | 0.733 |
+| 60+ | no | 83.2 | 142 | 0.664 |
+| 60+ | yes | 207.0 | 448 | 0.785 |
 
 Chart: `reports/census2025_return_rate_by_age_camp.svg`
 
