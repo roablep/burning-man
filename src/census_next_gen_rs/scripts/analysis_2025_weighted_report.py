@@ -7,6 +7,7 @@ import argparse
 import math
 import re
 from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 from typing import Iterable
 
 import numpy as np
@@ -181,17 +182,19 @@ def write_svg_bar_chart(
     max_val = max(values) if values else 1.0
     scale = (width - left_pad - right_pad) / max_val if max_val else 1.0
 
+    safe_title = xml_escape(title)
+    safe_x_label = xml_escape(x_label)
     lines = [
         f"<svg xmlns='http://www.w3.org/2000/svg' width='{width}' height='{height}'>",
         f"<style>text {{ font-family: Arial, sans-serif; font-size: 12px; }}</style>",
-        f"<text x='{left_pad}' y='28' font-size='16' font-weight='bold'>{title}</text>",
-        f"<text x='{left_pad}' y='{height - 15}' font-size='12'>{x_label}</text>",
+        f"<text x='{left_pad}' y='28' font-size='16' font-weight='bold'>{safe_title}</text>",
+        f"<text x='{left_pad}' y='{height - 15}' font-size='12'>{safe_x_label}</text>",
     ]
 
     for i, (cat, val) in enumerate(zip(categories, values)):
         y = top_pad + i * (bar_height + gap)
         bar_w = val * scale
-        lines.append(f"<text x='10' y='{y + 15}'>{cat}</text>")
+        lines.append(f"<text x='10' y='{y + 15}'>{xml_escape(str(cat))}</text>")
         lines.append(
             f"<rect x='{left_pad}' y='{y}' width='{bar_w:.1f}' height='{bar_height}' fill='{color}' />"
         )
@@ -228,20 +231,24 @@ def write_svg_grouped_bar_chart(
     max_val = max(values_a + values_b) if values_a or values_b else 1.0
     scale = (width - left_pad - right_pad) / max_val if max_val else 1.0
 
+    safe_title = xml_escape(title)
+    safe_x_label = xml_escape(x_label)
+    safe_label_a = xml_escape(label_a)
+    safe_label_b = xml_escape(label_b)
     lines = [
         f"<svg xmlns='http://www.w3.org/2000/svg' width='{width}' height='{height}'>",
         f"<style>text {{ font-family: Arial, sans-serif; font-size: 12px; }}</style>",
-        f"<text x='{left_pad}' y='28' font-size='16' font-weight='bold'>{title}</text>",
+        f"<text x='{left_pad}' y='28' font-size='16' font-weight='bold'>{safe_title}</text>",
         f"<rect x='{left_pad}' y='40' width='14' height='14' fill='#2b6cb0' />",
-        f"<text x='{left_pad + 20}' y='52'>{label_a}</text>",
+        f"<text x='{left_pad + 20}' y='52'>{safe_label_a}</text>",
         f"<rect x='{left_pad + 120}' y='40' width='14' height='14' fill='#c53030' />",
-        f"<text x='{left_pad + 140}' y='52'>{label_b}</text>",
-        f"<text x='{left_pad}' y='{height - 15}' font-size='12'>{x_label}</text>",
+        f"<text x='{left_pad + 140}' y='52'>{safe_label_b}</text>",
+        f"<text x='{left_pad}' y='{height - 15}' font-size='12'>{safe_x_label}</text>",
     ]
 
     for i, cat in enumerate(categories):
         y_base = top_pad + i * (2 * bar_height + gap + group_gap)
-        lines.append(f"<text x='10' y='{y_base + 14}'>{cat}</text>")
+        lines.append(f"<text x='10' y='{y_base + 14}'>{xml_escape(str(cat))}</text>")
 
         for j, (val, color) in enumerate(((values_a[i], "#2b6cb0"), (values_b[i], "#c53030"))):
             y = y_base + j * (bar_height + gap)
