@@ -1,3 +1,6 @@
+This report shows weighted crosstabs by `age_band` (rows) and `nburns_bucket` (columns), split by `campPlaced` values.
+`Weighted Counts` are the summed survey `weights` in each cell. `Row % (within age band)` divides each cell by its row total so each row sums to 100%.
+
 ## Weighted Counts — campPlaced=yes
 
 |  | 0 | 1 | 2 | 3 | 4 | 5+ | missing |
