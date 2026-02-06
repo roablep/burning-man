@@ -1,0 +1,19 @@
+# Allow zsh -lc scripts when working in this repo
+prefix_rule(
+    pattern = ["/bin/zsh", "-lc"],
+    decision = "allow",
+    justification = "Allow shell writes in this repo only",
+)
+
+# Allow direct cat usage when needed
+prefix_rule(
+    pattern = ["cat"],
+    decision = "allow",
+    justification = "Allow direct file writes with cat in this repo only",
+)
+
+prefix_rule(
+    pattern = ["python3"],
+    decision = "allow",
+    justification = "Allow direct execution with python3 in this repo only",
+)
