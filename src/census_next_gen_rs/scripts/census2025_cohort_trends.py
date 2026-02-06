@@ -382,7 +382,13 @@ def build_markdown_summary(
     )
     lines.append(f"- Rows: `{len(trends)}`")
     lines.append("")
-    lines.append("## Under-30 Share Table")
+    lines.append("## Age ≤28 Share Table")
+    lines.append("")
+    lines.append(
+        "**What this measures:** The proportion of each cohort that is age 28 or younger. "
+        "This is a composition metric (what % of the cohort is young), NOT a retention metric. "
+        "Age ≤28 includes age bands `<=22` and `23-28`."
+    )
     lines.append("")
     lines.append(
         "Saved to CSV with columns: `cohort_year`, `campPlaced`, "
@@ -390,6 +396,11 @@ def build_markdown_summary(
         "`under30_share`, `unweighted_n`."
     )
     lines.append(f"- Rows: `{len(under30_share)}`")
+    lines.append("")
+    lines.append(
+        "_Note: The variable is named 'under30' in the code for historical reasons, "
+        "but actually measures age ≤28 based on the age band definitions._"
+    )
     lines.append("")
     lines.append("## First-Timer Camp Placement Share")
     lines.append("")

@@ -117,12 +117,14 @@ def build_analysis_prompt(
     lines.append("Write an insight memo (short paragraphs + bullets) explaining:")
     lines.append("- Where retention is strongest and weakest")
     lines.append("- CampPlaced effect (yes vs no)")
-    lines.append("- Under-30 trends")
+    lines.append("- Age ≤28 trends (proportion of cohorts that are young)")
     lines.append("- Key caveats and small-N warnings")
     lines.append("")
     lines.append("Key stats (Global linear trends across all cohorts):")
     lines.append(f"- Overall retention trend slope: {trend_slope:.6f} per cohort year")
-    lines.append(f"- Under-30 share slope: {under30_slope:.6f} per cohort year")
+    lines.append(f"- Age ≤28 share slope: {under30_slope:.6f} per cohort year")
+    lines.append("")
+    lines.append("Note: 'Age ≤28 share' measures the proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28). This is a composition metric, not retention.")
     lines.append("")
     lines.append("Top retention cells (Highest likelihood of return; age_band, campPlaced, rate):")
     for _, row in top.iterrows():
@@ -166,12 +168,16 @@ def main() -> None:
     lines.append("## Highlights")
     lines.append("Summary of global linear trends across all cohorts for retention and youth participation.")
     lines.append("")
+    lines.append("**Key Metrics Explained:**")
+    lines.append("- **Retention trend**: Rate at which cohort members return the following year")
+    lines.append("- **Age ≤28 share**: Proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28)")
+    lines.append("")
     lines.append(
         f"- Overall retention trend slope (overall, campPlaced=all): "
         f"`{trend_slope:.6f}` per cohort year (n={trend_n})"
     )
     lines.append(
-        f"- Under-30 share slope (campPlaced=all): "
+        f"- Age ≤28 share slope (campPlaced=all): "
         f"`{under30_slope:.6f}` per cohort year (n={under30_n})"
     )
     lines.append("")

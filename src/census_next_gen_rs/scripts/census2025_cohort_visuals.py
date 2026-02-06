@@ -266,11 +266,25 @@ def build_under30_share_chart(df: pd.DataFrame) -> px.line:
         markers=True,
         hover_data=["under30_weighted_count", "total_weighted_count", "small_n"],
         labels={
-            "cohort_year": "Cohort year",
-            "under30_share": "Under-30 share (weighted)",
+            "cohort_year": "Cohort year (year of first attendance)",
+            "under30_share": "Share age ≤28 (weighted)",
             "campPlaced": "Camp placed",
         },
-        title="Under-30 Share by Cohort Year",
+        title="Age ≤28 Share by Cohort Year<br><sub>Proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28)</sub>",
+    )
+    fig.update_layout(
+        annotations=[
+            dict(
+                text="<i>This shows what percentage of people in each cohort are young (≤28), not retention rates.</i>",
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=-0.12,
+                showarrow=False,
+                xanchor="center",
+                font=dict(size=10, color="gray"),
+            )
+        ]
     )
     fig.update_yaxes(tickformat=".0%")
     return fig
@@ -323,7 +337,7 @@ def build_under30_ribbon_last10(under30: pd.DataFrame) -> go.Figure:
             y=yes_df["under30_share"],
             mode="lines+markers",
             name="campPlaced: yes",
-            hovertemplate="Year: %{x}<br>Under-30 share: %{y:.1%}<extra></extra>",
+            hovertemplate="Year: %{x}<br>Age ≤28 share: %{y:.1%}<extra></extra>",
         )
     )
     fig.add_trace(
@@ -332,14 +346,30 @@ def build_under30_ribbon_last10(under30: pd.DataFrame) -> go.Figure:
             y=no_df["under30_share"],
             mode="lines+markers",
             name="campPlaced: no",
-            hovertemplate="Year: %{x}<br>Under-30 share: %{y:.1%}<extra></extra>",
+            hovertemplate="Year: %{x}<br>Age ≤28 share: %{y:.1%}<extra></extra>",
         )
     )
     fig.update_layout(
-        title="Under-30 Share by Camp Placed (Last 10 Years)",
-        xaxis_title="Cohort year",
-        yaxis_title="Under-30 share (weighted)",
-        legend_title_text="Series",
+        title={
+            "text": "Age ≤28 Share by Camp Placement (Last 10 Years)<br><sub>Proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28)</sub>",
+            "x": 0.5,
+            "xanchor": "center",
+        },
+        xaxis_title="Cohort year (year of first attendance)",
+        yaxis_title="Share age ≤28 (weighted)",
+        legend_title_text="Camp Status",
+        annotations=[
+            dict(
+                text="<i>This shows what percentage of people in each cohort are young (≤28), not retention rates.<br>Higher values = younger cohort. Shaded area shows gap between placed vs non-placed camps.</i>",
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=-0.15,
+                showarrow=False,
+                xanchor="center",
+                font=dict(size=10, color="gray"),
+            )
+        ],
     )
     fig.update_yaxes(tickformat=".0%")
     return fig
@@ -402,14 +432,31 @@ def build_retention_gap_line_last10(retention: pd.DataFrame) -> go.Figure:
         color="age_band",
         markers=True,
         labels={
-            "cohort_year": "Cohort year",
-            "gap": "Return rate gap (yes - no)",
+            "cohort_year": "Cohort year (year of first attendance)",
+            "gap": "Retention advantage (placed - non-placed)",
             "age_band": "Age band",
         },
-        title="Return Rate Gap by Age Band (Last 10 Years)",
+        title="Placed Camp Retention Advantage by Age Band (Last 10 Years)<br><sub>Difference in return rates: [Placed camps] minus [Non-placed camps]. + val = higher retention in placed camps; - val = higher retention in non-placed camps</sub>",
     )
-    fig.add_hline(y=0, line_dash="dash", line_color="gray")
-    fig.update_yaxes(tickformat=".0%")
+    fig.add_hline(y=0, line_dash="dash", line_color="gray", annotation_text="No difference")
+    fig.update_layout(
+        annotations=[
+            dict(
+                text="<i>This shows the <b>retention gap</b> between placed and non-placed camps.<br>"
+                "Positive values = placed camps have higher return rates (retention advantage).<br>"
+                "Negative values = non-placed camps have higher return rates.<br>"
+                "Zero line = no difference in retention between camp types.</i>",
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=-0.18,
+                showarrow=False,
+                xanchor="center",
+                font=dict(size=10, color="gray"),
+            )
+        ]
+    )
+    fig.update_yaxes(tickformat=".0%", title="Return rate difference (percentage points)")
     return fig
 
 
@@ -480,12 +527,12 @@ def build_retention_gap_heatmap_last10(retention: pd.DataFrame) -> go.Figure:
             y=gap.index,
             colorscale=px.colors.diverging.RdBu,
             zmid=0.0,
-            colorbar=dict(title="Gap (yes - no)", tickformat=".0%"),
+            colorbar=dict(title="Retention advantage<br>(placed - non-placed)", tickformat=".0%"),
             customdata=n_min.values,
             hovertemplate=(
                 "Cohort year: %{x}"
                 "<br>Age band: %{y}"
-                "<br>Return gap (yes-no): %{z:.1%}"
+                "<br>Retention advantage: %{z:.1%}"
                 "<br>Min unweighted n: %{customdata}"
                 "<extra></extra>"
             ),
@@ -506,9 +553,26 @@ def build_retention_gap_heatmap_last10(retention: pd.DataFrame) -> go.Figure:
         )
     )
     fig.update_layout(
-        title="Return Rate Gap Heatmap (Last 10 Years)",
-        xaxis_title="Cohort year",
+        title={
+            "text": "Placed Camp Retention Advantage Heatmap (Last 10 Years)<br><sub>Difference in return rates: [Placed camps] minus [Non-placed camps]. + val = higher retention in placed camps; - val = higher retention in non-placed camps</sub>",
+            "x": 0.5,
+            "xanchor": "center",
+        },
+        xaxis_title="Cohort year (year of first attendance)",
         yaxis_title="Age band",
+        annotations=[
+            dict(
+                text="<i>Blue = placed camps have higher retention | Red = non-placed camps have higher retention | White = no difference<br>"
+                "Faded cells = small sample size (n < 30)</i>",
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=-0.12,
+                showarrow=False,
+                xanchor="center",
+                font=dict(size=10, color="gray"),
+            )
+        ],
     )
     fig.update_yaxes(categoryorder="array", categoryarray=AGE_LABELS)
     return fig
@@ -601,6 +665,8 @@ def build_retention_heatmap_by_camp_last10(retention: pd.DataFrame) -> go.Figure
             values="unweighted_n",
             aggfunc="sum",
         )
+        rate_pivot = rate_pivot.reindex(AGE_LABELS)
+        n_pivot = n_pivot.reindex(AGE_LABELS)
         fig.add_trace(
             go.Heatmap(
                 z=rate_pivot.values,
@@ -620,7 +686,7 @@ def build_retention_heatmap_by_camp_last10(retention: pd.DataFrame) -> go.Figure
             row=1,
             col=idx,
         )
-        small_n_mask = (n_pivot.values < SMALL_N_THRESHOLD).astype(float)
+        small_n_mask = (n_pivot.fillna(0).values < SMALL_N_THRESHOLD).astype(float)
         fig.add_trace(
             go.Heatmap(
                 z=small_n_mask,

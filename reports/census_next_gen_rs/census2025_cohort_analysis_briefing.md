@@ -3,8 +3,12 @@
 ## Highlights
 Summary of global linear trends across all cohorts for retention and youth participation.
 
+**Key Metrics Explained:**
+- **Retention trend**: Rate at which cohort members return the following year
+- **Age ≤28 share**: Proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28)
+
 - Overall retention trend slope (overall, campPlaced=all): `0.012984` per cohort year (n=34)
-- Under-30 share slope (campPlaced=all): `0.001709` per cohort year (n=34)
+- Age ≤28 share slope (campPlaced=all): `0.001709` per cohort year (n=34)
 
 ## Top Retention Cells
 The demographic segments (age and camp status) with the highest likelihood of returning to Black Rock City.
@@ -264,12 +268,14 @@ You are a human analyst reviewing the 2025 Burning Man cohort data.
 Write an insight memo (short paragraphs + bullets) explaining:
 - Where retention is strongest and weakest
 - CampPlaced effect (yes vs no)
-- Under-30 trends
+- Age ≤28 trends (proportion of cohorts that are young)
 - Key caveats and small-N warnings
 
 Key stats (Global linear trends across all cohorts):
 - Overall retention trend slope: 0.012984 per cohort year
-- Under-30 share slope: 0.001709 per cohort year
+- Age ≤28 share slope: 0.001709 per cohort year
+
+Note: 'Age ≤28 share' measures the proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28). This is a composition metric, not retention.
 
 Top retention cells (Highest likelihood of return; age_band, campPlaced, rate):
 - 35-39 / no: 1.0000 (w=1.08)

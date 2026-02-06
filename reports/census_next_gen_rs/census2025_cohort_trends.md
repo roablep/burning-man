@@ -15,10 +15,14 @@
 Saved to CSV with columns: `cohort_year`, `segment`, `campPlaced`, `weighted_count`, `weighted_return_rate`, `unweighted_n`.
 - Rows: `227`
 
-## Under-30 Share Table
+## Age ≤28 Share Table
+
+**What this measures:** The proportion of each cohort that is age 28 or younger. This is a composition metric (what % of the cohort is young), NOT a retention metric. Age ≤28 includes age bands `<=22` and `23-28`.
 
 Saved to CSV with columns: `cohort_year`, `campPlaced`, `under30_weighted_count`, `total_weighted_count`, `under30_share`, `unweighted_n`.
 - Rows: `97`
+
+_Note: The variable is named 'under30' in the code for historical reasons, but actually measures age ≤28 based on the age band definitions._
 
 ## First-Timer Camp Placement Share
 
