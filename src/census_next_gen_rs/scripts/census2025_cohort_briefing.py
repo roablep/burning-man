@@ -120,25 +120,25 @@ def build_analysis_prompt(
     lines.append("- Under-30 trends")
     lines.append("- Key caveats and small-N warnings")
     lines.append("")
-    lines.append("Key stats:")
+    lines.append("Key stats (Global linear trends across all cohorts):")
     lines.append(f"- Overall retention trend slope: {trend_slope:.6f} per cohort year")
     lines.append(f"- Under-30 share slope: {under30_slope:.6f} per cohort year")
     lines.append("")
-    lines.append("Top retention cells (age_band, campPlaced, rate):")
+    lines.append("Top retention cells (Highest likelihood of return; age_band, campPlaced, rate):")
     for _, row in top.iterrows():
         lines.append(
             f"- {row['age_band']} / {row['campPlaced']}: "
             f"{row['weighted_return_rate']:.4f} (w={row['weighted_count']:.2f})"
         )
     lines.append("")
-    lines.append("Lowest retention cells (age_band, campPlaced, rate):")
+    lines.append("Lowest retention cells (Lowest return rates; age_band, campPlaced, rate):")
     for _, row in bottom.iterrows():
         lines.append(
             f"- {row['age_band']} / {row['campPlaced']}: "
             f"{row['weighted_return_rate']:.4f} (w={row['weighted_count']:.2f})"
         )
     lines.append("")
-    lines.append("CampPlaced gaps (yes - no) by age_band:")
+    lines.append("CampPlaced gaps (Delta between placed and unplaced camps; yes - no) by age_band:")
     for _, row in gaps.iterrows():
         if pd.isna(row.get("gap_yes_minus_no")):
             continue

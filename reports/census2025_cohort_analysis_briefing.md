@@ -267,25 +267,25 @@ Write an insight memo (short paragraphs + bullets) explaining:
 - Under-30 trends
 - Key caveats and small-N warnings
 
-Key stats:
+Key stats (Global linear trends across all cohorts):
 - Overall retention trend slope: 0.012984 per cohort year
 - Under-30 share slope: 0.001709 per cohort year
 
-Top retention cells (age_band, campPlaced, rate):
+Top retention cells (Highest likelihood of return; age_band, campPlaced, rate):
 - 35-39 / no: 1.0000 (w=1.08)
 - 50-59 / no: 1.0000 (w=0.31)
 - 40-49 / no: 1.0000 (w=0.21)
 - 40-49 / yes: 1.0000 (w=0.63)
 - 50-59 / no: 1.0000 (w=2.67)
 
-Lowest retention cells (age_band, campPlaced, rate):
+Lowest retention cells (Lowest return rates; age_band, campPlaced, rate):
 - 29-34 / yes: 0.0000 (w=0.76)
 - <=22 / no: 0.0000 (w=1.59)
 - 29-34 / no: 0.0000 (w=1.38)
 - 50-59 / no: 0.0000 (w=3.46)
 - 60+ / no: 0.0000 (w=1.68)
 
-CampPlaced gaps (yes - no) by age_band:
+CampPlaced gaps (Delta between placed and unplaced camps; yes - no) by age_band:
 - <=22: 0.6667
 - 23-28: -0.1843
 - 29-34: -0.0025
