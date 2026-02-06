@@ -29,6 +29,8 @@
    - Tables: `reports/census_next_gen_rs/census2025_cohort_retention.csv`
    - Trends: `reports/census_next_gen_rs/census2025_cohort_trends.csv`
    - Under-30 share: `reports/census_next_gen_rs/census2025_under30_share.csv`
+   - First-timer camp share: `reports/census_next_gen_rs/census2025_firsttimer_camp_share.csv`
+   - Multi-year retention (pooled): `reports/census_next_gen_rs/census2025_multiyear_retention.csv`
    - Briefing prompt: `reports/census_next_gen_rs/census2025_cohort_analysis_briefing.md`
    - Visuals (Plotly HTML): `reports/census_next_gen_rs/figures/`
 
@@ -64,6 +66,10 @@
   exist, the value is treated as missing and excluded from results.
 - Rows are filtered to valid `age` (bucketed into fixed age bands) and `campPlaced` in {yes, no}.
 - Return rates are weighted: sum(weights * return_next_year) / sum(weights).
+- Important: This is computed from the 2025 census respondent sample only. For recent
+  cohorts (e.g., cohort_year = 2024), return_next_year is right-censored and biased upward
+  because the sample already consists of 2025 attendees. Near-100% return rates for the
+  most recent cohort are a sampling artifact, not population retention.
 - Outputs:
   - Cohort table: `cohort_year x age_band x campPlaced`
   - Aggregated table: `age_band x campPlaced`

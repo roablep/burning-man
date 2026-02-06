@@ -43,6 +43,16 @@ def parse_args() -> argparse.Namespace:
         default="reports/census_next_gen_rs/census2025_cohort_trends.md",
         help="Output markdown summary path.",
     )
+    parser.add_argument(
+        "--output-firsttimer-camp-csv",
+        default="reports/census_next_gen_rs/census2025_firsttimer_camp_share.csv",
+        help="Output CSV path for first-timer camp placement share table.",
+    )
+    parser.add_argument(
+        "--output-multiyear-retention-csv",
+        default="reports/census_next_gen_rs/census2025_multiyear_retention.csv",
+        help="Output CSV path for multi-year retention (pooled across cohorts).",
+    )
     return parser.parse_args()
 
 
@@ -111,12 +121,54 @@ def compute_return_next_year(
     return pd.Series(values, index=cohort_year.index)
 
 
+def compute_return_in_offset_year(
+    cohort_year: pd.Series,
+    attended: pd.DataFrame,
+    offset: int,
+) -> pd.Series:
+    year_set = set(attended.columns)
+    values: list[float] = []
+    for idx, year in cohort_year.items():
+        if pd.isna(year):
+            values.append(np.nan)
+            continue
+        target_year = int(year) + offset
+        if target_year not in year_set:
+            values.append(np.nan)
+            continue
+        values.append(1.0 if attended.loc[idx, target_year] == 1 else 0.0)
+    return pd.Series(values, index=cohort_year.index)
+
+
+def compute_return_after_offset(
+    cohort_year: pd.Series,
+    attended: pd.DataFrame,
+    offset: int,
+) -> pd.Series:
+    year_set = sorted(attended.columns)
+    values: list[float] = []
+    for idx, year in cohort_year.items():
+        if pd.isna(year):
+            values.append(np.nan)
+            continue
+        start_year = int(year) + offset
+        future_years = [y for y in year_set if y >= start_year]
+        if not future_years:
+            values.append(np.nan)
+            continue
+        attended_any = any(attended.loc[idx, y] == 1 for y in future_years)
+        values.append(1.0 if attended_any else 0.0)
+    return pd.Series(values, index=cohort_year.index)
+
+
 def build_age_band(age: pd.Series) -> pd.Series:
     age_band = pd.cut(age, bins=AGE_BINS, labels=AGE_LABELS, right=True)
     return pd.Categorical(age_band, categories=AGE_LABELS, ordered=True)
 
 
-def prepare_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[int, list[str]]]:
+def prepare_dataframe(
+    df: pd.DataFrame,
+) -> tuple[pd.DataFrame, dict[int, list[str]], pd.DataFrame]:
     year_map = discover_attended_year_columns(df)
     attended = build_attended_year_matrix(df, year_map)
 
@@ -126,7 +178,13 @@ def prepare_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, dict[int, list[st
     df["age_band"] = build_age_band(df["age"])
     df["campPlaced_clean"] = df["campPlaced"].where(df["campPlaced"].isin(["yes", "no"]))
     df["under30"] = df["age_band"].isin(["<=22", "23-28"])
-    return df, year_map
+    if "virgin" in df.columns:
+        df["first_timer"] = df["virgin"] == "virgin"
+    elif "nburns" in df.columns:
+        df["first_timer"] = df["nburns"] == 1
+    else:
+        df["first_timer"] = False
+    return df, year_map, attended
 
 
 def weighted_return_rate(group: pd.DataFrame) -> float:
@@ -204,11 +262,88 @@ def build_under30_share_table(df: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+def build_multiyear_retention_table(df: pd.DataFrame) -> pd.DataFrame:
+    segments = {
+        "overall": df,
+        "under30": df.loc[df["under30"]],
+        "age30plus": df.loc[~df["under30"]],
+    }
+    rows = []
+    metrics = [
+        ("return_year_1", "return_1yr"),
+        ("return_year_2", "return_2yr"),
+        ("return_year_3plus", "return_3plus"),
+    ]
+    for segment_name, segment_df in segments.items():
+        for camp_label in ["yes", "no"]:
+            subset = segment_df.loc[segment_df["campPlaced_clean"] == camp_label]
+            for column, metric in metrics:
+                metric_df = subset.loc[subset[column].notna()]
+                if metric_df.empty:
+                    continue
+                rows.append(
+                    {
+                        "segment": segment_name,
+                        "campPlaced": camp_label,
+                        "metric": metric,
+                        "weighted_count": float(metric_df["weights"].sum()),
+                        "weighted_return_rate": float(
+                            (metric_df["weights"] * metric_df[column]).sum()
+                            / metric_df["weights"].sum()
+                        ),
+                        "unweighted_n": int(metric_df.shape[0]),
+                    }
+                )
+    table = pd.DataFrame(rows)
+    return table.sort_values(
+        ["segment", "campPlaced", "metric"],
+        ignore_index=True,
+    )
+
+
+def build_firsttimer_camp_share_table(df: pd.DataFrame) -> pd.DataFrame:
+    subset = df.loc[df["first_timer"]]
+    subset = subset.loc[subset["campPlaced_clean"].notna()]
+    subset = subset.loc[subset["age_band"].notna() & subset["cohort_year"].notna()]
+
+    rows = []
+    grouped = subset.groupby(["cohort_year", "age_band"], dropna=False, observed=False)
+    for (cohort_year, age_band), group in grouped:
+        if pd.isna(cohort_year) or pd.isna(age_band):
+            continue
+        yes_weight = float(group.loc[group["campPlaced_clean"] == "yes", "weights"].sum())
+        no_weight = float(group.loc[group["campPlaced_clean"] == "no", "weights"].sum())
+        total_weight = yes_weight + no_weight
+        share = (yes_weight / total_weight) if total_weight > 0 else 0.0
+        rows.append(
+            {
+                "cohort_year": int(cohort_year),
+                "age_band": age_band,
+                "weighted_yes_count": yes_weight,
+                "weighted_no_count": no_weight,
+                "weighted_total_count": total_weight,
+                "camp_placed_share": share,
+                "unweighted_n": int(group.shape[0]),
+            }
+        )
+    table = pd.DataFrame(rows)
+    if not table.empty:
+        table["age_band"] = pd.Categorical(
+            table["age_band"], categories=AGE_LABELS, ordered=True
+        )
+    return table.sort_values(
+        ["cohort_year", "age_band"],
+        ignore_index=True,
+    )
+
+
 def build_markdown_summary(
     df: pd.DataFrame,
     year_map: dict[int, list[str]],
     trends: pd.DataFrame,
     under30_share: pd.DataFrame,
+    firsttimer_camp_share: pd.DataFrame,
+    multiyear_retention: pd.DataFrame,
     input_path: Path,
 ) -> str:
     total_rows = len(df)
@@ -246,6 +381,22 @@ def build_markdown_summary(
         "`under30_share`, `unweighted_n`."
     )
     lines.append(f"- Rows: `{len(under30_share)}`")
+    lines.append("")
+    lines.append("## First-Timer Camp Placement Share")
+    lines.append("")
+    lines.append(
+        "Saved to CSV with columns: `cohort_year`, `age_band`, `weighted_yes_count`, "
+        "`weighted_no_count`, `weighted_total_count`, `camp_placed_share`, `unweighted_n`."
+    )
+    lines.append(f"- Rows: `{len(firsttimer_camp_share)}`")
+    lines.append("")
+    lines.append("## Multi-Year Retention (Pooled Across Cohorts)")
+    lines.append("")
+    lines.append(
+        "Saved to CSV with columns: `segment`, `campPlaced`, `metric`, "
+        "`weighted_count`, `weighted_return_rate`, `unweighted_n`."
+    )
+    lines.append(f"- Rows: `{len(multiyear_retention)}`")
     return "\n".join(lines)
 
 
@@ -255,16 +406,24 @@ def main() -> None:
     output_csv = Path(args.output_csv)
     output_under30_csv = Path(args.output_under30_csv)
     output_md = Path(args.output_md)
+    output_firsttimer_csv = Path(args.output_firsttimer_camp_csv)
+    output_multiyear_csv = Path(args.output_multiyear_retention_csv)
 
     sheet = normalize_sheet(args.sheet)
     df = pd.read_excel(input_path, sheet_name=sheet)
-    df, year_map = prepare_dataframe(df)
+    df, year_map, attended = prepare_dataframe(df)
 
-    base_mask = df["cohort_year"].notna() & df["return_next_year"].notna()
-    df = df.loc[base_mask]
+    df["return_year_1"] = compute_return_in_offset_year(df["cohort_year"], attended, 1)
+    df["return_year_2"] = compute_return_in_offset_year(df["cohort_year"], attended, 2)
+    df["return_year_3plus"] = compute_return_after_offset(df["cohort_year"], attended, 3)
 
-    trends = build_trend_table(df)
-    under30_share = build_under30_share_table(df)
+    base_mask = df["cohort_year"].notna() & df["return_year_1"].notna()
+    df_return = df.loc[base_mask]
+
+    trends = build_trend_table(df_return)
+    under30_share = build_under30_share_table(df_return)
+    firsttimer_camp_share = build_firsttimer_camp_share_table(df)
+    multiyear_retention = build_multiyear_retention_table(df)
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     trends.to_csv(output_csv, index=False)
@@ -272,13 +431,29 @@ def main() -> None:
     output_under30_csv.parent.mkdir(parents=True, exist_ok=True)
     under30_share.to_csv(output_under30_csv, index=False)
 
+    output_firsttimer_csv.parent.mkdir(parents=True, exist_ok=True)
+    firsttimer_camp_share.to_csv(output_firsttimer_csv, index=False)
+
+    output_multiyear_csv.parent.mkdir(parents=True, exist_ok=True)
+    multiyear_retention.to_csv(output_multiyear_csv, index=False)
+
     output_md.parent.mkdir(parents=True, exist_ok=True)
-    summary = build_markdown_summary(df, year_map, trends, under30_share, input_path)
+    summary = build_markdown_summary(
+        df,
+        year_map,
+        trends,
+        under30_share,
+        firsttimer_camp_share,
+        multiyear_retention,
+        input_path,
+    )
     output_md.write_text(summary, encoding="utf-8")
 
     print("Census 2025 cohort trend outputs written.")
     print(f"- Trend CSV: {output_csv}")
     print(f"- Under-30 share CSV: {output_under30_csv}")
+    print(f"- First-timer camp share CSV: {output_firsttimer_csv}")
+    print(f"- Multi-year retention CSV: {output_multiyear_csv}")
     print(f"- Markdown: {output_md}")
     print("")
     print("Trend preview (overall, campPlaced=all):")

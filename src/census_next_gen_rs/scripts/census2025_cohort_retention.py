@@ -12,6 +12,10 @@ Methodology (high-level):
    - weighted_count = sum(weights)
    - weighted_return_rate = sum(weights * return_next_year) / sum(weights)
    - unweighted_n = row count
+Note: This analysis is computed from the 2025 census respondent sample only. For recent
+cohorts (e.g., 2024), "return_next_year" is right-censored and biased upward because the
+sample already consists of 2025 attendees. Interpret near-100% return rates for the most
+recent cohort as a sampling artifact, not true population retention.
 Outputs:
 - CSV: cohort_year x age_band x campPlaced table
 - Markdown: summary + aggregated age_band x campPlaced table
