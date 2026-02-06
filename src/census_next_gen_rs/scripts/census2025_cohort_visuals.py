@@ -8,9 +8,10 @@ from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 AGE_LABELS = ["<=22", "23-28", "29-34", "35-39", "40-49", "50-59", "60+"]
-SMALL_N_THRESHOLD = 30.0
+SMALL_N_THRESHOLD = 15.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,14 +66,14 @@ def prepare_retention_by_age_band(retention: pd.DataFrame) -> pd.DataFrame:
 def prepare_retention_trends(trends: pd.DataFrame) -> pd.DataFrame:
     df = trends.copy()
     df = df.loc[df["segment"] == "overall"]
-    df = df.loc[df["campPlaced"].isin(["all", "yes", "no"])]
+    df = df.loc[df["campPlaced"].isin(["yes", "no"])]
     df["small_n"] = df["weighted_count"] < SMALL_N_THRESHOLD
     return df.sort_values(["cohort_year", "campPlaced"])
 
 
 def prepare_under30_share(under30: pd.DataFrame) -> pd.DataFrame:
     df = under30.copy()
-    df = df.loc[df["campPlaced"].isin(["all", "yes", "no"])]
+    df = df.loc[df["campPlaced"].isin(["yes", "no"])]
     df["small_n"] = df["total_weighted_count"] < SMALL_N_THRESHOLD
     return df.sort_values(["cohort_year", "campPlaced"])
 
@@ -160,25 +161,44 @@ def build_retention_heatmap(df: pd.DataFrame) -> px.imshow:
         values="unweighted_n",
         aggfunc="sum",
     )
-    fig = px.imshow(
-        rate_pivot,
-        color_continuous_scale="Greens",
-        labels=dict(x="Cohort year", y="Age band", color="Return rate"),
-        title="Return-Next-Year Heatmap (Age Band x Cohort Year)",
-        aspect="auto",
-    )
-    fig.update_traces(
-        customdata=n_pivot.values,
-        hovertemplate=(
-            "Cohort year: %{x}"
-            "<br>Age band: %{y}"
-            "<br>Return rate: %{z:.1%}"
-            "<br>Unweighted n: %{customdata}"
-            "<extra></extra>"
+    fig = go.Figure()
+    fig.add_trace(
+        go.Heatmap(
+            z=rate_pivot.values,
+            x=rate_pivot.columns,
+            y=rate_pivot.index,
+            colorscale=px.colors.sequential.Greens,
+            colorbar=dict(title="Return rate", tickformat=".0%"),
+            customdata=n_pivot.values,
+            hovertemplate=(
+                "Cohort year: %{x}"
+                "<br>Age band: %{y}"
+                "<br>Return rate: %{z:.1%}"
+                "<br>Unweighted n: %{customdata}"
+                "<extra></extra>"
+            ),
         )
     )
+    small_n_mask = (n_pivot.values < SMALL_N_THRESHOLD).astype(float)
+    fig.add_trace(
+        go.Heatmap(
+            z=small_n_mask,
+            x=rate_pivot.columns,
+            y=rate_pivot.index,
+            colorscale=[
+                [0.0, "rgba(255,255,255,0.0)"],
+                [1.0, "rgba(255,255,255,0.6)"],
+            ],
+            showscale=False,
+            hoverinfo="skip",
+        )
+    )
+    fig.update_layout(
+        title="Return-Next-Year Heatmap (Age Band x Cohort Year)",
+        xaxis_title="Cohort year",
+        yaxis_title="Age band",
+    )
     fig.update_yaxes(categoryorder="array", categoryarray=AGE_LABELS)
-    fig.update_coloraxes(colorbar_tickformat=".0%")
     return fig
 
 
