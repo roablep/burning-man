@@ -397,6 +397,16 @@ def build_markdown_summary(
         "`weighted_count`, `weighted_return_rate`, `unweighted_n`."
     )
     lines.append(f"- Rows: `{len(multiyear_retention)}`")
+    if not multiyear_retention.empty:
+        lines.append("")
+        lines.append("| segment | campPlaced | metric | weighted_count | weighted_return_rate | unweighted_n |")
+        lines.append("|---|---|---|---|---|---|")
+        for _, row in multiyear_retention.iterrows():
+            lines.append(
+                f"| {row['segment']} | {row['campPlaced']} | {row['metric']} | "
+                f"{row['weighted_count']:.2f} | {row['weighted_return_rate']:.4f} | "
+                f"{int(row['unweighted_n'])} |"
+            )
     return "\n".join(lines)
 
 

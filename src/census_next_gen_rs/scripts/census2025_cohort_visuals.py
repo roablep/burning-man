@@ -113,6 +113,18 @@ def write_plot(fig, output_path: Path) -> None:
     fig.write_html(output_path, include_plotlyjs="cdn")
 
 
+def write_table(df: pd.DataFrame, output_dir: Path, stem: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    csv_path = output_dir / f"{stem}.csv"
+    md_path = output_dir / f"{stem}.md"
+    df.to_csv(csv_path, index=False)
+    try:
+        markdown = df.to_markdown(index=False)
+    except Exception:
+        markdown = df.to_csv(index=False, sep="|")
+    md_path.write_text(markdown, encoding="utf-8")
+
+
 def build_retention_by_age_band_chart(retention: pd.DataFrame) -> go.Figure:
     years = sorted(retention["cohort_year"].dropna().unique())
     if years:
@@ -216,6 +228,14 @@ def build_retention_slopegraph_last10(retention: pd.DataFrame) -> go.Figure:
     fig.update_yaxes(tickformat=".0%")
     fig.update_layout(legend_title_text="Cohort year")
     return fig
+
+
+def build_retention_slopegraph_table_last10(retention: pd.DataFrame) -> pd.DataFrame:
+    df = retention.copy()
+    df = df.loc[df["campPlaced"].isin(["yes", "no"])]
+    df = df.loc[df["age_band"].isin(AGE_LABELS)]
+    df = filter_last_n_years(df, n_years=10)
+    return df.sort_values(["cohort_year", "age_band", "campPlaced"]).reset_index(drop=True)
 
 
 def build_retention_trends_chart(df: pd.DataFrame) -> px.line:
@@ -325,6 +345,41 @@ def build_under30_ribbon_last10(under30: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def build_under30_ribbon_table_last10(under30: pd.DataFrame) -> pd.DataFrame:
+    df = filter_last_n_years(under30, n_years=10)
+    df = df.loc[df["campPlaced"].isin(["yes", "no"])]
+    df = df.sort_values(["cohort_year", "campPlaced"])
+    df["cohort_year"] = df["cohort_year"].astype(int)
+
+    yes_df = df.loc[df["campPlaced"] == "yes"]
+    no_df = df.loc[df["campPlaced"] == "no"]
+    merged = pd.merge(
+        yes_df[
+            [
+                "cohort_year",
+                "under30_share",
+                "under30_weighted_count",
+                "total_weighted_count",
+            ]
+        ],
+        no_df[
+            [
+                "cohort_year",
+                "under30_share",
+                "under30_weighted_count",
+                "total_weighted_count",
+            ]
+        ],
+        on="cohort_year",
+        suffixes=("_yes", "_no"),
+    ).sort_values("cohort_year")
+
+    merged["gap_yes_minus_no"] = merged["under30_share_yes"] - merged["under30_share_no"]
+    merged["upper_share"] = merged[["under30_share_yes", "under30_share_no"]].max(axis=1)
+    merged["lower_share"] = merged[["under30_share_yes", "under30_share_no"]].min(axis=1)
+    return merged.reset_index(drop=True)
+
+
 def build_retention_gap_line_last10(retention: pd.DataFrame) -> go.Figure:
     df = retention.copy()
     df = df.loc[df["campPlaced"].isin(["yes", "no"])]
@@ -356,6 +411,42 @@ def build_retention_gap_line_last10(retention: pd.DataFrame) -> go.Figure:
     fig.add_hline(y=0, line_dash="dash", line_color="gray")
     fig.update_yaxes(tickformat=".0%")
     return fig
+
+
+def build_retention_gap_table_last10(retention: pd.DataFrame) -> pd.DataFrame:
+    df = retention.copy()
+    df = df.loc[df["campPlaced"].isin(["yes", "no"])]
+    df = df.loc[df["age_band"].isin(AGE_LABELS)]
+    df = filter_last_n_years(df, n_years=10)
+    df["cohort_year"] = df["cohort_year"].astype(int)
+
+    rate_pivot = df.pivot_table(
+        index=["cohort_year", "age_band"],
+        columns="campPlaced",
+        values="weighted_return_rate",
+        aggfunc="mean",
+    )
+    n_pivot = df.pivot_table(
+        index=["cohort_year", "age_band"],
+        columns="campPlaced",
+        values="unweighted_n",
+        aggfunc="sum",
+    )
+    table = (
+        rate_pivot.join(n_pivot, lsuffix="_rate", rsuffix="_n")
+        .reset_index()
+        .rename(
+            columns={
+                "yes_rate": "yes_rate",
+                "no_rate": "no_rate",
+                "yes_n": "yes_unweighted_n",
+                "no_n": "no_unweighted_n",
+            }
+        )
+    )
+    table["gap_yes_minus_no"] = table["yes_rate"] - table["no_rate"]
+    table["min_unweighted_n"] = table[["yes_unweighted_n", "no_unweighted_n"]].min(axis=1)
+    return table.sort_values(["cohort_year", "age_band"]).reset_index(drop=True)
 
 
 def build_retention_gap_heatmap_last10(retention: pd.DataFrame) -> go.Figure:
@@ -421,6 +512,10 @@ def build_retention_gap_heatmap_last10(retention: pd.DataFrame) -> go.Figure:
     )
     fig.update_yaxes(categoryorder="array", categoryarray=AGE_LABELS)
     return fig
+
+
+def build_retention_gap_heatmap_table_last10(retention: pd.DataFrame) -> pd.DataFrame:
+    return build_retention_gap_table_last10(retention)
 
 
 def build_retention_heatmap(df: pd.DataFrame) -> px.imshow:
@@ -551,6 +646,10 @@ def build_retention_heatmap_by_camp_last10(retention: pd.DataFrame) -> go.Figure
     return fig
 
 
+def build_retention_heatmap_by_camp_table_last10(retention: pd.DataFrame) -> pd.DataFrame:
+    return build_retention_slopegraph_table_last10(retention)
+
+
 def build_firsttimer_camp_share_heatmap(df: pd.DataFrame) -> go.Figure:
     share_pivot = df.pivot_table(
         index="age_band",
@@ -615,6 +714,7 @@ def main() -> None:
     firsttimer = pd.read_csv(firsttimer_path) if firsttimer_path.exists() else None
 
     output_dir = Path(args.output_dir)
+    table_output_dir = output_dir.parent
 
     trends_overall = prepare_retention_trends(trends)
     under30_share = prepare_under30_share(under30)
@@ -639,6 +739,32 @@ def main() -> None:
 
     for filename, fig in charts.items():
         write_plot(fig, output_dir / filename)
+
+    write_table(
+        build_retention_slopegraph_table_last10(retention),
+        table_output_dir,
+        "retention_slopegraph_age_band_last10",
+    )
+    write_table(
+        build_retention_heatmap_by_camp_table_last10(retention),
+        table_output_dir,
+        "retention_heatmap_by_camp_last10",
+    )
+    write_table(
+        build_under30_ribbon_table_last10(under30_share),
+        table_output_dir,
+        "under30_share_ribbon_last10",
+    )
+    write_table(
+        build_retention_gap_table_last10(retention),
+        table_output_dir,
+        "retention_gap_line_last10",
+    )
+    write_table(
+        build_retention_gap_heatmap_table_last10(retention),
+        table_output_dir,
+        "retention_gap_heatmap_last10",
+    )
 
     print("Cohort visuals written.")
     for filename in charts:
