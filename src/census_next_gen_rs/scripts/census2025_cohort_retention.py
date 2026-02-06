@@ -1,5 +1,21 @@
 #!/usr/bin/env python3
-"""Generate weighted cohort retention tables for the 2025 census dataset."""
+"""Generate weighted cohort retention tables for the 2025 census dataset.
+
+Methodology (high-level):
+1) Identify attended-years columns like attendedYears.YYYY (e.g., attendedYears.1990Baker).
+2) For each year, collapse multiple columns into a single 0/1 indicator by taking max
+   across that year's columns (any attendance counts as attended).
+3) Define cohort_year as the earliest year with attended == 1 for each respondent.
+4) Define return_next_year as whether the respondent attended cohort_year + 1.
+   If the next-year column does not exist, return_next_year is NaN and excluded.
+5) Segment to age bands and campPlaced (yes/no only) and compute:
+   - weighted_count = sum(weights)
+   - weighted_return_rate = sum(weights * return_next_year) / sum(weights)
+   - unweighted_n = row count
+Outputs:
+- CSV: cohort_year x age_band x campPlaced table
+- Markdown: summary + aggregated age_band x campPlaced table
+"""
 
 from __future__ import annotations
 

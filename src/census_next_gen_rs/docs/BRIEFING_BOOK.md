@@ -4,6 +4,19 @@
 
 This request supports an intergenerational engagement initiative aimed at addressing the sharp decline in younger participants at Burning Man  \-  from \~30% under-30 in 2014 to \~12% today. The initiative explores the role of **theme camps as recruitment, acculturation, and retention engines** for younger burners.
 
+## **Goals & Objectives**
+
+**Goals**
+- Reverse or better understand the decline in under-30 participation by identifying how theme camps influence recruitment, acculturation, and retention.
+- Treat the Census as a partner for cultural sustainability research, not just a data source.
+
+**Objectives**
+- Diagnose the problem: separate recruitment vs. retention dynamics for younger participants.
+- Quantify the camp effect: measure under-30 participation and return rates by placed vs. non-placed camps.
+- Provide actionable benchmarks: anonymized metrics camps can compare to citywide averages (e.g., % under-30, % virgins, retention).
+- Inform program design: identify factors that correlate with stronger retention to guide next-gen engagement.
+- Set up future research: move toward longitudinal and on-playa methods (EMA/intercepts) that capture belonging and return intent.
+
 ## **Why This Matters**
 
 - **Sustainability of Culture:** Camps rely on new members to survive; younger participants bring energy, longevity, and fresh perspectives.  
@@ -135,4 +148,3 @@ This is a compact, analysis-focused subset of the weighted dataset. Columns are 
 | `campKStreetSide` | string | Camp K street side (sparse). |
 
 Additional candidate fields can be promoted once we lock cohort/retention definitions.
-
