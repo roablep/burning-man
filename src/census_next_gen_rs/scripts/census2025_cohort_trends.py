@@ -174,6 +174,14 @@ def prepare_dataframe(
 
     df = df.copy()
     df["cohort_year"] = compute_cohort_year(attended)
+
+    # Fix: Infer cohort_year for virgins who don't have attendedYears data
+    # Virgins responding to the 2025 census are first-time attendees in 2025
+    if "virgin" in df.columns and year_map:
+        census_year = max(year_map.keys())  # Assume census year is the latest year in data
+        is_virgin_no_cohort = (df["virgin"] == "virgin") & df["cohort_year"].isna()
+        df.loc[is_virgin_no_cohort, "cohort_year"] = float(census_year)
+
     df["return_next_year"] = compute_return_next_year(df["cohort_year"], attended)
     df["age_band"] = build_age_band(df["age"])
     df["campPlaced_clean"] = df["campPlaced"].where(df["campPlaced"].isin(["yes", "no"]))
@@ -331,10 +339,11 @@ def build_firsttimer_camp_share_table(df: pd.DataFrame) -> pd.DataFrame:
         table["age_band"] = pd.Categorical(
             table["age_band"], categories=AGE_LABELS, ordered=True
         )
-    return table.sort_values(
-        ["cohort_year", "age_band"],
-        ignore_index=True,
-    )
+        return table.sort_values(
+            ["cohort_year", "age_band"],
+            ignore_index=True,
+        )
+    return table
 
 
 def build_markdown_summary(
