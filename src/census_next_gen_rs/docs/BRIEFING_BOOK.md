@@ -100,4 +100,32 @@ Primary output: **aggregate “belonging & retention” maps** to inform cultura
 
 The Census already plays a foundational role in documenting who we are as a community.  
 This project proposes a natural extension of that mission:  
-→ to **listen actively, engage continuously, and design intentionally** for the cultural resilience of Burning Man’s future generations.  
+→ to **listen actively, engage continuously, and design intentionally** for the cultural resilience of Burning Man’s future generations.
+---
+
+## **2025 Weighted Raw Data**
+
+A data dictionary for the newly available weighted raw dataset is available here: `src/census_next_gen_rs/docs/census2025_weighted_data_dictionary.md`
+
+It summarizes column names, data types, missingness, unique counts, and a few sample values.
+---
+
+## **Key Fields For 2025 Analysis (Draft)**
+
+This is a compact, analysis-focused subset of the weighted dataset. Columns are from the raw file unless noted as derived.
+
+| Field | Type | Notes |
+|---|---|---|
+| `weights` | numeric | Survey weights; use for population-weighted stats. |
+| `age` | integer | Respondent age in years. |
+| `age_band` (derived) | categorical | Bins used for initial analysis: `<=22`, `23-28`, `29-34`, `35-39`, `40-49`, `50-59`, `60+`. |
+| `campPlaced` | string | Placed camp membership (values seen: `yes`, `no`, `dontKnow`). |
+| `nburns` | numeric | Number of Burns attended (as reported). |
+| `virgin` | string | First-time indicator (values seen: `virgin`, `not virgin`). |
+| `campAddressStreet` | string | Camp address street (sparse). |
+| `campCenterCampRadial` | string | Camp radial (very sparse). |
+| `campStreetSide` | string | Camp street side (sparse). |
+| `campKStreetSide` | string | Camp K street side (sparse). |
+
+Additional candidate fields can be promoted once we lock cohort/retention definitions.
+
