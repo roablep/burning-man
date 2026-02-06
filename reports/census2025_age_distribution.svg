@@ -1,0 +1,26 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='324'>
+<style>text { font-family: Arial, sans-serif; font-size: 12px; }</style>
+<text x='180' y='28' font-size='16' font-weight='bold'>Age Distribution (Weighted %)</text>
+<text x='180' y='309' font-size='12'>Share of respondents</text>
+<text x='10' y='65'><=22</text>
+<rect x='180' y='50' width='21.0' height='22' fill='#2b6cb0' />
+<text x='207.0' y='65'>0.8%</text>
+<text x='10' y='97'>23-28</text>
+<rect x='180' y='82' width='204.4' height='22' fill='#2b6cb0' />
+<text x='390.4' y='97'>7.8%</text>
+<text x='10' y='129'>29-34</text>
+<rect x='180' y='114' width='516.2' height='22' fill='#2b6cb0' />
+<text x='702.2' y='129'>19.8%</text>
+<text x='10' y='161'>35-39</text>
+<rect x='180' y='146' width='568.7' height='22' fill='#2b6cb0' />
+<text x='754.7' y='161'>21.8%</text>
+<text x='10' y='193'>40-49</text>
+<rect x='180' y='178' width='680.0' height='22' fill='#2b6cb0' />
+<text x='866.0' y='193'>26.1%</text>
+<text x='10' y='225'>50-59</text>
+<rect x='180' y='210' width='407.6' height='22' fill='#2b6cb0' />
+<text x='593.6' y='225'>15.6%</text>
+<text x='10' y='257'>60+</text>
+<rect x='180' y='242' width='211.3' height='22' fill='#2b6cb0' />
+<text x='397.3' y='257'>8.1%</text>
+</svg>

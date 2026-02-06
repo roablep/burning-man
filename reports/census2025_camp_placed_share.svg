@@ -1,0 +1,17 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='228'>
+<style>text { font-family: Arial, sans-serif; font-size: 12px; }</style>
+<text x='180' y='28' font-size='16' font-weight='bold'>Placed Camp Membership (Weighted %)</text>
+<text x='180' y='213' font-size='12'>Share of respondents</text>
+<text x='10' y='65'>yes</text>
+<rect x='180' y='50' width='680.0' height='22' fill='#c05621' />
+<text x='866.0' y='65'>73.9%</text>
+<text x='10' y='97'>no</text>
+<rect x='180' y='82' width='197.7' height='22' fill='#c05621' />
+<text x='383.7' y='97'>21.5%</text>
+<text x='10' y='129'>dontKnow</text>
+<rect x='180' y='114' width='40.7' height='22' fill='#c05621' />
+<text x='226.7' y='129'>4.4%</text>
+<text x='10' y='161'>missing</text>
+<rect x='180' y='146' width='2.0' height='22' fill='#c05621' />
+<text x='188.0' y='161'>0.2%</text>
+</svg>
