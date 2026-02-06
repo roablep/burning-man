@@ -107,13 +107,13 @@ This project proposes a natural extension of that mission:
 
 A data dictionary for the newly available weighted raw dataset is available here:
 
-- `reports/census2025_weighted_data_dictionary.md`
+- `reports/census_next_gen_rs/census2025_weighted_data_dictionary.md`
 
 It summarizes column names, data types, missingness, unique counts, and a few sample values.
 
 Initial weighted distributions are here:
 
-- `reports/census2025_weighted_quick_stats.md`
+- `reports/census_next_gen_rs/census2025_weighted_quick_stats.md`
 
 ---
 

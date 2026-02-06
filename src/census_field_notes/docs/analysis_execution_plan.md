@@ -31,7 +31,7 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
     -   [x] **Keyword Extraction:** Identify top unique words for Virgins vs. Veterans.
     -   [x] **LLM Analysis:** Ask Gemini to summarize the "Core Driver of Change" for a sample of each cohort.
 - [x] **Hypothesis Test:** Verify if "Ego Death" is a Virgin trait and "Service" is a Veteran trait.
-- [x] **Output:** `reports/module_1_transformation.md`
+- [x] **Output:** `reports/field_notes/module_1_transformation.md`
 
 - [x] **Module 2: Maslow’s Inverted Pyramid (Survival vs. Epiphany)**
 *Research Question:* Does physical hardship correlate with emotional breakthrough?
@@ -41,7 +41,7 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
     -   [x] **Hardship Index:** Score responses based on mentions of "Mud", "Dust", "Heat", "Hunger".
     -   [x] **Epiphany Index:** Score "Transformation" responses for "Life Changing" sentiment.
     -   [x] **Correlation:** Plot/Check overlap. Do those with high Hardship scores have high Epiphany scores?
-- [x] **Output:** `reports/module_2_survival.md`
+- [x] **Output:** `reports/field_notes/module_2_survival.md`
 
 - [x] **Module 3: The Mask vs. The Mirror (Identity)**
 *Research Question:* Is the costume a mask (hiding) or a mirror (revealing)?
@@ -53,7 +53,7 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
         -   *Type B: Revealing/Authenticity*
         -   *Type C: Play/Fun*
     -   [x] **Cross-Reference:** Check if *Type B* respondents report higher "Positive Interactions" in Diversity Q7.
-- [x] **Output:** `reports/module_3_identity.md`
+- [x] **Output:** `reports/field_notes/module_3_identity.md`
 
 - [x] **Module 4: Sacred vs. Profane (Symbolism)**
 *Research Question:* How do "The Man" and "The Temple" differ in emotional coding?
@@ -62,7 +62,7 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
 - [x] **Analysis Script (`analyze_symbolism.py`):**
     -   [x] **Sentiment Contrast:** Compare sentiment scores for "The Man" vs. "The Temple".
     -   [x] **Gender Split:** Analyze if Men vs. Women describe these icons differently.
-- [x] **Output:** `reports/module_4_symbolism.md`
+- [x] **Output:** `reports/field_notes/module_4_symbolism.md`
 
 - [x] **Module 5: The "Other" in Utopia (Radical Inclusion)**
 *Research Question:* How does the minority experience differ in Black Rock City?
@@ -71,7 +71,7 @@ Before diving into specific modules, ensure the data is ready and the toolkit is
 - [x] **Analysis Script (`analyze_diversity.py`):**
     -   [x] **Pain Point Identification:** Cluster the "Negative" experiences for this group.
     -   [x] **Code Switching:** Analyze mentions of modifying behavior/appearance.
-- [x] **Output:** `reports/module_5_diversity.md`
+- [x] **Output:** `reports/field_notes/module_5_diversity.md`
 
 ## 7. Final Synthesis
 - [ ] **Compile:** Aggregate all module reports into a master `FINAL_ANALYSIS_REPORT.md`.

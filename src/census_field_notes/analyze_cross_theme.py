@@ -20,7 +20,7 @@ from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 DATA_DIR = "src/census/data"
-REPORT_DIR = "reports/cross_theme"
+REPORT_DIR = "reports/field_notes/cross_theme"
 
 MIN_SINGLE_N = 15
 MIN_TWO_WAY_N = 15

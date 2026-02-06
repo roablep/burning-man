@@ -157,16 +157,16 @@ Parsed CSV (one column per question)
 1. **Module 1: Transformation by Tenure** (`analyze_transformation.py`)
    - Theme extraction using LLM (Gemini 2.0 Flash Lite)
    - Cohort comparison (Virgin vs. Sophomore vs. Veteran vs. Elder)
-   - Output: `reports/module_1_transformation.md`
+   - Output: `reports/field_notes/module_1_transformation.md`
 
 2. **Module 2: Survival as Catalyst** (`analyze_survival.py`)
    - Keyword detection for hardship vs. breakthrough
    - Testing "The Ordeal Hypothesis"
-   - Output: `reports/module_2_survival.md`
+   - Output: `reports/field_notes/module_2_survival.md`
 
 3. **Basic Demographic Statistics** (`generate_basic_stats.py`)
    - Age, gender, region, tenure histograms
-   - Output: `src/census/reports/basic_stats_report.md`
+   - Output: `src/census/reports/field_notes/basic_stats_report.md`
 
 ---
 
@@ -512,10 +512,10 @@ burning-man/
 │       ├── analyze_survival.py (Module 2)
 │       ├── analysis_plan.md (theoretical framework)
 │       ├── analysis_execution_plan.md (project management)
-│       └── reports/
+│       └── reports/field_notes/
 │           ├── basic_stats_report.md
 │           ├── module_1_transformation.md
-├── reports/ (top-level consolidated reports)
+├── reports/field_notes/ (top-level consolidated reports)
 │   ├── module_1_transformation.md
 │   ├── module_2_survival.md
 ├── analysis_cache/ (LLM response cache to avoid re-runs)
@@ -696,7 +696,7 @@ As seen in Module 1 "Representative Voices," some transcriptions are heavily gar
    ```bash
    python src/census/generate_basic_stats.py
    ```
-7. **Read existing reports** in `reports/` to see what's been discovered
+7. **Read existing reports** in `reports/field_notes/` to see what's been discovered
 
 ### Understanding the Research Philosophy
 
@@ -729,7 +729,7 @@ This project sits at the intersection of:
 | `src/census/analysis_utils.py` | Shared utilities (load data, call LLM, cache) |
 | `src/census/data/{year}-field-note-transcriptions-normalized.csv` | **Primary dataset** |
 | `src/census/data/question-set-{year}.md` | Survey instruments (what was asked) |
-| `reports/` | Analysis outputs (markdown reports) |
+| `reports/field_notes/` | Analysis outputs (markdown reports) |
 
 ---
 

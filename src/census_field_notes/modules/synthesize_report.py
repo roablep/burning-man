@@ -23,7 +23,7 @@ def run_synthesis():
     # Check for reports in project root
     # Assuming script is run from project root, or we need to find root relative to this script
     # This script is in src/census/modules/
-    # Reports are in reports/ (project root)
+    # Reports are in reports/field_notes/ (project root)
     
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
     reports_dir = os.path.join(project_root, "reports")

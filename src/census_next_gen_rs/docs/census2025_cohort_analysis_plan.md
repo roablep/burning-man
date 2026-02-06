@@ -54,12 +54,12 @@ We will build a cohort retention analysis using the weighted 2025 dataset. Cohor
      - weighted count (`sum(weights)`)
      - weighted return rate (`sum(weights * return_next_year) / sum(weights)`)
 5. **Reporting**
-   - Save a cohort table to `reports/` (CSV + brief markdown summary).
+   - Save a cohort table to `reports/census_next_gen_rs/` (CSV + brief markdown summary).
    - Produce 1–2 plots (optional if matplotlib/plotly already in project).
 
 ## Public Interfaces / Files
 - New analysis script in `src/census_next_gen_rs/` (exact filename TBD).
-- New output files in `reports/` (e.g., `reports/census2025_cohort_retention.md`, `reports/census2025_cohort_retention.csv`).
+- New output files in `reports/census_next_gen_rs/` (e.g., `reports/census_next_gen_rs/census2025_cohort_retention.md`, `reports/census_next_gen_rs/census2025_cohort_retention.csv`).
 
 ## Tests
 - Add `tests/test_cohort_retention.py` with:
