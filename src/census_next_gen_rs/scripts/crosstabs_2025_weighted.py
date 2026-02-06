@@ -95,6 +95,14 @@ def write_csv(df: pd.DataFrame, path: Path) -> None:
     df.to_csv(path)
 
 
+def flatten_columns(df: pd.DataFrame, sep: str = "__") -> pd.DataFrame:
+    if not isinstance(df.columns, pd.MultiIndex):
+        return df.copy()
+    flat = df.copy()
+    flat.columns = [sep.join(map(str, col)).strip() for col in flat.columns]
+    return flat
+
+
 def write_markdown_table(df: pd.DataFrame, path: Path, title: str) -> None:
     def esc(val: object) -> str:
         text = str(val)
@@ -201,6 +209,19 @@ def main() -> None:
     write_csv(combined, combined_counts_csv)
     write_csv(combined_pct, combined_pct_csv)
 
+    combined_flat = flatten_columns(combined)
+    combined_pct_flat = flatten_columns(combined_pct)
+
+    combined_counts_flat_csv = (
+        output_dir / "census2025_crosstab_counts_all_campPlaced_flat.csv"
+    )
+    combined_pct_flat_csv = (
+        output_dir / "census2025_crosstab_pct_all_campPlaced_flat.csv"
+    )
+
+    write_csv(combined_flat, combined_counts_flat_csv)
+    write_csv(combined_pct_flat, combined_pct_flat_csv)
+
     write_markdown_table(
         combined,
         report_path,
@@ -211,9 +232,22 @@ def main() -> None:
         report_path,
         title="Row % (within age band) — campPlaced x nburns_bucket (combined)",
     )
+    write_markdown_table(
+        combined_flat,
+        report_path,
+        title="Weighted Counts — campPlaced x nburns_bucket (combined, flat)",
+    )
+    write_markdown_table(
+        combined_pct_flat,
+        report_path,
+        title="Row % (within age band) — campPlaced x nburns_bucket (combined, flat)",
+    )
 
     print("combined campPlaced x nburns_bucket:")
     print(combined)
+    print("")
+    print("combined campPlaced x nburns_bucket (flat):")
+    print(combined_flat)
     print("")
 
     print(f"Wrote markdown report to {report_path}")
