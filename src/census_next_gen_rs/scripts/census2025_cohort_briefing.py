@@ -20,22 +20,22 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--cohort-retention",
-        default="reports/census2025_cohort_retention.csv",
+        default="reports/census_next_gen_rs/census2025_cohort_retention.csv",
         help="Path to cohort retention CSV.",
     )
     parser.add_argument(
         "--cohort-trends",
-        default="reports/census2025_cohort_trends.csv",
+        default="reports/census_next_gen_rs/census2025_cohort_trends.csv",
         help="Path to cohort trends CSV.",
     )
     parser.add_argument(
         "--under30-share",
-        default="reports/census2025_under30_share.csv",
+        default="reports/census_next_gen_rs/census2025_under30_share.csv",
         help="Path to under-30 share CSV.",
     )
     parser.add_argument(
         "--output-md",
-        default="reports/census2025_cohort_analysis_briefing.md",
+        default="reports/census_next_gen_rs/census2025_cohort_analysis_briefing.md",
         help="Output markdown path.",
     )
     return parser.parse_args()

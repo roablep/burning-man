@@ -26,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output",
-        default="reports/census2025_weighted_quick_stats.md",
+        default="reports/census_next_gen_rs/census2025_weighted_quick_stats.md",
         help="Output markdown path.",
     )
     return parser.parse_args()

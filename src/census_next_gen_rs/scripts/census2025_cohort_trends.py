@@ -30,17 +30,17 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-csv",
-        default="reports/census2025_cohort_trends.csv",
+        default="reports/census_next_gen_rs/census2025_cohort_trends.csv",
         help="Output CSV path for cohort trend table.",
     )
     parser.add_argument(
         "--output-under30-csv",
-        default="reports/census2025_under30_share.csv",
+        default="reports/census_next_gen_rs/census2025_under30_share.csv",
         help="Output CSV path for under-30 share table.",
     )
     parser.add_argument(
         "--output-md",
-        default="reports/census2025_cohort_trends.md",
+        default="reports/census_next_gen_rs/census2025_cohort_trends.md",
         help="Output markdown summary path.",
     )
     return parser.parse_args()

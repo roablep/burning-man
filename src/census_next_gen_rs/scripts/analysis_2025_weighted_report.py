@@ -33,7 +33,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-report",
-        default="reports/census2025_weighted_analysis_report.md",
+        default="reports/census_next_gen_rs/census2025_weighted_analysis_report.md",
         help="Output markdown report path.",
     )
     parser.add_argument(
@@ -480,7 +480,7 @@ def main() -> None:
     age_table = pd.DataFrame({"age_band": AGE_LABELS, "weighted_pct": [f"{age_dist.get(label, 0.0):.1f}%" for label in AGE_LABELS]})
     lines.append(format_table(age_table))
     lines.append("")
-    lines.append("Chart: `reports/census2025_age_distribution.svg`")
+    lines.append("Chart: `reports/census_next_gen_rs/census2025_age_distribution.svg`")
     lines.append("")
 
     lines.append("### Camp Placement (Weighted %)")
@@ -488,7 +488,7 @@ def main() -> None:
     camp_table = pd.DataFrame({"campPlaced": ["yes", "no", "dontKnow", "missing"], "weighted_pct": [f"{camp_dist.get(label, 0.0):.1f}%" for label in ["yes", "no", "dontKnow", "missing"]]})
     lines.append(format_table(camp_table))
     lines.append("")
-    lines.append("Chart: `reports/census2025_camp_placed_share.svg`")
+    lines.append("Chart: `reports/census_next_gen_rs/census2025_camp_placed_share.svg`")
     lines.append("")
 
     lines.append("### Under-30 Share by Camp Placement (Weighted %)")
@@ -527,7 +527,7 @@ def main() -> None:
 
     lines.append("## Crosstabs")
     lines.append("")
-    lines.append("See `reports/census2025_weighted_crosstabs.md` and CSV outputs in `reports/`.")
+    lines.append("See `reports/census_next_gen_rs/census2025_weighted_crosstabs.md` and CSV outputs in `reports/census_next_gen_rs/`.")
     lines.append("")
 
     lines.append("## Retention: Return Next Year")
@@ -536,7 +536,7 @@ def main() -> None:
     lines.append("")
     lines.append(format_table(retention_table))
     lines.append("")
-    lines.append("Chart: `reports/census2025_return_rate_by_age_camp.svg`")
+    lines.append("Chart: `reports/census_next_gen_rs/census2025_return_rate_by_age_camp.svg`")
     lines.append("")
 
     lines.append("## Inference (Weighted Logistic Regression)")
