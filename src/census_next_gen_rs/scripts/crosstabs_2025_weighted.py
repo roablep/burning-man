@@ -130,6 +130,16 @@ def write_markdown_table(df: pd.DataFrame, path: Path, title: str) -> None:
         path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def write_markdown_intro(path: Path) -> None:
+    intro = [
+        "TL;DR: Weighted Counts = summed survey `weights` per cell.",
+        "Row % = each cell as a percent of its `age_band` row (rows sum to 100%).",
+        "",
+    ]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(intro), encoding="utf-8")
+
+
 def main() -> None:
     args = parse_args()
     input_path = Path(args.input)
@@ -148,6 +158,7 @@ def main() -> None:
     report_path = output_dir / "census2025_weighted_crosstabs.md"
     if report_path.exists():
         report_path.unlink()
+    write_markdown_intro(report_path)
 
     print("Generating weighted crosstabs...")
 
