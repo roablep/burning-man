@@ -16,6 +16,7 @@ from modules import (
     analyze_symbolism,
     analyze_diversity,
     analyze_relationships,
+    analyze_next_gen,
     synthesize_report
 )
 import analyze_cross_theme
@@ -43,6 +44,7 @@ async def main():
         ("Module 4: Symbolism", analyze_symbolism.run_analysis),
         ("Module 5: Diversity", analyze_diversity.run_analysis),
         ("Module 6: Relationships", analyze_relationships.run_analysis),
+        ("Module 7: Next Gen / Rising Sparks", analyze_next_gen.run_analysis),
         ("Synthesis: Final Report", synthesize_report.run_synthesis)
     ]
 

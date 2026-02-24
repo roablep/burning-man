@@ -42,6 +42,28 @@ def get_age_bucket(age_val):
     else:
         return "50+"
 
+def get_generation_bucket(age_val):
+    """
+    Returns a generational bucket string based on age (approximate birth years).
+    GenZ: < 28 (Born 1997-2012)
+    Millennial: 28-43 (Born 1981-1996)
+    GenX: 44-59 (Born 1965-1980)
+    Boomer+: 60+ (Born 1964 and earlier)
+    """
+    try:
+        age = int(age_val)
+    except (ValueError, TypeError):
+        return "Unknown"
+
+    if age < 28:
+        return "GenZ"
+    elif age < 44:
+        return "Millennial"
+    elif age < 60:
+        return "GenX"
+    else:
+        return "Boomer+"
+
 def load_data(year=2024, survey_type=None) -> List[Dict[str, Any]]:
     """
     Loads normalized data for a specific year.
@@ -163,11 +185,13 @@ async def batch_process_with_llm(
     return results
 
 def save_report(filename, content):
-    """Saves a markdown report to the reports directory."""
-    if not os.path.exists("reports"):
-        os.makedirs("reports")
+    """Saves a markdown report to the reports directory, creating subdirs if needed."""
+    base_dir = "reports"
+    path = os.path.join(base_dir, filename)
     
-    path = os.path.join("reports", filename)
+    # Ensure all parent directories exist
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
     print(f"Report saved to {path}")
