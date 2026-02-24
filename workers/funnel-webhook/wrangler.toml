@@ -1,0 +1,24 @@
+name = "funnel-webhook"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# Secrets (set via `wrangler secret put <KEY>` — never commit values):
+# BREVO_API_KEY        – Brevo transactional email + contact API key
+# TWILIO_ACCOUNT_SID   – Twilio account SID
+# TWILIO_AUTH_TOKEN    – Twilio auth token
+# TWILIO_FROM_NUMBER   – Twilio SMS sender number (+1XXXXXXXXXX)
+# SHEETS_SERVICE_CREDS – Google service account JSON (base64-encoded)
+# SHEETS_SPREADSHEET_ID – Target Google Sheet ID
+# TYPEFORM_WEBHOOK_SECRET – Typeform webhook secret for signature verification
+
+[[d1_databases]]
+binding = "DB"
+database_name = "funnel-db"
+database_id = "YOUR_D1_DATABASE_ID"   # replace after `wrangler d1 create funnel-db`
+
+# Nightly camp-profile embedding refresh
+[[triggers.crons]]
+crons = ["0 3 * * *"]

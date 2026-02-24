@@ -1,0 +1,15 @@
+{
+  "name": "funnel-webhook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker: Typeform webhook → Brevo + Twilio + Google Sheets + D1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create funnel-db",
+    "db:migrate": "wrangler d1 execute funnel-db --file=src/schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
