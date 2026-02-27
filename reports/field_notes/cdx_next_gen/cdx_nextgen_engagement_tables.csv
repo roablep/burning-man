@@ -1,0 +1,23 @@
+group_type,group_value,metric_name,metric_value,n,year_scope,question_family,notes
+year,2024,next_gen_share,0.18335343787696018,1658,2024,all,
+year,2025,next_gen_share,0.17266187050359713,139,2025,all,
+question_family,Boundaries of Humanity,next_gen_share,0.21428571428571427,126,pooled,Boundaries of Humanity,
+question_family,Diversity & Inclusion,next_gen_share,0.20535714285714285,112,pooled,Diversity & Inclusion,
+question_family,Emotions & Experiences,next_gen_share,0.17721518987341772,316,pooled,Emotions & Experiences,
+question_family,Other,next_gen_share,0.1794478527607362,652,pooled,Other,
+question_family,Relationships,next_gen_share,0.17054263565891473,129,pooled,Relationships,
+question_family,Survival,next_gen_share,0.20105820105820105,189,pooled,Survival,
+question_family,Symbolism,next_gen_share,0.16216216216216217,148,pooled,Symbolism,
+question_family,Transformation,next_gen_share,0.168,125,pooled,Transformation,
+next_gen_tenure,Elder,avg_response_len_words,,9,pooled,all,suppressed_low_n<20
+next_gen_tenure,Elder,avg_answered_open_questions,,9,pooled,all,suppressed_low_n<20
+next_gen_tenure,Sophomore,avg_response_len_words,27.53061224489796,98,pooled,all,
+next_gen_tenure,Sophomore,avg_answered_open_questions,3.5816326530612246,98,pooled,all,
+next_gen_tenure,Unknown,avg_response_len_words,23.14814814814815,54,pooled,all,
+next_gen_tenure,Unknown,avg_answered_open_questions,3.0185185185185186,54,pooled,all,
+next_gen_tenure,Veteran,avg_response_len_words,24.71794871794872,39,pooled,all,
+next_gen_tenure,Veteran,avg_answered_open_questions,3.717948717948718,39,pooled,all,
+next_gen_tenure,Virgin,avg_response_len_words,24.0859375,128,pooled,all,
+next_gen_tenure,Virgin,avg_answered_open_questions,3.5859375,128,pooled,all,
+next_gen_age_band,25-29,share_within_next_gen,0.6158536585365854,202,pooled,all,
+next_gen_age_band,<25,share_within_next_gen,0.38414634146341464,126,pooled,all,

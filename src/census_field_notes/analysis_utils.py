@@ -4,6 +4,7 @@ import json
 import time
 import asyncio
 import hashlib
+import random
 from typing import List, Dict, Any, Type, Optional
 from google import genai
 from google.genai import types
@@ -97,7 +98,10 @@ async def batch_process_with_llm(
     prompt_template: str, 
     response_schema: Optional[Type[BaseModel]] = None,
     batch_size: int = 10,
-    rate_limit_delay: float = 1.0
+    rate_limit_delay: float = 1.0,
+    max_retries: int = 4,
+    retry_base_delay: float = 2.0,
+    retry_max_delay: float = 20.0,
 ) -> List[Any]:
     """
     Processes a list of text items using the LLM with a given prompt.
@@ -132,49 +136,71 @@ async def batch_process_with_llm(
     # 2. Process Uncached
     sem = asyncio.Semaphore(batch_size)
 
+    def _is_retryable_error(message: str) -> bool:
+        upper = message.upper()
+        retryable_tokens = (
+            "503",
+            "UNAVAILABLE",
+            "429",
+            "RESOURCE_EXHAUSTED",
+            "INTERNAL",
+            "500",
+            "502",
+            "504",
+            "DEADLINE_EXCEEDED",
+        )
+        return any(token in upper for token in retryable_tokens)
+
     async def _process(idx):
         item = items[idx]
         cache_key = f"{prompt_template}::{item}::{str(response_schema)}"
         cache_path = get_cache_path(cache_key)
         
         async with sem:
-            try:
-                full_prompt = prompt_template.replace("{{TEXT}}", item)
-                
-                config_kwargs = {}
-                if response_schema:
-                    config_kwargs["response_mime_type"] = "application/json"
-                    config_kwargs["response_schema"] = response_schema
+            full_prompt = prompt_template.replace("{{TEXT}}", item)
+            config_kwargs = {}
+            if response_schema:
+                config_kwargs["response_mime_type"] = "application/json"
+                config_kwargs["response_schema"] = response_schema
 
-                response = await client.aio.models.generate_content(
-                    model=model_id,
-                    contents=full_prompt,
-                    config=types.GenerateContentConfig(**config_kwargs)
-                )
-                
-                # Extract Result
-                if response_schema:
-                    # Parse JSON
-                    # Usually response.text is the JSON string
-                    # We can use response.parsed if the SDK supports it directly with types
-                    # But text + json.loads is safest common denominator
-                    try:
-                        result_data = json.loads(response.text)
-                    except json.JSONDecodeError:
-                        print(f"JSON Decode Error for item {idx}")
-                        result_data = {"error": "Invalid JSON"}
-                else:
-                    result_data = response.text.strip()
-                
-                # Save to cache
-                with open(cache_path, 'w') as f:
-                    json.dump({'response': result_data}, f)
-                
-                results[idx] = result_data
-                
-            except Exception as e:
-                print(f"Error processing item {idx}: {e}")
-                results[idx] = {"error": str(e)}
+            for attempt in range(max_retries + 1):
+                try:
+                    response = await client.aio.models.generate_content(
+                        model=model_id,
+                        contents=full_prompt,
+                        config=types.GenerateContentConfig(**config_kwargs)
+                    )
+                    
+                    # Extract Result
+                    if response_schema:
+                        try:
+                            result_data = json.loads(response.text)
+                        except json.JSONDecodeError:
+                            print(f"JSON Decode Error for item {idx}")
+                            result_data = {"error": "Invalid JSON"}
+                    else:
+                        result_data = response.text.strip()
+                    
+                    # Save to cache
+                    with open(cache_path, 'w') as f:
+                        json.dump({'response': result_data}, f)
+                    
+                    results[idx] = result_data
+                    break
+                except Exception as e:
+                    error_msg = str(e)
+                    retryable = _is_retryable_error(error_msg)
+                    if retryable and attempt < max_retries:
+                        delay = min(retry_max_delay, retry_base_delay * (2 ** attempt)) + random.uniform(0, 0.5)
+                        print(
+                            f"Transient error for item {idx} (attempt {attempt + 1}/{max_retries + 1}): {e}. "
+                            f"Retrying in {delay:.1f}s..."
+                        )
+                        await asyncio.sleep(delay)
+                        continue
+                    print(f"Error processing item {idx}: {e}")
+                    results[idx] = {"error": error_msg}
+                    break
             
             # Rate limit chill
             await asyncio.sleep(rate_limit_delay)
