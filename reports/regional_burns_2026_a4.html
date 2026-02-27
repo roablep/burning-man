@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regional Burns Schedule 2026</title>
+  <style>
+    :root {
+      --paper: #fbf8f2;
+      --ink: #1e2933;
+      --muted: #5a6b75;
+      --accent: #cc4b18;
+      --line: #d9d2c3;
+      --usa: #b03a1a;
+      --canada: #355c7d;
+      --australia: #2f7f64;
+      --south-africa: #7c4b9a;
+      --international: #886f4c;
+      --virtual: #3f4a8a;
+    }
+
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, #fff8e8, var(--paper) 55%);
+      line-height: 1.35;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 8mm 8mm 4mm;
+    }
+
+    header {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 6mm;
+      margin-bottom: 5mm;
+      background: linear-gradient(135deg, #fff7dc, #f8efe4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 3mm 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .legend {
+      margin-top: 4mm;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm 3mm;
+      font-size: 11px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 1mm 2.5mm;
+      border: 1px solid currentColor;
+      font-weight: 600;
+    }
+
+    .tag.usa { color: var(--usa); }
+    .tag.canada { color: var(--canada); }
+    .tag.australia { color: var(--australia); }
+    .tag.south-africa { color: var(--south-africa); }
+    .tag.international { color: var(--international); }
+    .tag.virtual { color: var(--virtual); }
+
+    .month-block {
+      margin-bottom: 5mm;
+      page-break-inside: avoid;
+    }
+
+    .month-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--line);
+      margin-bottom: 2.5mm;
+      padding-bottom: 1mm;
+    }
+
+    .month-header h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    .month-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+    }
+
+    .event-card {
+      border: 1.5px solid var(--line);
+      border-left-width: 6px;
+      border-radius: 10px;
+      padding: 2.5mm 3mm;
+      background: #fffdf9;
+      break-inside: avoid;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .event-card.usa { border-left-color: var(--usa); }
+    .event-card.canada { border-left-color: var(--canada); }
+    .event-card.australia { border-left-color: var(--australia); }
+    .event-card.south-africa { border-left-color: var(--south-africa); }
+    .event-card.international { border-left-color: var(--international); }
+    .event-card.virtual { border-left-color: var(--virtual); }
+
+    .date-chip {
+      display: inline-block;
+      background: rgba(204, 75, 24, 0.09);
+      border: 1px solid rgba(204, 75, 24, 0.25);
+      color: #8f3110;
+      padding: 0.4mm 2mm;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1.3mm;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .location {
+      margin: 1mm 0 1mm;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .blurb {
+      margin: 0;
+      font-size: 11.2px;
+      color: #2c3942;
+    }
+
+    footer {
+      margin-top: 4mm;
+      border-top: 1px dashed var(--line);
+      padding-top: 2mm;
+      color: var(--muted);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    @media print {
+      body {
+        background: var(--paper);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Regional Burns Calendar 2026</h1>
+      <p class="subtitle">Chronological guide to upcoming regional burns and decompression gatherings. Designed for clean A4 printing.</p>
+      <div class="legend">
+        <span class="tag usa">USA</span>
+        <span class="tag canada">Canada</span>
+        <span class="tag australia">Australia</span>
+        <span class="tag south-africa">South Africa</span>
+        <span class="tag international">Other International</span>
+        <span class="tag virtual">Virtual</span>
+      </div>
+    </header>
+
+    <section class="month-block">
+      <div class="month-header">
+        <h2>February 2026</h2>
+        <p>1 event</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card usa">
+          <div class="date-chip">Feb 28</div>
+          <h3>Melting Man</h3>
+          <p class="location">North Dakota, USA</p>
+          <p class="blurb">A Midwest regional gathering bringing local burners together for connection and community.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>March 2026</h2>
+        <p>3 events</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card usa">
+          <div class="date-chip">Mar 21</div>
+          <h3>SF Burnal Equinox 2026: The Cosmic Treehouse</h3>
+          <p class="location">California, USA</p>
+          <p class="blurb">San Francisco’s official “midpoint between Burns” celebration of art and community.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Mar 27</div>
+          <h3>Frostburn Decompression</h3>
+          <p class="location">West Virginia, USA</p>
+          <p class="blurb">A cozy mountain decompression weekend focused on connection and creativity.</p>
+        </article>
+        <article class="event-card canada">
+          <div class="date-chip">Mar 28</div>
+          <h3>taBURNak!</h3>
+          <p class="location">Canada</p>
+          <p class="blurb">A one-night immersive regional experience rooted in participation and art.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>April 2026</h2>
+        <p>12 events</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card australia">
+          <div class="date-chip">Apr 01</div>
+          <h3>Blazing Swan</h3>
+          <p class="location">Western Australia, Australia</p>
+          <p class="blurb">Western Australia’s large-scale regional burn and week-long temporary city.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Apr 03</div>
+          <h3>Helsinki Decompression</h3>
+          <p class="location">Finland</p>
+          <p class="blurb">A Finnish decompression weekend celebrating art, performance, and co-creation.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 15</div>
+          <h3>SNRG – Southern Nevada Regional Gathering</h3>
+          <p class="location">Nevada, USA</p>
+          <p class="blurb">A desert regional gathering centered on fire art, camps, and radical inclusion.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Apr 16</div>
+          <h3>European Leadership Summit 2026</h3>
+          <p class="location">Netherlands</p>
+          <p class="blurb">A global summit convening Regional Contacts and community leaders.</p>
+        </article>
+        <article class="event-card virtual">
+          <div class="date-chip">Apr 17</div>
+          <h3>Burn2 Burnal Equinox</h3>
+          <p class="location">Online</p>
+          <p class="blurb">A virtual Burnal Equinox gathering hosted in the online Burn2 world.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 17</div>
+          <h3>Colorado Burnal Equinox (CBE)</h3>
+          <p class="location">Colorado, USA</p>
+          <p class="blurb">Colorado’s official Burnal Equinox celebration of art and performance.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 22</div>
+          <h3>Saguaro Man 2026 ~ Succulent Dystopia</h3>
+          <p class="location">USA</p>
+          <p class="blurb">A multi-day desert campout built on self-reliance and participatory art.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 23</div>
+          <h3>Burning Flipside</h3>
+          <p class="location">Texas, USA</p>
+          <p class="blurb">Texas’s long-running regional burn rooted in gifting and Leave No Trace.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 25</div>
+          <h3>Burnal Equinox WNY</h3>
+          <p class="location">New York, USA</p>
+          <p class="blurb">Western New York’s spring kickoff celebrating DJs, art, and community.</p>
+        </article>
+        <article class="event-card south-africa">
+          <div class="date-chip">Apr 26</div>
+          <h3>AfrikaBurn 2026 Through The Prism</h3>
+          <p class="location">South Africa</p>
+          <p class="blurb">A large-scale temporary city in the Tankwa Karoo desert.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Apr 30</div>
+          <h3>UnSCruz: Absurdia</h3>
+          <p class="location">California, USA</p>
+          <p class="blurb">A four-day Central California campout of art, music, and weirdness.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Apr 30</div>
+          <h3>Dragon Burn</h3>
+          <p class="location">China</p>
+          <p class="blurb">China’s regional burn celebrating art, fire, and participatory culture.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>May 2026</h2>
+        <p>10 events</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card usa">
+          <div class="date-chip">May 06</div>
+          <h3>BEquinox 2026: Think Outside the Box</h3>
+          <p class="location">California, USA</p>
+          <p class="blurb">Los Angeles’s official regional spring gathering.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 06</div>
+          <h3>Reclaimation</h3>
+          <p class="location">Kentucky, USA</p>
+          <p class="blurb">A Kentucky regional blending Southern hospitality with burner principles.</p>
+        </article>
+        <article class="event-card canada">
+          <div class="date-chip">May 14</div>
+          <h3>SideBurn</h3>
+          <p class="location">Ontario, Canada</p>
+          <p class="blurb">An Ontario arts and camping event shaped entirely by participant offerings.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 14</div>
+          <h3>InterFuse</h3>
+          <p class="location">Missouri, USA</p>
+          <p class="blurb">A Midwest four-day experiment in intentional community.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">May 18</div>
+          <h3>Burning Nest</h3>
+          <p class="location">United Kingdom</p>
+          <p class="blurb">A woodland week of art, play, and mischief in Devon.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 21</div>
+          <h3>SOAK</h3>
+          <p class="location">Oregon, USA</p>
+          <p class="blurb">Oregon’s long-running regional fostering participatory arts and experimentation.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 21</div>
+          <h3>Playa del Fuego</h3>
+          <p class="location">Pennsylvania, USA</p>
+          <p class="blurb">The Mid-Atlantic’s oldest regional burn built on collaboration and gifting.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 22</div>
+          <h3>Ignite!</h3>
+          <p class="location">Virginia, USA</p>
+          <p class="blurb">A “learn ’n’ burn” regional blending education, art, and camping.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">May 22</div>
+          <h3>Wicked Burn</h3>
+          <p class="location">Maine, USA</p>
+          <p class="blurb">A Maine forest gathering centered on creativity and community.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">May 26</div>
+          <h3>Crème Brûlée</h3>
+          <p class="location">France</p>
+          <p class="blurb">A rural French regional celebrating art, workshops, and co-creation.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>June 2026</h2>
+        <p>7 events</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card usa">
+          <div class="date-chip">Jun 04</div>
+          <h3>To The Moon</h3>
+          <p class="location">Tennessee, USA</p>
+          <p class="blurb">A Tennessee camping festival of art, music, and fire.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jun 04</div>
+          <h3>This Event Is Cancelled (T.E.I.C.)</h3>
+          <p class="location">Kansas, USA</p>
+          <p class="blurb">A Kansas regional inspired by the 10 Principles and volunteer-run culture.</p>
+        </article>
+        <article class="event-card canada">
+          <div class="date-chip">Jun 04</div>
+          <h3>OtherWorld</h3>
+          <p class="location">British Columbia, Canada</p>
+          <p class="blurb">A Vancouver Island gathering focused on art, music, and co-creation.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jun 10</div>
+          <h3>Apogaea – Mythos &amp; Mechanica</h3>
+          <p class="location">Colorado, USA</p>
+          <p class="blurb">Colorado’s flagship regional celebrating art, sustainability, and inclusion.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Jun 18</div>
+          <h3>Where the Sheep Sleep</h3>
+          <p class="location">Netherlands</p>
+          <p class="blurb">A four-day immersive Dutch burn built entirely by participants.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jun 24</div>
+          <h3>Element 11</h3>
+          <p class="location">Utah, USA</p>
+          <p class="blurb">Utah’s desert regional celebrating radical self-expression and art.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jun 30</div>
+          <h3>Firefly</h3>
+          <p class="location">Massachusetts, USA</p>
+          <p class="blurb">A New England woods gathering dedicated to DIY experiential art.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>July 2026</h2>
+        <p>14 events</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card international">
+          <div class="date-chip">Jul 02</div>
+          <h3>Amber Burn</h3>
+          <p class="location">Lithuania</p>
+          <p class="blurb">Lithuania’s volunteer-run regional focused on creative self-reliance.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Jul 09</div>
+          <h3>Art Baer</h3>
+          <p class="location">Germany</p>
+          <p class="blurb">A Berlin-organized summer event centered on art and playful experimentation.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jul 09</div>
+          <h3>Cosmic Burn: Choose Your Own Adventure</h3>
+          <p class="location">New York, USA</p>
+          <p class="blurb">A five-day Ithaca gathering culminating in a communal effigy burn.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Jul 12</div>
+          <h3>Nowhere</h3>
+          <p class="location">Spain</p>
+          <p class="blurb">A creative desert gathering in northern Spain grounded in the 10 Principles.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jul 13</div>
+          <h3>Critical Northwest</h3>
+          <p class="location">Washington, USA</p>
+          <p class="blurb">A Pacific Northwest week-long forest burn inspired by playa culture.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jul 15</div>
+          <h3>Lakes of Fire</h3>
+          <p class="location">Michigan, USA</p>
+          <p class="blurb">The Great Lakes region’s annual collaborative art burn.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jul 16</div>
+          <h3>Transformus</h3>
+          <p class="location">North Carolina, USA</p>
+          <p class="blurb">A North Carolina camping event of parades, art, and radical self-expression.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Jul 20</div>
+          <h3>The Borderland</h3>
+          <p class="location">Sweden</p>
+          <p class="blurb">A week-long Swedish burn built through decentralized co-creation.</p>
+        </article>
+        <article class="event-card australia">
+          <div class="date-chip">Jul 21</div>
+          <h3>Modifyre</h3>
+          <p class="location">Australia</p>
+          <p class="blurb">An Australian regional focused on gift economy and participatory art.</p>
+        </article>
+        <article class="event-card usa">
+          <div class="date-chip">Jul 23</div>
+          <h3>PortalBurn</h3>
+          <p class="location">New York, USA</p>
+          <p class="blurb">A New York regional celebrating music, art, and creative self-expression.</p>
+        </article>
+        <article class="event-card canada">
+          <div class="date-chip">Jul 23</div>
+          <h3>What If?</h3>
+          <p class="location">British Columbia, Canada</p>
+          <p class="blurb">A 2,000+ person collaborative burn in British Columbia.</p>
+        </article>
+        <article class="event-card virtual">
+          <div class="date-chip">Jul 24</div>
+          <h3>Burn2 Conception</h3>
+          <p class="location">Online</p>
+          <p class="blurb">An online Burn2 event continuing the virtual burner tradition.</p>
+        </article>
+        <article class="event-card south-africa">
+          <div class="date-chip">Jul 25</div>
+          <h3>Afrikaburn Decompression</h3>
+          <p class="location">South Africa</p>
+          <p class="blurb">A post-AfrikaBurn gathering rekindling community and creative energy.</p>
+        </article>
+        <article class="event-card international">
+          <div class="date-chip">Jul 28</div>
+          <h3>RoBurn</h3>
+          <p class="location">Romania</p>
+          <p class="blurb">Romania’s week-long regional centered on art, music, and connection.</p>
+        </article>
+      </div>
+    </section>
+    <section class="month-block">
+      <div class="month-header">
+        <h2>August 2026</h2>
+        <p>1 event</p>
+      </div>
+      <div class="events-grid">
+        <article class="event-card international">
+          <div class="date-chip">Aug 05</div>
+          <h3>Schönburn</h3>
+          <p class="location">Austria</p>
+          <p class="blurb">An Austrian regional encouraging open expression and creative exploration.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>Prepared for print on A4 • Sorted by start date • 48 events</footer>
+  </main>
+</body>
+</html>

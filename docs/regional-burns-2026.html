@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Regional Burns Calendar · Rising Sparks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Variables ──────────────────────────────── */
+    :root {
+      --orange:  #ff9200;
+      --charcoal: #4a4a4a;
+      --cream:   #f7f3e9;
+      --black:   #1a1a1a;
+      --white:   #ffffff;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* ── Page / Print setup ─────────────────────── */
+    @page {
+      size: A4 portrait;
+      margin: 14mm 16mm;
+    }
+
+    @media print {
+      html, body { background: var(--cream) !important; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .page-header { -webkit-print-color-adjust: exact !important; }
+      a { text-decoration: none; color: inherit; }
+    }
+
+    /* ── Body ───────────────────────────────────── */
+    body {
+      background: var(--cream);
+      font-family: 'Merriweather', Georgia, serif;
+      color: var(--charcoal);
+      font-size: 8.5pt;
+      line-height: 1.5;
+    }
+
+    /* Screen wrapper so it looks nice in browser too */
+    @media screen {
+      body { padding: 0; }
+      .wrapper {
+        max-width: 210mm;
+        margin: 0 auto;
+        padding: 0 0 20mm;
+        background: var(--cream);
+        box-shadow: 0 0 40px rgba(0,0,0,0.15);
+      }
+    }
+
+    @media print {
+      .wrapper { max-width: none; padding: 0; box-shadow: none; }
+    }
+
+    /* ── Page Header ────────────────────────────── */
+    .page-header {
+      background: var(--black);
+      color: var(--cream);
+      padding: 10mm 16mm 8mm;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      /* Decorative arc — subtle background texture */
+      content: '';
+      position: absolute;
+      right: -30mm;
+      top: -20mm;
+      width: 90mm;
+      height: 90mm;
+      border-radius: 50%;
+      background: rgba(255,146,0,0.07);
+      pointer-events: none;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      right: -10mm;
+      bottom: -15mm;
+      width: 55mm;
+      height: 55mm;
+      border-radius: 50%;
+      background: rgba(255,146,0,0.05);
+      pointer-events: none;
+    }
+
+    .header-eyebrow {
+      font-family: 'Merriweather', serif;
+      font-size: 6.5pt;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4mm;
+    }
+
+    .header-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 36pt;
+      letter-spacing: 1.5px;
+      line-height: 0.95;
+      color: var(--cream);
+    }
+
+    .header-title em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 6mm;
+      margin-top: 4mm;
+      align-items: center;
+    }
+
+    .header-stat {
+      font-size: 7pt;
+      color: rgba(247,243,233,0.55);
+    }
+
+    .header-stat strong {
+      display: block;
+      font-family: 'Anton', sans-serif;
+      font-size: 13pt;
+      color: var(--cream);
+      letter-spacing: 0.5px;
+      font-weight: normal;
+      line-height: 1;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 8mm;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .header-tagline {
+      margin-left: auto;
+      font-style: italic;
+      font-size: 7.5pt;
+      color: rgba(247,243,233,0.5);
+      text-align: right;
+      max-width: 55mm;
+    }
+
+    /* ── Content area ───────────────────────────── */
+    .content {
+      padding: 6mm 16mm 0;
+    }
+
+    /* ── Month Section ──────────────────────────── */
+    .month-section {
+      margin-bottom: 5mm;
+    }
+
+    .month-header {
+      display: flex;
+      align-items: baseline;
+      gap: 3mm;
+      padding: 3.5mm 0 2.5mm;
+      border-top: 2.5px solid var(--orange);
+      margin-bottom: 2.5mm;
+      page-break-after: avoid;
+    }
+
+    .month-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 14pt;
+      letter-spacing: 1px;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .month-count {
+      font-size: 6.5pt;
+      color: var(--orange);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Events Grid ────────────────────────────── */
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5mm;
+    }
+
+    /* ── Event Card ─────────────────────────────── */
+    .event-card {
+      background: var(--white);
+      border-radius: 1.5mm;
+      padding: 3mm 3.5mm;
+      break-inside: avoid;
+      border-left: 2.5px solid transparent;
+      box-shadow: var(--card-shadow);
+      transition: border-color 0.15s;
+    }
+
+    @media screen {
+      .event-card:hover { border-left-color: var(--orange); }
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2.5mm;
+      margin-bottom: 1mm;
+    }
+
+    .event-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 8.5pt;
+      letter-spacing: 0.2px;
+      color: var(--black);
+      line-height: 1.2;
+      flex: 1;
+    }
+
+    .event-date {
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Merriweather', serif;
+      font-size: 6.5pt;
+      font-weight: 700;
+      padding: 0.8mm 2mm;
+      border-radius: 0.8mm;
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    .event-location {
+      font-size: 6.5pt;
+      color: #aaa;
+      margin-bottom: 1.2mm;
+      letter-spacing: 0.2px;
+    }
+
+    .event-description {
+      font-size: 6.5pt;
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    /* ── Footer ─────────────────────────────────── */
+    .page-footer {
+      margin: 6mm 16mm 0;
+      padding-top: 3mm;
+      border-top: 1px solid rgba(74,74,74,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 6.5pt;
+      color: #bbb;
+    }
+
+    .footer-brand {
+      font-family: 'Anton', sans-serif;
+      font-size: 10pt;
+      letter-spacing: 2px;
+      color: var(--orange);
+    }
+
+    .footer-links {
+      font-size: 6.5pt;
+      color: #bbb;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="page-header">
+    <div class="header-eyebrow">Burning Man Global Network · Rising Sparks</div>
+    <h1 class="header-title">2026 <em>Regional</em><br>Burns</h1>
+    <div class="header-meta">
+      <div class="header-stat">
+        <strong>48</strong>events
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-stat">
+        <strong>16+</strong>countries
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-stat">
+        <strong>Feb–Aug</strong>season
+      </div>
+      <div class="header-tagline">
+        A grassroots global calendar of participatory art &amp; community
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ CONTENT ═══ -->
+  <main class="content">
+
+    <!-- ── FEBRUARY ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">February</span>
+        <span class="month-count">1 event</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Melting Man</div>
+            <div class="event-date">Feb 28</div>
+          </div>
+          <div class="event-location">🇺🇸 North Dakota, USA</div>
+          <div class="event-description">A Midwest regional gathering bringing local burners together for connection and community.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MARCH ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">March</span>
+        <span class="month-count">3 events</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">SF Burnal Equinox 2026: The Cosmic Treehouse</div>
+            <div class="event-date">Mar 21</div>
+          </div>
+          <div class="event-location">🇺🇸 California, USA</div>
+          <div class="event-description">San Francisco's official "midpoint between Burns" celebration of art and community.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Frostburn Decompression</div>
+            <div class="event-date">Mar 27</div>
+          </div>
+          <div class="event-location">🇺🇸 West Virginia, USA</div>
+          <div class="event-description">A cozy mountain decompression weekend focused on connection and creativity.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">taBURNak!</div>
+            <div class="event-date">Mar 28</div>
+          </div>
+          <div class="event-location">🇨🇦 Canada</div>
+          <div class="event-description">A one-night immersive regional experience rooted in participation and art.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── APRIL ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">April</span>
+        <span class="month-count">12 events</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Blazing Swan</div>
+            <div class="event-date">Apr 1</div>
+          </div>
+          <div class="event-location">🇦🇺 Western Australia, Australia</div>
+          <div class="event-description">Western Australia's large-scale regional burn and week-long temporary city.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Helsinki Decompression</div>
+            <div class="event-date">Apr 3</div>
+          </div>
+          <div class="event-location">🇫🇮 Finland</div>
+          <div class="event-description">A Finnish decompression weekend celebrating art, performance, and co-creation.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">SNRG – Southern Nevada Regional Gathering</div>
+            <div class="event-date">Apr 15</div>
+          </div>
+          <div class="event-location">🇺🇸 Nevada, USA</div>
+          <div class="event-description">A desert regional gathering centered on fire art, camps, and radical inclusion.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">European Leadership Summit 2026</div>
+            <div class="event-date">Apr 16</div>
+          </div>
+          <div class="event-location">🇳🇱 Netherlands</div>
+          <div class="event-description">A global summit convening Regional Contacts and community leaders.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Burn2 Burnal Equinox</div>
+            <div class="event-date">Apr 17</div>
+          </div>
+          <div class="event-location">🌐 Virtual</div>
+          <div class="event-description">A virtual Burnal Equinox gathering hosted in the online Burn2 world.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Colorado Burnal Equinox (CBE)</div>
+            <div class="event-date">Apr 17</div>
+          </div>
+          <div class="event-location">🇺🇸 Colorado, USA</div>
+          <div class="event-description">Colorado's official Burnal Equinox celebration of art and performance.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Saguaro Man 2026 ~ Succulent Dystopia</div>
+            <div class="event-date">Apr 22</div>
+          </div>
+          <div class="event-location">🇺🇸 USA</div>
+          <div class="event-description">A multi-day desert campout built on self-reliance and participatory art.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Burning Flipside</div>
+            <div class="event-date">Apr 23</div>
+          </div>
+          <div class="event-location">🇺🇸 Texas, USA</div>
+          <div class="event-description">Texas's long-running regional burn rooted in gifting and Leave No Trace.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Burnal Equinox WNY</div>
+            <div class="event-date">Apr 25</div>
+          </div>
+          <div class="event-location">🇺🇸 New York, USA</div>
+          <div class="event-description">Western New York's spring kickoff celebrating DJs, art, and community.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">AfrikaBurn 2026: Through The Prism</div>
+            <div class="event-date">Apr 26</div>
+          </div>
+          <div class="event-location">🇿🇦 South Africa</div>
+          <div class="event-description">A large-scale temporary city in the Tankwa Karoo desert.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">UnSCruz: Absurdia</div>
+            <div class="event-date">Apr 30</div>
+          </div>
+          <div class="event-location">🇺🇸 California, USA</div>
+          <div class="event-description">A four-day Central California campout of art, music, and weirdness.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Dragon Burn</div>
+            <div class="event-date">Apr 30</div>
+          </div>
+          <div class="event-location">🇨🇳 China</div>
+          <div class="event-description">China's regional burn celebrating art, fire, and participatory culture.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MAY ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">May</span>
+        <span class="month-count">10 events</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">BEquinox 2026: Think Outside the Box</div>
+            <div class="event-date">May 6</div>
+          </div>
+          <div class="event-location">🇺🇸 California, USA</div>
+          <div class="event-description">Los Angeles's official regional spring gathering.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Reclaimation</div>
+            <div class="event-date">May 6</div>
+          </div>
+          <div class="event-location">🇺🇸 Kentucky, USA</div>
+          <div class="event-description">A Kentucky regional blending Southern hospitality with burner principles.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">SideBurn</div>
+            <div class="event-date">May 14</div>
+          </div>
+          <div class="event-location">🇨🇦 Ontario, Canada</div>
+          <div class="event-description">An Ontario arts and camping event shaped entirely by participant offerings.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">InterFuse</div>
+            <div class="event-date">May 14</div>
+          </div>
+          <div class="event-location">🇺🇸 Missouri, USA</div>
+          <div class="event-description">A Midwest four-day experiment in intentional community.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Burning Nest</div>
+            <div class="event-date">May 18</div>
+          </div>
+          <div class="event-location">🇬🇧 United Kingdom</div>
+          <div class="event-description">A woodland week of art, play, and mischief in Devon.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">SOAK</div>
+            <div class="event-date">May 21</div>
+          </div>
+          <div class="event-location">🇺🇸 Oregon, USA</div>
+          <div class="event-description">Oregon's long-running regional fostering participatory arts and experimentation.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Playa del Fuego</div>
+            <div class="event-date">May 21</div>
+          </div>
+          <div class="event-location">🇺🇸 Pennsylvania, USA</div>
+          <div class="event-description">The Mid-Atlantic's oldest regional burn built on collaboration and gifting.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Ignite!</div>
+            <div class="event-date">May 22</div>
+          </div>
+          <div class="event-location">🇺🇸 Virginia, USA</div>
+          <div class="event-description">A "learn 'n' burn" regional blending education, art, and camping.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Wicked Burn</div>
+            <div class="event-date">May 22</div>
+          </div>
+          <div class="event-location">🇺🇸 Maine, USA</div>
+          <div class="event-description">A Maine forest gathering centered on creativity and community.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Crème Brûlée</div>
+            <div class="event-date">May 26</div>
+          </div>
+          <div class="event-location">🇫🇷 France</div>
+          <div class="event-description">A rural French regional celebrating art, workshops, and co-creation.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── JUNE ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">June</span>
+        <span class="month-count">7 events</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">To The Moon</div>
+            <div class="event-date">Jun 4</div>
+          </div>
+          <div class="event-location">🇺🇸 Tennessee, USA</div>
+          <div class="event-description">A Tennessee camping festival of art, music, and fire.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">This Event Is Cancelled (T.E.I.C.)</div>
+            <div class="event-date">Jun 4</div>
+          </div>
+          <div class="event-location">🇺🇸 Kansas, USA</div>
+          <div class="event-description">A Kansas regional inspired by the 10 Principles and volunteer-run culture.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">OtherWorld</div>
+            <div class="event-date">Jun 4</div>
+          </div>
+          <div class="event-location">🇨🇦 British Columbia, Canada</div>
+          <div class="event-description">A Vancouver Island gathering focused on art, music, and co-creation.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Apogaea – Mythos &amp; Mechanica</div>
+            <div class="event-date">Jun 10</div>
+          </div>
+          <div class="event-location">🇺🇸 Colorado, USA</div>
+          <div class="event-description">Colorado's flagship regional celebrating art, sustainability, and inclusion.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Where the Sheep Sleep</div>
+            <div class="event-date">Jun 18</div>
+          </div>
+          <div class="event-location">🇳🇱 Netherlands</div>
+          <div class="event-description">A four-day immersive Dutch burn built entirely by participants.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Element 11</div>
+            <div class="event-date">Jun 24</div>
+          </div>
+          <div class="event-location">🇺🇸 Utah, USA</div>
+          <div class="event-description">Utah's desert regional celebrating radical self-expression and art.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Firefly</div>
+            <div class="event-date">Jun 30</div>
+          </div>
+          <div class="event-location">🇺🇸 Massachusetts, USA</div>
+          <div class="event-description">A New England woods gathering dedicated to DIY experiential art.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── JULY ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">July</span>
+        <span class="month-count">14 events</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Amber Burn</div>
+            <div class="event-date">Jul 2</div>
+          </div>
+          <div class="event-location">🇱🇹 Lithuania</div>
+          <div class="event-description">Lithuania's volunteer-run regional focused on creative self-reliance.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Art Baer</div>
+            <div class="event-date">Jul 9</div>
+          </div>
+          <div class="event-location">🇩🇪 Germany</div>
+          <div class="event-description">A Berlin-organized summer event centered on art and playful experimentation.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Cosmic Burn: Choose Your Own Adventure</div>
+            <div class="event-date">Jul 9</div>
+          </div>
+          <div class="event-location">🇺🇸 New York, USA</div>
+          <div class="event-description">A five-day Ithaca gathering culminating in a communal effigy burn.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Nowhere</div>
+            <div class="event-date">Jul 12</div>
+          </div>
+          <div class="event-location">🇪🇸 Spain</div>
+          <div class="event-description">A creative desert gathering in northern Spain grounded in the 10 Principles.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Critical Northwest</div>
+            <div class="event-date">Jul 13</div>
+          </div>
+          <div class="event-location">🇺🇸 Washington, USA</div>
+          <div class="event-description">A Pacific Northwest week-long forest burn inspired by playa culture.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Lakes of Fire</div>
+            <div class="event-date">Jul 15</div>
+          </div>
+          <div class="event-location">🇺🇸 Michigan, USA</div>
+          <div class="event-description">The Great Lakes region's annual collaborative art burn.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Transformus</div>
+            <div class="event-date">Jul 16</div>
+          </div>
+          <div class="event-location">🇺🇸 North Carolina, USA</div>
+          <div class="event-description">A North Carolina camping event of parades, art, and radical self-expression.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">The Borderland</div>
+            <div class="event-date">Jul 20</div>
+          </div>
+          <div class="event-location">🇸🇪 Sweden</div>
+          <div class="event-description">A week-long Swedish burn built through decentralized co-creation.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Modifyre</div>
+            <div class="event-date">Jul 21</div>
+          </div>
+          <div class="event-location">🇦🇺 Australia</div>
+          <div class="event-description">An Australian regional focused on gift economy and participatory art.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">PortalBurn</div>
+            <div class="event-date">Jul 23</div>
+          </div>
+          <div class="event-location">🇺🇸 New York, USA</div>
+          <div class="event-description">A New York regional celebrating music, art, and creative self-expression.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">What If?</div>
+            <div class="event-date">Jul 23</div>
+          </div>
+          <div class="event-location">🇨🇦 British Columbia, Canada</div>
+          <div class="event-description">A 2,000+ person collaborative burn in British Columbia.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Burn2 Conception</div>
+            <div class="event-date">Jul 24</div>
+          </div>
+          <div class="event-location">🌐 Virtual</div>
+          <div class="event-description">An online Burn2 event continuing the virtual burner tradition.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">AfrikaBurn Decompression</div>
+            <div class="event-date">Jul 25</div>
+          </div>
+          <div class="event-location">🇿🇦 South Africa</div>
+          <div class="event-description">A post-AfrikaBurn gathering rekindling community and creative energy.</div>
+        </div>
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">RoBurn</div>
+            <div class="event-date">Jul 28</div>
+          </div>
+          <div class="event-location">🇷🇴 Romania</div>
+          <div class="event-description">Romania's week-long regional centered on art, music, and connection.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── AUGUST ── -->
+    <section class="month-section">
+      <div class="month-header">
+        <span class="month-name">August</span>
+        <span class="month-count">1 event</span>
+      </div>
+      <div class="events-grid">
+
+        <div class="event-card">
+          <div class="card-top">
+            <div class="event-name">Schönburn</div>
+            <div class="event-date">Aug 5</div>
+          </div>
+          <div class="event-location">🇦🇹 Austria</div>
+          <div class="event-description">An Austrian regional encouraging open expression and creative exploration.</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="page-footer">
+    <span class="footer-text">48 events · 16+ countries · Feb–Aug 2026</span>
+    <span class="footer-brand">RISING SPARKS</span>
+    <span class="footer-links">#bethespark · therisingsparks.com</span>
+  </footer>
+
+</div><!-- /.wrapper -->
+</body>
+</html>
