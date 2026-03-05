@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 .DS_Store
 /analysis_cache
+/static/Theme Camp Dues!.csv
