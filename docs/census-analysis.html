@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Census Analysis · Burning Man Research</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #ffffff;
+      color: #111827;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1e3a5f;
+      color: #ffffff;
+      padding: 2rem 2rem 1.75rem;
+    }
+
+    header nav {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+
+    header nav a { color: #ffffff; text-decoration: none; }
+    header nav a:hover { text-decoration: underline; }
+
+    header h1 {
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    header p {
+      opacity: 0.85;
+      margin-top: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .stats-bar {
+      background: #f0f4f8;
+      border-top: 3px solid #2563eb;
+      padding: 0.85rem 2rem;
+      font-size: 0.92rem;
+      color: #374151;
+    }
+
+    .stats-bar span { margin-right: 1.5rem; display: inline-block; }
+    .stats-bar strong { color: #1e3a5f; }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    section { margin-bottom: 3rem; }
+
+    h2 {
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      color: #1e3a5f;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .finding-card {
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      padding: 1rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .finding-card h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .finding-card p {
+      font-size: 0.95rem;
+      color: #111827;
+    }
+
+    .finding-card strong { color: #1d4ed8; }
+
+    .chart-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .chart-block h3 {
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+      color: #1e3a5f;
+      margin-bottom: 0.3rem;
+    }
+
+    .chart-block .caption {
+      font-size: 0.88rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-frame {
+      width: 100%;
+      height: 480px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+
+    .caveat {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 6px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.88rem;
+      color: #78350f;
+      margin-top: 1rem;
+    }
+
+    .caveat strong { color: #92400e; }
+
+    details {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    summary {
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e3a5f;
+      font-size: 0.95rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    summary::before { content: "▶"; font-size: 0.7rem; transition: transform 0.2s; }
+    details[open] summary::before { transform: rotate(90deg); }
+
+    .details-inner {
+      padding: 0 1rem 1rem;
+    }
+
+    .link-group {
+      margin-bottom: 1rem;
+    }
+
+    .link-group h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .link-group a {
+      display: block;
+      color: #2563eb;
+      font-size: 0.88rem;
+      text-decoration: none;
+      padding: 0.2rem 0;
+    }
+
+    .link-group a:hover { text-decoration: underline; }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav><a href="index.html">← Research Hub</a></nav>
+  <h1>Census Analysis</h1>
+  <p>2025 weighted census · 5,028 respondents · cohort years 1986–2024</p>
+</header>
+
+<div class="stats-bar">
+  <span><strong>+0.013</strong> retention trend slope per cohort year</span>
+  <span><strong>+0.0017</strong> under-28 share slope per cohort year</span>
+  <span><strong>+0.67</strong> camp placement retention gap for ≤22 year-olds</span>
+</div>
+
+<main>
+
+  <section>
+    <h2>Key Findings</h2>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <h3>Retention trend</h3>
+        <p>Overall second-year return rates show a <strong>modest upward trend</strong> of +0.013 per cohort year across 34 cohort years — the community is slowly getting stickier.</p>
+      </div>
+      <div class="finding-card">
+        <h3>Youth recruitment</h3>
+        <p>The under-28 share of each cohort is growing at <strong>+0.0017 per year</strong>. Slow, but directionally positive — the event is gradually skewing younger.</p>
+      </div>
+      <div class="finding-card">
+        <h3>Camp placement effect</h3>
+        <p>Being in a placed camp <strong>strongly predicts return</strong> for the youngest burners: a +0.67 retention gap for ≤22 year-olds (placed vs. unplaced). Effect diminishes with age.</p>
+      </div>
+    </div>
+    <div class="caveat">
+      <strong>Methodology note:</strong> Many cells — especially for younger age bands in earlier cohort years — have fewer than 30 weighted respondents. Treat single-cohort figures for ≤22 and 23–28 age bands with caution. Global trend lines are more reliable than cell-level values.
+    </div>
+  </section>
+
+  <section>
+    <h2>Three Key Charts</h2>
+
+    <div class="chart-block">
+      <h3>1. Is Burning Man getting younger?</h3>
+      <p class="caption">Under-30 share of each entry cohort over time, split by camp placement status. Use the legend to toggle groups.</p>
+      <iframe class="chart-frame" src="charts/under30_share_by_cohort.html" title="Under-30 share by cohort"></iframe>
+    </div>
+
+    <div class="chart-block">
+      <h3>2. Who comes back?</h3>
+      <p class="caption">Second-year return rates by age band. Use the dropdown to filter by cohort era (All, 2015–2018, 2022–2024).</p>
+      <iframe class="chart-frame" src="charts/retention_by_age_band.html" title="Retention by age band"></iframe>
+    </div>
+
+    <div class="chart-block">
+      <h3>3. Does camp placement matter?</h3>
+      <p class="caption">Retention gap (camp-placed minus unplaced) by age band over the last 10 cohort years. Positive = placed burners return more. The ≤22 gap of +0.67 is striking but based on small samples.</p>
+      <iframe class="chart-frame" src="charts/retention_gap_line_last10.html" title="Retention gap by camp placement"></iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2>More Detail</h2>
+
+    <details>
+      <summary>All 10 interactive figures</summary>
+      <div class="details-inner">
+        <div class="link-group">
+          <h4>Retention by age</h4>
+          <a href="../reports/census_next_gen_rs/figures/retention_by_age_band.html" target="_blank">Second-year return rate by age band (with cohort filter)</a>
+          <a href="../reports/census_next_gen_rs/figures/retention_trends_by_cohort.html" target="_blank">Retention trends by cohort (line chart)</a>
+          <a href="../reports/census_next_gen_rs/figures/retention_heatmap_cohort_age.html" target="_blank">Retention heatmap: cohort × age</a>
+          <a href="../reports/census_next_gen_rs/figures/retention_slopegraph_age_band_last10.html" target="_blank">Retention slopegraph by age band (last 10 years)</a>
+        </div>
+        <div class="link-group">
+          <h4>Camp placement effect</h4>
+          <a href="../reports/census_next_gen_rs/figures/retention_heatmap_by_camp_last10.html" target="_blank">Retention heatmap by camp placement (last 10 years)</a>
+          <a href="../reports/census_next_gen_rs/figures/retention_gap_heatmap_last10.html" target="_blank">Retention gap heatmap (last 10 years)</a>
+          <a href="../reports/census_next_gen_rs/figures/retention_gap_line_last10.html" target="_blank">Retention gap line chart (last 10 years)</a>
+          <a href="../reports/census_next_gen_rs/figures/firsttimer_camp_share_heatmap.html" target="_blank">First-timer camp placement share heatmap</a>
+        </div>
+        <div class="link-group">
+          <h4>Youth composition</h4>
+          <a href="../reports/census_next_gen_rs/figures/under30_share_by_cohort.html" target="_blank">Under-30 share by cohort</a>
+          <a href="../reports/census_next_gen_rs/figures/under30_share_ribbon_last10.html" target="_blank">Under-30 share ribbon chart (last 10 years)</a>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Full written reports</summary>
+      <div class="details-inner">
+        <div class="link-group">
+          <h4>Summary reports</h4>
+          <a href="../reports/census_next_gen_rs/census2025_weighted_quick_stats.md" target="_blank">Quick stats overview</a>
+          <a href="../reports/census_next_gen_rs/census2025_cohort_analysis_briefing.md" target="_blank">Cohort analysis briefing</a>
+          <a href="../reports/census_next_gen_rs/census2025_weighted_analysis_report.md" target="_blank">Full weighted analysis report</a>
+        </div>
+        <div class="link-group">
+          <h4>Detailed analyses</h4>
+          <a href="../reports/census_next_gen_rs/census2025_cohort_retention.md" target="_blank">Cohort retention detail</a>
+          <a href="../reports/census_next_gen_rs/census2025_cohort_trends.md" target="_blank">Cohort trends detail</a>
+          <a href="../reports/census_next_gen_rs/census2025_weighted_crosstabs.md" target="_blank">Demographic crosstabs</a>
+          <a href="../reports/census_next_gen_rs/basic_stats_report.md" target="_blank">Basic statistics report</a>
+        </div>
+      </div>
+    </details>
+
+  </section>
+
+</main>
+
+<footer>
+  <a href="index.html" style="color: #9ca3af;">← Research Hub</a> &nbsp;·&nbsp; Burning Man Research · 2025
+</footer>
+
+</body>
+</html>
