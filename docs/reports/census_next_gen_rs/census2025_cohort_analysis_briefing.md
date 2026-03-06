@@ -1,0 +1,302 @@
+# Census 2025 Cohort Analysis Briefing
+
+## Highlights
+Summary of global linear trends across all cohorts for retention and youth participation.
+
+**Key Metrics Explained:**
+- **Retention trend**: Rate at which cohort members return the following year
+- **Age ≤28 share**: Proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28)
+
+- Overall retention trend slope (overall, campPlaced=all): `0.012984` per cohort year (n=34)
+- Age ≤28 share slope (campPlaced=all): `0.001709` per cohort year (n=34)
+
+## Top Retention Cells
+The demographic segments (age and camp status) with the highest likelihood of returning to Black Rock City.
+
+- 35-39 / no: 1.0000 (w=1.08)
+- 50-59 / no: 1.0000 (w=0.31)
+- 40-49 / no: 1.0000 (w=0.21)
+- 40-49 / yes: 1.0000 (w=0.63)
+- 50-59 / no: 1.0000 (w=2.67)
+
+## Lowest Retention Cells
+Segments with the lowest return rates, highlighting where the community may be losing members.
+
+- 29-34 / yes: 0.0000 (w=0.76)
+- <=22 / no: 0.0000 (w=1.59)
+- 29-34 / no: 0.0000 (w=1.38)
+- 50-59 / no: 0.0000 (w=3.46)
+- 60+ / no: 0.0000 (w=1.68)
+
+## CampPlaced Gaps (Yes - No)
+The delta in retention rates between those in placed camps ('yes') versus those not ('no'). Positive values suggest placement correlates with higher retention.
+
+- <=22: 0.6667
+- 23-28: -0.1843
+- 29-34: -0.0025
+- 35-39: 0.0153
+- 40-49: -0.0672
+- 50-59: 0.0618
+- 60+: 0.0242
+
+## Small-N Warnings (weighted_count < 30)
+Data points where the weighted sample size is below 30, indicating results should be interpreted with caution due to high variance.
+
+- 2001 / 23-28 / no: w=0.41, n=1
+- 2007 / 23-28 / no: w=0.44, n=1
+- 2013 / 23-28 / no: w=1.68, n=1
+- 2018 / 23-28 / no: w=5.00, n=3
+- 2022 / 23-28 / no: w=5.70, n=3
+- 2023 / 23-28 / no: w=15.19, n=9
+- 2024 / 23-28 / no: w=5.85, n=5
+- 2010 / 23-28 / yes: w=0.39, n=1
+- 2011 / 23-28 / yes: w=1.37, n=2
+- 2015 / 23-28 / yes: w=3.22, n=3
+- 2017 / 23-28 / yes: w=4.62, n=2
+- 2018 / 23-28 / yes: w=16.44, n=6
+- 2009 / 29-34 / no: w=0.27, n=1
+- 2012 / 29-34 / no: w=1.38, n=1
+- 2013 / 29-34 / no: w=4.01, n=4
+- 2014 / 29-34 / no: w=6.12, n=8
+- 2015 / 29-34 / no: w=4.46, n=3
+- 2016 / 29-34 / no: w=5.88, n=8
+- 2017 / 29-34 / no: w=4.15, n=6
+- 2018 / 29-34 / no: w=11.54, n=11
+- 2022 / 29-34 / no: w=27.64, n=20
+- 2023 / 29-34 / no: w=25.94, n=17
+- 2024 / 29-34 / no: w=20.75, n=19
+- 2004 / 29-34 / yes: w=0.35, n=1
+- 2007 / 29-34 / yes: w=1.34, n=1
+- 2008 / 29-34 / yes: w=0.06, n=1
+- 2009 / 29-34 / yes: w=0.76, n=1
+- 2010 / 29-34 / yes: w=0.68, n=2
+- 2011 / 29-34 / yes: w=0.59, n=2
+- 2012 / 29-34 / yes: w=5.79, n=6
+- 2013 / 29-34 / yes: w=4.86, n=9
+- 2014 / 29-34 / yes: w=7.45, n=11
+- 2015 / 29-34 / yes: w=12.31, n=20
+- 2016 / 29-34 / yes: w=17.59, n=20
+- 2007 / 35-39 / no: w=2.76, n=1
+- 2008 / 35-39 / no: w=1.08, n=3
+- 2009 / 35-39 / no: w=0.71, n=2
+- 2010 / 35-39 / no: w=2.11, n=4
+- 2011 / 35-39 / no: w=2.91, n=4
+- 2012 / 35-39 / no: w=2.88, n=7
+- 2013 / 35-39 / no: w=4.02, n=8
+- 2014 / 35-39 / no: w=3.20, n=4
+- 2015 / 35-39 / no: w=10.11, n=12
+- 2016 / 35-39 / no: w=14.45, n=10
+- 2017 / 35-39 / no: w=13.97, n=14
+- 2018 / 35-39 / no: w=15.67, n=10
+- 2022 / 35-39 / no: w=28.02, n=18
+- 2023 / 35-39 / no: w=18.92, n=15
+- 2024 / 35-39 / no: w=11.03, n=11
+- 1996 / 35-39 / yes: w=3.90, n=1
+- 2004 / 35-39 / yes: w=1.01, n=1
+- 2006 / 35-39 / yes: w=3.36, n=5
+- 2008 / 35-39 / yes: w=5.92, n=12
+- 2009 / 35-39 / yes: w=3.56, n=10
+- 2010 / 35-39 / yes: w=4.63, n=8
+- 2011 / 35-39 / yes: w=9.24, n=19
+- 2012 / 35-39 / yes: w=11.39, n=18
+- 1995 / 40-49 / no: w=1.43, n=2
+- 1997 / 40-49 / no: w=1.73, n=1
+- 1999 / 40-49 / no: w=0.21, n=1
+- 2000 / 40-49 / no: w=0.48, n=2
+- 2001 / 40-49 / no: w=2.26, n=4
+- 2002 / 40-49 / no: w=0.20, n=1
+- 2003 / 40-49 / no: w=0.11, n=1
+- 2004 / 40-49 / no: w=1.83, n=5
+- 2005 / 40-49 / no: w=3.52, n=2
+- 2006 / 40-49 / no: w=1.43, n=4
+- 2007 / 40-49 / no: w=1.44, n=5
+- 2008 / 40-49 / no: w=2.15, n=3
+- 2009 / 40-49 / no: w=1.30, n=4
+- 2010 / 40-49 / no: w=8.58, n=20
+- 2011 / 40-49 / no: w=2.74, n=8
+- 2012 / 40-49 / no: w=7.16, n=11
+- 2013 / 40-49 / no: w=10.36, n=18
+- 2014 / 40-49 / no: w=2.40, n=7
+- 2015 / 40-49 / no: w=9.01, n=12
+- 2016 / 40-49 / no: w=23.33, n=21
+- 2017 / 40-49 / no: w=16.91, n=14
+- 2018 / 40-49 / no: w=20.05, n=14
+- 2022 / 40-49 / no: w=16.48, n=15
+- 2023 / 40-49 / no: w=25.97, n=24
+- 2024 / 40-49 / no: w=25.43, n=18
+- 1993 / 40-49 / yes: w=0.23, n=1
+- 1996 / 40-49 / yes: w=1.84, n=1
+- 1997 / 40-49 / yes: w=2.63, n=3
+- 1998 / 40-49 / yes: w=0.84, n=3
+- 1999 / 40-49 / yes: w=0.63, n=3
+- 2000 / 40-49 / yes: w=1.96, n=7
+- 2001 / 40-49 / yes: w=4.30, n=11
+- 2002 / 40-49 / yes: w=7.67, n=10
+- 2003 / 40-49 / yes: w=3.31, n=10
+- 2004 / 40-49 / yes: w=5.14, n=14
+- 2005 / 40-49 / yes: w=3.37, n=9
+- 2006 / 40-49 / yes: w=14.66, n=27
+- 2007 / 40-49 / yes: w=8.45, n=20
+- 2008 / 40-49 / yes: w=12.96, n=30
+- 2009 / 40-49 / yes: w=15.73, n=35
+- 2010 / 40-49 / yes: w=19.10, n=42
+- 2011 / 40-49 / yes: w=14.38, n=35
+- 2012 / 40-49 / yes: w=15.87, n=39
+- 2013 / 40-49 / yes: w=26.47, n=52
+- 1995 / 50-59 / no: w=0.29, n=1
+- 1996 / 50-59 / no: w=0.24, n=1
+- 1997 / 50-59 / no: w=2.18, n=3
+- 1998 / 50-59 / no: w=0.46, n=1
+- 1999 / 50-59 / no: w=2.41, n=6
+- 2000 / 50-59 / no: w=1.48, n=3
+- 2002 / 50-59 / no: w=0.51, n=2
+- 2003 / 50-59 / no: w=0.66, n=2
+- 2004 / 50-59 / no: w=0.31, n=1
+- 2006 / 50-59 / no: w=0.91, n=3
+- 2007 / 50-59 / no: w=1.31, n=1
+- 2008 / 50-59 / no: w=1.43, n=4
+- 2009 / 50-59 / no: w=2.67, n=2
+- 2010 / 50-59 / no: w=1.41, n=3
+- 2011 / 50-59 / no: w=5.00, n=6
+- 2012 / 50-59 / no: w=1.90, n=3
+- 2013 / 50-59 / no: w=3.46, n=3
+- 2014 / 50-59 / no: w=5.54, n=7
+- 2015 / 50-59 / no: w=8.96, n=6
+- 2016 / 50-59 / no: w=2.99, n=5
+- 2017 / 50-59 / no: w=5.34, n=4
+- 2018 / 50-59 / no: w=15.66, n=10
+- 2022 / 50-59 / no: w=4.65, n=3
+- 2023 / 50-59 / no: w=8.03, n=6
+- 2024 / 50-59 / no: w=18.50, n=14
+- 1990 / 50-59 / yes: w=0.12, n=1
+- 1994 / 50-59 / yes: w=1.75, n=3
+- 1995 / 50-59 / yes: w=1.82, n=3
+- 1996 / 50-59 / yes: w=2.89, n=8
+- 1997 / 50-59 / yes: w=3.94, n=12
+- 1998 / 50-59 / yes: w=7.49, n=14
+- 1999 / 50-59 / yes: w=11.17, n=18
+- 2000 / 50-59 / yes: w=11.42, n=21
+- 2001 / 50-59 / yes: w=2.92, n=9
+- 2002 / 50-59 / yes: w=8.73, n=19
+- 2003 / 50-59 / yes: w=4.23, n=14
+- 2004 / 50-59 / yes: w=8.22, n=14
+- 2005 / 50-59 / yes: w=3.63, n=11
+- 2006 / 50-59 / yes: w=10.45, n=18
+- 2007 / 50-59 / yes: w=9.11, n=19
+- 2008 / 50-59 / yes: w=11.22, n=19
+- 2009 / 50-59 / yes: w=10.11, n=16
+- 2010 / 50-59 / yes: w=10.63, n=23
+- 2011 / 50-59 / yes: w=5.75, n=15
+- 2012 / 50-59 / yes: w=6.93, n=19
+- 2013 / 50-59 / yes: w=9.55, n=19
+- 2014 / 50-59 / yes: w=13.36, n=23
+- 2015 / 50-59 / yes: w=26.23, n=26
+- 2016 / 50-59 / yes: w=27.72, n=23
+- 1986 / 60+ / no: w=1.68, n=2
+- 1988 / 60+ / no: w=1.18, n=2
+- 1994 / 60+ / no: w=0.36, n=1
+- 1995 / 60+ / no: w=0.19, n=1
+- 1996 / 60+ / no: w=0.18, n=1
+- 1998 / 60+ / no: w=0.59, n=2
+- 1999 / 60+ / no: w=0.38, n=2
+- 2000 / 60+ / no: w=0.17, n=1
+- 2001 / 60+ / no: w=0.33, n=2
+- 2002 / 60+ / no: w=0.77, n=4
+- 2003 / 60+ / no: w=1.06, n=4
+- 2004 / 60+ / no: w=0.39, n=2
+- 2005 / 60+ / no: w=1.90, n=6
+- 2006 / 60+ / no: w=1.79, n=4
+- 2007 / 60+ / no: w=3.15, n=4
+- 2008 / 60+ / no: w=1.09, n=5
+- 2009 / 60+ / no: w=2.63, n=7
+- 2010 / 60+ / no: w=7.37, n=12
+- 2011 / 60+ / no: w=2.93, n=7
+- 2012 / 60+ / no: w=1.11, n=6
+- 2013 / 60+ / no: w=2.32, n=5
+- 2014 / 60+ / no: w=5.47, n=12
+- 2015 / 60+ / no: w=1.99, n=5
+- 2016 / 60+ / no: w=7.18, n=11
+- 2017 / 60+ / no: w=3.48, n=4
+- 2018 / 60+ / no: w=12.79, n=7
+- 2022 / 60+ / no: w=2.48, n=3
+- 2023 / 60+ / no: w=6.91, n=10
+- 2024 / 60+ / no: w=11.31, n=10
+- 1986 / 60+ / yes: w=0.21, n=1
+- 1987 / 60+ / yes: w=0.20, n=1
+- 1991 / 60+ / yes: w=0.91, n=2
+- 1993 / 60+ / yes: w=0.16, n=1
+- 1994 / 60+ / yes: w=1.10, n=4
+- 1995 / 60+ / yes: w=1.50, n=4
+- 1996 / 60+ / yes: w=1.66, n=7
+- 1997 / 60+ / yes: w=1.60, n=7
+- 1998 / 60+ / yes: w=1.52, n=7
+- 1999 / 60+ / yes: w=2.30, n=7
+- 2000 / 60+ / yes: w=4.51, n=15
+- 2001 / 60+ / yes: w=2.61, n=9
+- 2002 / 60+ / yes: w=3.92, n=12
+- 2003 / 60+ / yes: w=3.49, n=16
+- 2004 / 60+ / yes: w=3.20, n=12
+- 2005 / 60+ / yes: w=4.70, n=18
+- 2006 / 60+ / yes: w=4.56, n=22
+- 2007 / 60+ / yes: w=8.23, n=28
+- 2008 / 60+ / yes: w=2.14, n=10
+- 2009 / 60+ / yes: w=6.20, n=19
+- 2010 / 60+ / yes: w=3.52, n=12
+- 2011 / 60+ / yes: w=7.19, n=18
+- 2012 / 60+ / yes: w=5.90, n=16
+- 2013 / 60+ / yes: w=6.77, n=26
+- 2014 / 60+ / yes: w=11.20, n=22
+- 2015 / 60+ / yes: w=6.78, n=22
+- 2016 / 60+ / yes: w=13.72, n=21
+- 2017 / 60+ / yes: w=15.55, n=23
+- 2018 / 60+ / yes: w=19.87, n=17
+- 2022 / 60+ / yes: w=18.69, n=19
+- 2023 / 60+ / yes: w=19.15, n=22
+- 2024 / 60+ / yes: w=23.98, n=28
+- 2011 / <=22 / no: w=1.59, n=1
+- 2003 / <=22 / yes: w=1.23, n=1
+- 2009 / <=22 / yes: w=0.42, n=1
+- 2013 / <=22 / yes: w=2.63, n=2
+- 2022 / <=22 / yes: w=1.98, n=1
+- 2023 / <=22 / yes: w=3.55, n=2
+- 2024 / <=22 / yes: w=4.11, n=2
+
+## Analyze This Prompt
+
+```text
+You are a human analyst reviewing the 2025 Burning Man cohort data.
+Write an insight memo (short paragraphs + bullets) explaining:
+- Where retention is strongest and weakest
+- CampPlaced effect (yes vs no)
+- Age ≤28 trends (proportion of cohorts that are young)
+- Key caveats and small-N warnings
+
+Key stats (Global linear trends across all cohorts):
+- Overall retention trend slope: 0.012984 per cohort year
+- Age ≤28 share slope: 0.001709 per cohort year
+
+Note: 'Age ≤28 share' measures the proportion of each cohort that is age 28 or younger (age bands: ≤22, 23-28). This is a composition metric, not retention.
+
+Top retention cells (Highest likelihood of return; age_band, campPlaced, rate):
+- 35-39 / no: 1.0000 (w=1.08)
+- 50-59 / no: 1.0000 (w=0.31)
+- 40-49 / no: 1.0000 (w=0.21)
+- 40-49 / yes: 1.0000 (w=0.63)
+- 50-59 / no: 1.0000 (w=2.67)
+
+Lowest retention cells (Lowest return rates; age_band, campPlaced, rate):
+- 29-34 / yes: 0.0000 (w=0.76)
+- <=22 / no: 0.0000 (w=1.59)
+- 29-34 / no: 0.0000 (w=1.38)
+- 50-59 / no: 0.0000 (w=3.46)
+- 60+ / no: 0.0000 (w=1.68)
+
+CampPlaced gaps (Delta between placed and unplaced camps; yes - no) by age_band:
+- <=22: 0.6667
+- 23-28: -0.1843
+- 29-34: -0.0025
+- 35-39: 0.0153
+- 40-49: -0.0672
+- 50-59: 0.0618
+- 60+: 0.0242
+```
