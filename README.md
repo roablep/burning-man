@@ -43,3 +43,20 @@ Or, if your environment is activated:
 ```bash
 streamlit run src/bm/bm_streamlit_app.py
 ```
+
+## Running the Grindr MCP server
+
+A lightweight MCP server is available at `src/bm/grindr_mcp_server.py`.
+It communicates over stdio with MCP JSON-RPC framing and wraps selected
+unofficial Grindr v3 REST endpoints.
+
+Run it with:
+
+```bash
+poetry run python src/bm/grindr_mcp_server.py
+```
+
+Optional environment variables:
+
+- `GRINDR_BASE_URL` (default: `https://grindr.mobi`)
+- `GRINDR_USER_AGENT` (default: `grindr3/3.0.1.4529;4529;Unknown;Android 4.4.4`)
