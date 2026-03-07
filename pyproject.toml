@@ -46,6 +46,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
+mcp = {extras = ["cli"], version = "*"}
+httpx = "*"
 pandas = "*"
 ipython = "*"
 streamlit = "*"
