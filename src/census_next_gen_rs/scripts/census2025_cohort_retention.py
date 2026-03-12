@@ -12,13 +12,23 @@ Methodology (high-level):
    - weighted_count = sum(weights)
    - weighted_return_rate = sum(weights * return_next_year) / sum(weights)
    - unweighted_n = row count
+
+Age band methodology:
+- The cohort table (cohort_year x age_band) uses AGE_BAND_AT_ENTRY: the respondent's
+  estimated age when they first attended (cohort_year - birth_year, where
+  birth_year = census_year - age). This controls for the fact that respondents from
+  older cohorts have aged since their first attendance and would otherwise be
+  systematically placed in older age bands.
+- The summary table (age_band x campPlaced, no cohort_year dimension) uses current
+  2025 age, which is appropriate for that cross-sectional view.
+
 Note: This analysis is computed from the 2025 census respondent sample only. For recent
 cohorts (e.g., 2024), "return_next_year" is right-censored and biased upward because the
 sample already consists of 2025 attendees. Interpret near-100% return rates for the most
 recent cohort as a sampling artifact, not true population retention.
 Outputs:
-- CSV: cohort_year x age_band x campPlaced table
-- Markdown: summary + aggregated age_band x campPlaced table
+- CSV: cohort_year x age_band_at_entry x campPlaced table
+- Markdown: summary + aggregated age_band (current) x campPlaced table
 """
 
 from __future__ import annotations
@@ -142,6 +152,14 @@ def prepare_cohort_dataframe(
     df["cohort_year"] = compute_cohort_year(attended)
     df["return_next_year"] = compute_return_next_year(df["cohort_year"], attended)
     df["age_band"] = build_age_band(df["age"])
+
+    # Compute age at time of first attendance to avoid aging bias in cross-cohort comparisons.
+    # Respondents from older cohorts have aged since first attending; using current age would
+    # systematically place them in older bands, distorting comparisons across cohort years.
+    census_year = max(year_map) if year_map else 2025
+    df["age_at_entry"] = df["cohort_year"] - (census_year - df["age"])
+    df["age_band_at_entry"] = build_age_band(df["age_at_entry"])
+
     df["campPlaced_clean"] = df["campPlaced"].where(df["campPlaced"].isin(["yes", "no"]))
     return df, year_map
 
@@ -154,8 +172,11 @@ def weighted_return_rate(group: pd.DataFrame) -> float:
 
 
 def build_cohort_table(df: pd.DataFrame) -> pd.DataFrame:
+    # Group by age_band_at_entry so age bands reflect the respondent's age when they
+    # first attended, not their current 2025 age. The output column is named "age_band"
+    # for downstream compatibility, but represents age at entry.
     grouped = df.groupby(
-        ["cohort_year", "age_band", "campPlaced_clean"],
+        ["cohort_year", "age_band_at_entry", "campPlaced_clean"],
         dropna=False,
         observed=False,
     )
@@ -167,7 +188,7 @@ def build_cohort_table(df: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "cohort_year": int(cohort_year),
-                "age_band": age_band,
+                "age_band": age_band,  # age at first attendance
                 "campPlaced": camp,
                 "weighted_count": float(group["weights"].sum()),
                 "weighted_return_rate": weighted_return_rate(group),
@@ -222,7 +243,7 @@ def build_markdown_summary(
     total_rows = len(df)
     missing_cohort = int(df["cohort_year"].isna().sum())
     missing_return = int(df["return_next_year"].isna().sum())
-    missing_age = int(df["age_band"].isna().sum())
+    missing_age = int(df["age_band_at_entry"].isna().sum())
     excluded_camp = int(df["campPlaced_clean"].isna().sum())
 
     lines: list[str] = []
@@ -233,11 +254,26 @@ def build_markdown_summary(
     if year_map:
         lines.append(f"- Attended years: `{min(year_map)}-{max(year_map)}`")
     lines.append("")
+    lines.append("## Age Band Methodology")
+    lines.append("")
+    lines.append(
+        "**Cohort table** (`age_band` column): uses **age at first attendance** "
+        "(estimated as `cohort_year - birth_year`). This controls for aging bias: "
+        "respondents from older cohorts have aged since their first attendance and "
+        "would otherwise be systematically placed in older bands, distorting "
+        "cross-cohort comparisons."
+    )
+    lines.append("")
+    lines.append(
+        "**Summary table below** (no cohort_year dimension): uses **current 2025 age**, "
+        "which is appropriate for this cross-sectional view."
+    )
+    lines.append("")
     lines.append("## Data Hygiene")
     lines.append("")
     lines.append(f"- Missing cohort year: `{missing_cohort}`")
     lines.append(f"- Missing return-next-year: `{missing_return}`")
-    lines.append(f"- Missing/invalid age band: `{missing_age}`")
+    lines.append(f"- Missing/invalid age at entry: `{missing_age}`")
     lines.append(f"- Excluded campPlaced (dontKnow/missing): `{excluded_camp}`")
     lines.append("")
     lines.append("## Second-Year Return Rate By Age Band (campPlaced)")
@@ -272,9 +308,12 @@ def main() -> None:
     df, year_map = prepare_cohort_dataframe(df)
 
     base_mask = df["cohort_year"].notna() & df["return_next_year"].notna()
-    segmented_mask = base_mask & df["age_band"].notna() & df["campPlaced_clean"].notna()
-    cohort_table = build_cohort_table(df.loc[segmented_mask])
-    age_band_table = build_age_band_camp_table(df.loc[segmented_mask])
+    # Cohort table uses age_band_at_entry; summary table uses current age_band.
+    # Both require non-null age, so the masks are equivalent in practice.
+    cohort_mask = base_mask & df["age_band_at_entry"].notna() & df["campPlaced_clean"].notna()
+    summary_mask = base_mask & df["age_band"].notna() & df["campPlaced_clean"].notna()
+    cohort_table = build_cohort_table(df.loc[cohort_mask])
+    age_band_table = build_age_band_camp_table(df.loc[summary_mask])
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     cohort_table.to_csv(output_csv, index=False)

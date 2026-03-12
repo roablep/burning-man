@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Generate cohort trend summaries for the 2025 census dataset."""
+"""Generate cohort trend summaries for the 2025 census dataset.
+
+Age band methodology:
+- All cross-cohort analysis (trend table, under-30 share, multi-year retention,
+  first-timer camp share) uses AGE_BAND_AT_ENTRY: the respondent's estimated age
+  when they first attended (cohort_year - birth_year, where
+  birth_year = census_year - age). This controls for aging bias across cohort years.
+- The `age_band` column (current 2025 age) is retained on the dataframe but not
+  used for cross-cohort segmentation.
+"""
 
 from __future__ import annotations
 
@@ -184,8 +193,17 @@ def prepare_dataframe(
 
     df["return_next_year"] = compute_return_next_year(df["cohort_year"], attended)
     df["age_band"] = build_age_band(df["age"])
+
+    # Compute age at time of first attendance to avoid aging bias in cross-cohort comparisons.
+    # Respondents from older cohorts have aged since first attending; using current age would
+    # systematically place them in older bands, distorting comparisons across cohort years.
+    census_year = max(year_map) if year_map else 2025
+    df["age_at_entry"] = df["cohort_year"] - (census_year - df["age"])
+    df["age_band_at_entry"] = build_age_band(df["age_at_entry"])
+    df["under30_at_entry"] = df["age_band_at_entry"].isin(["<=22", "23-28"])
+
     df["campPlaced_clean"] = df["campPlaced"].where(df["campPlaced"].isin(["yes", "no"]))
-    df["under30"] = df["age_band"].isin(["<=22", "23-28"])
+    df["under30"] = df["age_band"].isin(["<=22", "23-28"])  # current age; kept for reference
     if "virgin" in df.columns:
         df["first_timer"] = df["virgin"] == "virgin"
     elif "nburns" in df.columns:
@@ -203,10 +221,11 @@ def weighted_return_rate(group: pd.DataFrame) -> float:
 
 
 def build_trend_table(df: pd.DataFrame) -> pd.DataFrame:
+    # Use under30_at_entry so segments reflect age when first attending, not 2025 age.
     segments = {
         "overall": df,
-        "under30": df.loc[df["under30"]],
-        "age30plus": df.loc[~df["under30"]],
+        "under30": df.loc[df["under30_at_entry"]],
+        "age30plus": df.loc[~df["under30_at_entry"]],
     }
     camp_filters = {
         "all": df,
@@ -251,7 +270,7 @@ def build_under30_share_table(df: pd.DataFrame) -> pd.DataFrame:
             if pd.isna(cohort_year):
                 continue
             total_weight = float(group["weights"].sum())
-            under30_weight = float(group.loc[group["under30"], "weights"].sum())
+            under30_weight = float(group.loc[group["under30_at_entry"], "weights"].sum())
             share = (under30_weight / total_weight) if total_weight > 0 else 0.0
             rows.append(
                 {
@@ -271,10 +290,11 @@ def build_under30_share_table(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_multiyear_retention_table(df: pd.DataFrame) -> pd.DataFrame:
+    # Use under30_at_entry so segments reflect age when first attending, not 2025 age.
     segments = {
         "overall": df,
-        "under30": df.loc[df["under30"]],
-        "age30plus": df.loc[~df["under30"]],
+        "under30": df.loc[df["under30_at_entry"]],
+        "age30plus": df.loc[~df["under30_at_entry"]],
     }
     rows = []
     metrics = [
@@ -312,10 +332,12 @@ def build_multiyear_retention_table(df: pd.DataFrame) -> pd.DataFrame:
 def build_firsttimer_camp_share_table(df: pd.DataFrame) -> pd.DataFrame:
     subset = df.loc[df["first_timer"]]
     subset = subset.loc[subset["campPlaced_clean"].notna()]
-    subset = subset.loc[subset["age_band"].notna() & subset["cohort_year"].notna()]
+    # Use age_band_at_entry: for first-timers this equals current age (cohort_year == census_year),
+    # but using the consistent field keeps the methodology uniform.
+    subset = subset.loc[subset["age_band_at_entry"].notna() & subset["cohort_year"].notna()]
 
     rows = []
-    grouped = subset.groupby(["cohort_year", "age_band"], dropna=False, observed=False)
+    grouped = subset.groupby(["cohort_year", "age_band_at_entry"], dropna=False, observed=False)
     for (cohort_year, age_band), group in grouped:
         if pd.isna(cohort_year) or pd.isna(age_band):
             continue
@@ -367,6 +389,16 @@ def build_markdown_summary(
     lines.append(f"- Rows: `{total_rows}`")
     if year_map:
         lines.append(f"- Attended years: `{min(year_map)}-{max(year_map)}`")
+    lines.append("")
+    lines.append("## Age Band Methodology")
+    lines.append("")
+    lines.append(
+        "All cross-cohort analyses (trend table, under-30 share, multi-year retention, "
+        "first-timer camp share) use **age at first attendance** (estimated as "
+        "`cohort_year - birth_year`). This controls for aging bias: respondents from "
+        "older cohorts have aged since their first attendance and would otherwise be "
+        "systematically placed in older age bands, distorting cross-cohort comparisons."
+    )
     lines.append("")
     lines.append("## Data Hygiene")
     lines.append("")
