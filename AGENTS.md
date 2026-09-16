@@ -1,8 +1,9 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
+- `RISING_SPARKS_README.md` outlines the Rising Sparks initiative for next-generation participation, cultural continuity, and developer/agent guiding principles.
 - `src/bm/` contains the core Burning Man workflows and the Streamlit app (`bm_streamlit_app.py`).
-- `src/census/` holds census ingestion, cleaning, and analysis scripts plus `data/` inputs (CSV/JSON/MD).
+- `src/census/` (and `src/census_field_notes/`, `src/census_next_gen_rs/`) holds census ingestion, cleaning, and analysis scripts plus `data/` inputs (CSV/JSON/MD).
 - `reports/` stores generated analysis reports and writeups; `analysis_cache/` holds cached analysis artifacts.
 - `static/` contains static assets used by the app or reports (e.g., CSVs, images).
 

@@ -1,5 +1,9 @@
 # rivanna-py
 
+## Initiatives & Documentation
+
+- **[Rising Sparks](file:///Users/peter/github/burning-man/RISING_SPARKS_README.md)**: A grassroots effort and strategic roadmap focused on the next generation of participation, cultural continuity, and community connective infrastructure in Burning Man culture. See [`RISING_SPARKS_README.md`](file:///Users/peter/github/burning-man/RISING_SPARKS_README.md) for full context, guiding principles, and developer defaults.
+
 ## Repo Setup
 
 ### Prerequisites

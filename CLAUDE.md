@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Python data analysis project focused on Burning Man research — specifically theme camp dues structures and participant census data. There are three largely independent workstreams:
+This is a Python data analysis project focused on Burning Man research — specifically theme camp dues structures, participant census data, and the next-generation participation initiative. There are key workstreams and initiatives:
 
 1. **Theme Camp Dues App** (`src/bm/`) — Streamlit interactive dashboard analyzing camp budget and contribution data
 2. **Census Field Notes** (`src/census_field_notes/`) — ETL pipeline using Google Gemini to OCR handwritten field notes and run thematic analysis modules
 3. **Census Next-Gen Research** (`src/census_next_gen_rs/`) — Standalone scripts analyzing 2025 weighted census XLSX data for under-30 recruitment/retention
+4. **Rising Sparks Initiative** (`RISING_SPARKS_README.md`) — Vision, principles, and guidelines for next-generation participation, cultural continuity, and community connective infrastructure. Agents and developers working in this domain must follow the defaults defined in [RISING_SPARKS_README.md](file:///Users/peter/github/burning-man/RISING_SPARKS_README.md).
 
 ## Environment Setup
 

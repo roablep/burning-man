@@ -11,6 +11,7 @@ This project is a data analysis and visualization tool focused on Burning Man Th
 *   **Dependency Management:** Poetry
 
 ## Directory Structure
+- `RISING_SPARKS_README.md`: Vision, principles, and guidelines for the Rising Sparks next-gen participation initiative.
 - `src/bm/`: Core Burning Man workflows and the Streamlit app (`bm_streamlit_app.py`).
 - `src/census_field_notes/`: Census ingestion, cleaning, and analysis scripts plus `data/` inputs.
 - `src/census_next_gen_rs/`: Next generation census research scripts.
