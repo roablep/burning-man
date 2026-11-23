@@ -14,7 +14,7 @@
 - `poetry run python src/census/analyze_survival.py` (example) runs a single analysis script.
 
 ## Coding Style & Naming Conventions
-- Use Python 3.11+, 4-space indentation, and PEP 8 conventions.
+- Use Python 3.14+, 4-space indentation, and PEP 8 conventions.
 - Prefer `snake_case` for functions/variables and `PascalCase` for classes.
 - Keep data files in `src/census/data/` and generated artifacts in `reports/` or `analysis_cache/`.
 

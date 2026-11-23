@@ -36,7 +36,7 @@ authors = ["peter <pelbaor@gmail.com>"]
 name = "BM"
 description = "Burning Man Stuff"
 readme = "README.md"
-requires-python = ">=3.11.6"
+requires-python = ">=3.14"
 dynamic = ["version"]
 
 classifiers = [
